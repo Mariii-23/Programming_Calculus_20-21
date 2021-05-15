@@ -1555,26 +1555,19 @@ São dadas:
 \end{hscode}\resethooks
 Definir:
 
+% Comentario outEXpAr
+% outExpAr :: ExpAr a -> Either
+%     b (Either a (Either (BinOp, (ExpAr a, ExpAr a)) (UnOp, ExpAr a)))
+
+% outExpAr = undefined
+% arg -> X   || X -> X
+% 10 -> N 10 || (N 10)-> 10
+% (Sum,(a,b)) -> Bin Sum a b
+% (Bin Sum a b) -> (Sum,(a,b))
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{3}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{5}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
-\>[B]{}\mbox{\onelinecomment  outExpAr :: ExpAr a -> Either}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment      b (Either a (Either (BinOp, (ExpAr a, ExpAr a)) (UnOp, ExpAr a)))}{}\<[E]%
-\\[\blanklineskip]%
-\>[B]{}\mbox{\onelinecomment  outExpAr = undefined}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment  arg -> X   | X -> X}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment  10 -> N 10 | (N 10)-> 10}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment  (Sum,(a,b)) -> Bin Sum a b}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment  (Bin Sum a b) -> (Sum,(a,b))}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment }{}\<[E]%
+\>[B]{}\mbox{\onelinecomment  ola ola}{}\<[E]%
 \\
 \>[B]{}\Varid{outExpAr}\;\Conid{X}\mathrel{=}i_1\;(){}\<[E]%
 \\
@@ -1583,67 +1576,62 @@ Definir:
 \>[B]{}\Varid{outExpAr}\;(\Conid{Bin}\;\Varid{op}\;\Varid{a}\;\Varid{b})\mathrel{=}i_2\comp i_2\comp i_1\mathbin{\$}(\Varid{op},(\Varid{a},\Varid{b})){}\<[E]%
 \\
 \>[B]{}\Varid{outExpAr}\;(\Conid{Un}\;\Varid{op}\;\Varid{a})\mathrel{=}i_2\comp i_2\comp i_2\mathbin{\$}(\Varid{op},\Varid{a}){}\<[E]%
-\\[\blanklineskip]%
-\>[B]{}\mbox{\onelinecomment }{}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+
+% Comentario recEXpAr
+% x -> x
+% n a -> n a
+% bin _ a b -> a && b
+% un _ a -> a
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\mbox{\onelinecomment  x -> x}{}\<[E]%
 \\
-\>[B]{}\mbox{\onelinecomment  X -> X}{}\<[E]%
+\>[B]{}\mbox{\onelinecomment  n a -> n a}{}\<[E]%
 \\
-\>[B]{}\mbox{\onelinecomment  N a -> N a}{}\<[E]%
+\>[B]{}\mbox{\onelinecomment  bin _ a b -> a && b}{}\<[E]%
 \\
-\>[B]{}\mbox{\onelinecomment  Bin _ a b -> a && b}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment  Un _ a -> a}{}\<[E]%
+\>[B]{}\mbox{\onelinecomment  un _ a -> a}{}\<[E]%
 \\
 \>[B]{}\Varid{recExpAr}\;\Varid{x}\mathrel{=}\Varid{baseExpAr}\;\Varid{id}\;\Varid{id}\;\Varid{id}\;\Varid{x}\;\Varid{x}\;\Varid{id}\;\Varid{x}{}\<[E]%
-\\[\blanklineskip]%
-\>[B]{}\mbox{\onelinecomment  g_eval}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment  a () -> a}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment  a 10 -> 10}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment  a (BinOP,(valor1,valor2)) -> valor1 op valor2}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment  a (Un valor )-> un valor}{}\<[E]%
-\\[\blanklineskip]%
-\>[B]{}\mbox{\onelinecomment  INICIAL}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment  g_eval_exp a (Left ()) = a}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment  g_eval_exp _ (Right (Left a)) = a}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment  g_eval_exp _ (Right (Right (Left l) )) = f l}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment    where}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment      f (Sum,(a,b)) = (+) a b}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment      f (Product,(a,b)) = (*) a b}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment  g_eval_exp _ (Right (Right (Right l))) = g l}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment    where}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment      g (E,a) = expd a}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment      g (Negate,a) = - a}{}\<[E]%
-\\[\blanklineskip]%
-\>[B]{}\mbox{\onelinecomment  Melhor}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment  g_eval_exp num = either (const num) (either id (either f g))}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment    where}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment      f (Sum,(a,b)) = (+) a b}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment      f (Product,(a,b)) = (*) a b}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment      g (E,a) = expd a}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment      g (Negate,a) = - a}{}\<[E]%
-\\[\blanklineskip]%
-\>[B]{}\mbox{\onelinecomment  versao simplificada}{}\<[E]%
-\\[\blanklineskip]%
+\ColumnHook
+\end{hscode}\resethooks
+
+% Comentario g_eval
+% a () -> a
+% a 10 -> 10
+% a (BinOP,(valor1,valor2)) -> valor1 op valor2
+% a (Un valor )-> un valor
+%
+% INICIAL
+% g_eval_exp a (Left ()) = a
+% g_eval_exp _ (Right (Left a)) = a
+% g_eval_exp _ (Right (Right (Left l) )) = f l
+%   where
+%     f (Sum,(a,b)) = (+) a b
+%     f (Product,(a,b)) = (*) a b
+% g_eval_exp _ (Right (Right (Right l))) = g l
+%   where
+%     g (E,a) = expd a
+%     g (Negate,a) = - a
+%
+% Melhor
+% g_eval_exp num = either (const num) (either id (either f g))
+%   where
+%     f (Sum,(a,b)) = (+) a b
+%     f (Product,(a,b)) = (*) a b
+%     g (E,a) = expd a
+%     g (Negate,a) = - a
+%
+% versao simplificada
+
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{3}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{5}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
 \>[B]{}\Varid{g\char95 eval\char95 exp}\;\Varid{num}\mathrel{=}\alt{\underline{\Varid{num}}}{\alt{\Varid{id}}{\alt{\uncurry{\Varid{f}}}{\uncurry{\Varid{g}}}}}{}\<[E]%
 \\
 \>[B]{}\hsindent{3}{}\<[3]%
@@ -1671,6 +1659,22 @@ Definir:
 \ColumnHook
 \end{hscode}\resethooks
 
+% Comentario sd_gen
+% funcao, derivada
+% a :: ( a, a')
+% sd_gen (Left ()) = (X , (N 1)) 
+% sd_gen (Right (Left a)) = ((N a) , (N 0))
+% sd_gen (Right (Right (Left (op,(a,b)) ))) = ( g , f )
+%   where
+%     g = Bin op (p1 a) (p1 b)
+%     f = if( op == Sum ) then Bin Sum (p2 a) (p2 b)
+%         else Bin Sum (Bin Product (p1 a) (p2 b)) ( Bin Product ( p2 a ) ( p1 b ))
+% sd_gen (Right (Right (Right (op,a) ))) = ( g , f )
+%   where
+%     g = Un op (p1 a) 
+%     f = if (op == Negate) then Un op (p2 a)
+%         else Bin Product (Un E (p1 a)) (p2 a)
+
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{3}{@{}>{\hspre}l<{\hspost}@{}}%
@@ -1682,34 +1686,6 @@ Definir:
 \\
 \>[B]{}\hsindent{5}{}\<[5]%
 \>[5]{}()+(\Varid{a}+((\Conid{BinOp},((\Conid{ExpAr}\;\Varid{a},\Conid{ExpAr}\;\Varid{a}),(\Conid{ExpAr}\;\Varid{a},\Conid{ExpAr}\;\Varid{a})))+(\Conid{UnOp},(\Conid{ExpAr}\;\Varid{a},\Conid{ExpAr}\;\Varid{a}))))\to (\Conid{ExpAr}\;\Varid{a},\Conid{ExpAr}\;\Varid{a}){}\<[E]%
-\\[\blanklineskip]%
-\>[B]{}\mbox{\onelinecomment  funcao, derivada}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment  a :: ( a, a')}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment  sd_gen (Left ()) = (X , (N 1)) }{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment  sd_gen (Right (Left a)) = ((N a) , (N 0))}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment  sd_gen (Right (Right (Left (op,(a,b)) ))) = ( g , f )}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment    where}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment      g = Bin op (p1 a) (p1 b)}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment      f = if( op == Sum ) then Bin Sum (p2 a) (p2 b)}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment          else Bin Sum (Bin Product (p1 a) (p2 b)) ( Bin Product ( p2 a ) ( p1 b ))}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment  sd_gen (Right (Right (Right (op,a) ))) = ( g , f )}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment    where}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment      g = Un op (p1 a) }{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment      f = if (op == Negate) then Un op (p2 a)}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment          else Bin Product (Un E (p1 a)) (p2 a)}{}\<[E]%
 \\[\blanklineskip]%
 \>[B]{}\Varid{sd\char95 gen}\mathrel{=}\alt{\underline{(\Conid{X},(\Conid{N}\;\mathrm{1}))}}{\alt{\Varid{construi\char95 n}}{{}\<[55]%
 \>[55]{}\alt{\Varid{construi\char95 bin}}{{}\<[77]%
@@ -1735,41 +1711,31 @@ Definir:
 \ColumnHook
 \end{hscode}\resethooks
 
+% Comentario ad_gen
+
+% ad_gen a (Left ()) = ( a, 1)
+% ad_gen _ (Right (Left b)) = (b, 0)
+% -- a :: (valor do a real, derivada do a)
+% ad_gen _ (Right (Right (Left (op,(a,b))))) = (g, f)
+%   where
+%     g = if (op == Sum ) then (+) (p1 a) (p1 b)
+%       else (*) (p1 a) (p1 b)
+%     f = if( op == Sum ) then (+) (p2 a) (p2 b)
+%         -- a * b' + a' * b
+%         else (+) ((*) (p1 a) (p2 b)) ((*) (p2 a) (p1 b))
+% ad_gen _ (Right (Right (Right (op,a)))) = (g, f)
+%   where
+%     g = if (op == Negate) then -(p1 a) else Prelude.exp(p1 a)
+%     -- exponencial u' * e^u
+%     f = if (op == Negate) then -(p2 a) else (p2 a) * Prelude.exp(p1 a)
+
+% g n = (n, 0)
+
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{3}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{5}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
-\>[B]{}\mbox{\onelinecomment  ad_gen a (Left ()) = ( a, 1)}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment  ad_gen _ (Right (Left b)) = (b, 0)}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment  -- a :: (valor do a real, derivada do a)}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment  ad_gen _ (Right (Right (Left (op,(a,b))))) = (g, f)}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment    where}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment      g = if (op == Sum ) then (+) (p1 a) (p1 b)}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment        else (*) (p1 a) (p1 b)}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment      f = if( op == Sum ) then (+) (p2 a) (p2 b)}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment          -- a * b' + a' * b}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment          else (+) ((*) (p1 a) (p2 b)) ((*) (p2 a) (p1 b))}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment  ad_gen _ (Right (Right (Right (op,a)))) = (g, f)}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment    where}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment      g = if (op == Negate) then -(p1 a) else Prelude.exp(p1 a)}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment      -- exponencial u' * e^u}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment      f = if (op == Negate) then -(p2 a) else (p2 a) * Prelude.exp(p1 a)}{}\<[E]%
-\\[\blanklineskip]%
 \>[B]{}\Varid{ad\char95 gen}\;\Varid{a}\mathrel{=}\alt{\underline{(\Varid{a},\mathrm{1})}}{\alt{\Varid{g}}{\alt{\uncurry{\Varid{bin\char95 op}}}{\uncurry{\Varid{un\char95 op}}}}}{}\<[E]%
 \\
 \>[B]{}\hsindent{3}{}\<[3]%
@@ -1777,9 +1743,6 @@ Definir:
 \\
 \>[3]{}\hsindent{2}{}\<[5]%
 \>[5]{}\Varid{g}\mathrel{=}\conj{\Varid{id}}{\underline{\mathrm{0}}}{}\<[E]%
-\\
-\>[3]{}\hsindent{2}{}\<[5]%
-\>[5]{}\mbox{\onelinecomment g n = (n, 0)}{}\<[E]%
 \\
 \>[3]{}\hsindent{2}{}\<[5]%
 \>[5]{}\Varid{bin\char95 op}\;\Conid{Sum}\;(\Varid{a},\Varid{b})\mathrel{=}((\mathbin{+})\;(\p1\;\Varid{a})\;(\p1\;\Varid{b}),(\mathbin{+})\;(\p2\;\Varid{a})\;(\p2\;\Varid{b})){}\<[E]%

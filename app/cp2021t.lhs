@@ -1017,56 +1017,64 @@ ad v = p2 . cataExpAr (ad_gen v)
 \end{code}
 Definir:
 
-\begin{code}
--- outExpAr :: ExpAr a -> Either
---     b (Either a (Either (BinOp, (ExpAr a, ExpAr a)) (UnOp, ExpAr a)))
+% Comentario outEXpAr
+% outExpAr :: ExpAr a -> Either
+%     b (Either a (Either (BinOp, (ExpAr a, ExpAr a)) (UnOp, ExpAr a)))
 
--- outExpAr = undefined
--- arg -> X   || X -> X
--- 10 -> N 10 || (N 10)-> 10
--- (Sum,(a,b)) -> Bin Sum a b
--- (Bin Sum a b) -> (Sum,(a,b))
---
+% outExpAr = undefined
+% arg -> X   || X -> X
+% 10 -> N 10 || (N 10)-> 10
+% (Sum,(a,b)) -> Bin Sum a b
+% (Bin Sum a b) -> (Sum,(a,b))
+\begin{code}
 outExpAr X = i1 ()
 outExpAr (N a) = i2 . i1 $ a
 outExpAr (Bin op a b) = i2 . i2 . i1 $ (op, (a, b))
 outExpAr (Un op a) = i2 . i2 . i2 $ (op, a)
+\end{code}
 
----
--- X -> X
--- N a -> N a
--- Bin _ a b -> a && b
--- Un _ a -> a
+% Comentario recEXpAr
+% x -> x
+% n a -> n a
+% bin _ a b -> a && b
+% un _ a -> a
+\begin{code}
+--- x -> x
+--- n a -> n a
+--- bin _ a b -> a && b
+--- un _ a -> a
 recExpAr x = baseExpAr id id id x x id x
+\end{code}
 
--------- g_eval
--- a () -> a
--- a 10 -> 10
--- a (BinOP,(valor1,valor2)) -> valor1 op valor2
--- a (Un valor )-> un valor
+% Comentario g_eval
+% a () -> a
+% a 10 -> 10
+% a (BinOP,(valor1,valor2)) -> valor1 op valor2
+% a (Un valor )-> un valor
+%
+% INICIAL
+% g_eval_exp a (Left ()) = a
+% g_eval_exp _ (Right (Left a)) = a
+% g_eval_exp _ (Right (Right (Left l) )) = f l
+%   where
+%     f (Sum,(a,b)) = (+) a b
+%     f (Product,(a,b)) = (*) a b
+% g_eval_exp _ (Right (Right (Right l))) = g l
+%   where
+%     g (E,a) = expd a
+%     g (Negate,a) = - a
+%
+% Melhor
+% g_eval_exp num = either (const num) (either id (either f g))
+%   where
+%     f (Sum,(a,b)) = (+) a b
+%     f (Product,(a,b)) = (*) a b
+%     g (E,a) = expd a
+%     g (Negate,a) = - a
+%
+% versao simplificada
 
--- INICIAL
--- g_eval_exp a (Left ()) = a
--- g_eval_exp _ (Right (Left a)) = a
--- g_eval_exp _ (Right (Right (Left l) )) = f l
---   where
---     f (Sum,(a,b)) = (+) a b
---     f (Product,(a,b)) = (*) a b
--- g_eval_exp _ (Right (Right (Right l))) = g l
---   where
---     g (E,a) = expd a
---     g (Negate,a) = - a
-
--- Melhor
--- g_eval_exp num = either (const num) (either id (either f g))
---   where
---     f (Sum,(a,b)) = (+) a b
---     f (Product,(a,b)) = (*) a b
---     g (E,a) = expd a
---     g (Negate,a) = - a
-
--- versao simplificada
-
+\begin{code}
 g_eval_exp num = either (const num) (either id (either (uncurry f) (uncurry g)))
   where
     f Sum = uncurry (+)
@@ -1081,24 +1089,25 @@ clean = undefined
 gopt = undefined
 \end{code}
 
+% Comentario sd_gen
+% funcao, derivada
+% a :: ( a, a')
+% sd_gen (Left ()) = (X , (N 1)) 
+% sd_gen (Right (Left a)) = ((N a) , (N 0))
+% sd_gen (Right (Right (Left (op,(a,b)) ))) = ( g , f )
+%   where
+%     g = Bin op (p1 a) (p1 b)
+%     f = if( op == Sum ) then Bin Sum (p2 a) (p2 b)
+%         else Bin Sum (Bin Product (p1 a) (p2 b)) ( Bin Product ( p2 a ) ( p1 b ))
+% sd_gen (Right (Right (Right (op,a) ))) = ( g , f )
+%   where
+%     g = Un op (p1 a) 
+%     f = if (op == Negate) then Un op (p2 a)
+%         else Bin Product (Un E (p1 a)) (p2 a)
+
 \begin{code}
 sd_gen :: Floating a =>
     Either () (Either a (Either (BinOp, ((ExpAr a, ExpAr a), (ExpAr a, ExpAr a))) (UnOp, (ExpAr a, ExpAr a)))) -> (ExpAr a, ExpAr a)
-    
--- funcao, derivada
--- a :: ( a, a')
--- sd_gen (Left ()) = (X , (N 1)) 
--- sd_gen (Right (Left a)) = ((N a) , (N 0))
--- sd_gen (Right (Right (Left (op,(a,b)) ))) = ( g , f )
---   where
---     g = Bin op (p1 a) (p1 b)
---     f = if( op == Sum ) then Bin Sum (p2 a) (p2 b)
---         else Bin Sum (Bin Product (p1 a) (p2 b)) ( Bin Product ( p2 a ) ( p1 b ))
--- sd_gen (Right (Right (Right (op,a) ))) = ( g , f )
---   where
---     g = Un op (p1 a) 
---     f = if (op == Negate) then Un op (p2 a)
---         else Bin Product (Un E (p1 a)) (p2 a)
 
 sd_gen = either (const (X,(N 1))) (either construi_n  (either construi_bin  construi_un))
   where
@@ -1110,28 +1119,30 @@ sd_gen = either (const (X,(N 1))) (either construi_n  (either construi_bin  cons
     
 \end{code}
 
+% Comentario ad_gen
+
+% ad_gen a (Left ()) = ( a, 1)
+% ad_gen _ (Right (Left b)) = (b, 0)
+% -- a :: (valor do a real, derivada do a)
+% ad_gen _ (Right (Right (Left (op,(a,b))))) = (g, f)
+%   where
+%     g = if (op == Sum ) then (+) (p1 a) (p1 b)
+%       else (*) (p1 a) (p1 b)
+%     f = if( op == Sum ) then (+) (p2 a) (p2 b)
+%         -- a * b' + a' * b
+%         else (+) ((*) (p1 a) (p2 b)) ((*) (p2 a) (p1 b))
+% ad_gen _ (Right (Right (Right (op,a)))) = (g, f)
+%   where
+%     g = if (op == Negate) then -(p1 a) else Prelude.exp(p1 a)
+%     -- exponencial u' * e^u
+%     f = if (op == Negate) then -(p2 a) else (p2 a) * Prelude.exp(p1 a)
+
+% g n = (n, 0)
+
 \begin{code}
-
--- ad_gen a (Left ()) = ( a, 1)
--- ad_gen _ (Right (Left b)) = (b, 0)
--- -- a :: (valor do a real, derivada do a)
--- ad_gen _ (Right (Right (Left (op,(a,b))))) = (g, f)
---   where
---     g = if (op == Sum ) then (+) (p1 a) (p1 b)
---       else (*) (p1 a) (p1 b)
---     f = if( op == Sum ) then (+) (p2 a) (p2 b)
---         -- a * b' + a' * b
---         else (+) ((*) (p1 a) (p2 b)) ((*) (p2 a) (p1 b))
--- ad_gen _ (Right (Right (Right (op,a)))) = (g, f)
---   where
---     g = if (op == Negate) then -(p1 a) else Prelude.exp(p1 a)
---     -- exponencial u' * e^u
---     f = if (op == Negate) then -(p2 a) else (p2 a) * Prelude.exp(p1 a)
-
 ad_gen a = either (const (a,1)) (either g (either (uncurry bin_op) (uncurry un_op)))
   where
     g = split id (const 0)
-    --g n = (n, 0)
     bin_op Sum (a,b) = ( (+) (p1 a) (p1 b) , (+) (p2 a) (p2 b))
     bin_op Product (a,b) =( (*) (p1 a) (p1 b) , (+) ((*) (p1 a) (p2 b)) ((*) (p2 a) (p1 b)))
     un_op E a = ( expd (p1 a) , (*) (p2 a) (expd(p1 a)))
