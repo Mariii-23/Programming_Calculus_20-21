@@ -1567,8 +1567,6 @@ Definir:
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
-\>[B]{}\mbox{\onelinecomment  ola ola}{}\<[E]%
-\\
 \>[B]{}\Varid{outExpAr}\;\Conid{X}\mathrel{=}i_1\;(){}\<[E]%
 \\
 \>[B]{}\Varid{outExpAr}\;(\Conid{N}\;\Varid{a})\mathrel{=}i_2\comp i_1\mathbin{\$}\Varid{a}{}\<[E]%
@@ -1587,14 +1585,6 @@ Definir:
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
-\>[B]{}\mbox{\onelinecomment  x -> x}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment  n a -> n a}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment  bin _ a b -> a && b}{}\<[E]%
-\\
-\>[B]{}\mbox{\onelinecomment  un _ a -> a}{}\<[E]%
-\\
 \>[B]{}\Varid{recExpAr}\;\Varid{x}\mathrel{=}\Varid{baseExpAr}\;\Varid{id}\;\Varid{id}\;\Varid{id}\;\Varid{x}\;\Varid{x}\;\Varid{id}\;\Varid{x}{}\<[E]%
 \ColumnHook
 \end{hscode}\resethooks
@@ -1648,14 +1638,84 @@ Definir:
 \\
 \>[3]{}\hsindent{2}{}\<[5]%
 \>[5]{}\Varid{g}\;\Conid{Negate}\mathrel{=}\Varid{negate}{}\<[E]%
-\\[\blanklineskip]%
-\>[B]{}\mbox{\onelinecomment }{}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+
+% Comentario clean
+% o seu tipo de saida tem q ser do tipo de entrada do out
+
+% funcao q limpa ou seja, se puder fazer contas faz
+% X -> nada a fazer
+% valor -> valor
+% Bin op Valor1 Valor2 -> (op) Valor1 Valor2
+% se em vez de valores tivermos expressoes nao podemos calcular,
+% returnamos o valor do out
+% Un op Valor -> op Valor
+
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{3}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{5}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{clean}\;\Conid{X}\mathrel{=}i_1\;\Conid{X}{}\<[E]%
 \\
-\>[B]{}\Varid{clean}\mathrel{=}\bot {}\<[E]%
+\>[B]{}\Varid{clean}\;(\Conid{N}\;\Varid{a})\mathrel{=}i_2\comp i_1\mathbin{\$}\Varid{a}{}\<[E]%
 \\
-\>[B]{}\mbox{\onelinecomment }{}\<[E]%
+\>[B]{}\Varid{clean}\;(\Conid{Bin}\;\Varid{op}\;(\Conid{N}\;\Varid{a})\;(\Conid{N}\;\Varid{b}))\mathrel{=}i_2\comp i_1\mathbin{\$}((\Varid{f}\;\Varid{op})\;\Varid{a}\;\Varid{b}){}\<[E]%
 \\
-\>[B]{}\Varid{gopt}\mathrel{=}\bot {}\<[E]%
+\>[B]{}\hsindent{3}{}\<[3]%
+\>[3]{}\mathbf{where}{}\<[E]%
+\\
+\>[3]{}\hsindent{2}{}\<[5]%
+\>[5]{}\Varid{f}\;\Conid{Sum}\mathrel{=}(\mathbin{+}){}\<[E]%
+\\
+\>[3]{}\hsindent{2}{}\<[5]%
+\>[5]{}\Varid{f}\;\Conid{Product}\mathrel{=}(\mathbin{*}){}\<[E]%
+\\
+\>[B]{}\Varid{clean}\;(\Conid{Bin}\;\Varid{op}\;\Varid{a}\;\Varid{b})\mathrel{=}i_2\comp i_2\comp i_1\mathbin{\$}(\Varid{op},(\Varid{a},\Varid{b})){}\<[E]%
+\\
+\>[B]{}\Varid{clean}\;(\Conid{Un}\;\Varid{op}\;(\Conid{N}\;\Varid{a}))\mathrel{=}i_2\comp i_1\mathbin{\$}((\Varid{g}\;\Varid{op})\;\Varid{a}){}\<[E]%
+\\
+\>[B]{}\hsindent{3}{}\<[3]%
+\>[3]{}\mathbf{where}{}\<[E]%
+\\
+\>[3]{}\hsindent{2}{}\<[5]%
+\>[5]{}\Varid{g}\;\Conid{E}\mathrel{=}\Varid{expd}{}\<[E]%
+\\
+\>[3]{}\hsindent{2}{}\<[5]%
+\>[5]{}\Varid{g}\;\Conid{Negate}\mathrel{=}\Varid{negate}{}\<[E]%
+\\
+\>[B]{}\Varid{clean}\;(\Conid{Un}\;\Varid{op}\;\Varid{a})\mathrel{=}i_2\comp i_2\comp i_2\mathbin{\$}(\Varid{op},\Varid{a}){}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+
+% Comentario gopt
+% tipo de entrada é o de saida do out
+% tipo de saida um valor
+% ou altera o valor do X pelo recebido
+% ou faz calculos
+
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{3}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{5}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{gopt}\;\Varid{num}\mathrel{=}\alt{\underline{\Varid{num}}}{\alt{\Varid{id}}{\alt{\uncurry{\Varid{f}}}{\uncurry{\Varid{g}}}}}{}\<[E]%
+\\
+\>[B]{}\hsindent{3}{}\<[3]%
+\>[3]{}\mathbf{where}{}\<[E]%
+\\
+\>[3]{}\hsindent{2}{}\<[5]%
+\>[5]{}\Varid{f}\;\Conid{Sum}\mathrel{=}\uncurry{(\mathbin{+})}{}\<[E]%
+\\
+\>[3]{}\hsindent{2}{}\<[5]%
+\>[5]{}\Varid{f}\;\Conid{Product}\mathrel{=}\uncurry{(\mathbin{*})}{}\<[E]%
+\\
+\>[3]{}\hsindent{2}{}\<[5]%
+\>[5]{}\Varid{g}\;\Conid{E}\mathrel{=}\Varid{expd}{}\<[E]%
+\\
+\>[3]{}\hsindent{2}{}\<[5]%
+\>[5]{}\Varid{g}\;\Conid{Negate}\mathrel{=}\Varid{negate}{}\<[E]%
 \ColumnHook
 \end{hscode}\resethooks
 

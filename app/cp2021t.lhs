@@ -1039,10 +1039,6 @@ outExpAr (Un op a) = i2 . i2 . i2 $ (op, a)
 % bin _ a b -> a && b
 % un _ a -> a
 \begin{code}
---- x -> x
---- n a -> n a
---- bin _ a b -> a && b
---- un _ a -> a
 recExpAr x = baseExpAr id id id x x id x
 \end{code}
 
@@ -1082,11 +1078,48 @@ g_eval_exp num = either (const num) (either id (either (uncurry f) (uncurry g)))
     g E = expd 
     g Negate = negate
     
+\end{code}
 
----
-clean = undefined
----
-gopt = undefined
+% Comentario clean
+% o seu tipo de saida tem q ser do tipo de entrada do out
+
+% funcao q limpa ou seja, se puder fazer contas faz
+% X -> nada a fazer
+% valor -> valor
+% Bin op Valor1 Valor2 -> (op) Valor1 Valor2
+% se em vez de valores tivermos expressoes nao podemos calcular,
+% returnamos o valor do out
+% Un op Valor -> op Valor
+
+\begin{code}
+clean X = i1 X
+clean (N a) = i2 . i1 $ a
+clean (Bin op (N a) (N b)) = i2 . i1 $ ((f op) a b)
+  where
+    f Sum = (+)
+    f Product = (*)
+clean (Bin op a b)= i2 . i2 . i1 $ (op ,(a,b))
+clean (Un op (N a)) =i2 . i1 $ ((g op) a)
+  where
+    g E = expd
+    g Negate = negate
+clean (Un op a) =i2 . i2 . i2 $ (op,a)
+\end{code}
+
+% Comentario gopt
+% tipo de entrada é o de saida do out
+% tipo de saida um valor
+% ou altera o valor do X pelo recebido
+% ou faz calculos
+
+\begin{code}
+gopt num = either (const num) (either id (either (uncurry f) (uncurry g)))
+  where
+    f Sum = uncurry (+)
+    f Product = uncurry (*)
+    g E = expd 
+    g Negate = negate
+
 \end{code}
 
 % Comentario sd_gen
