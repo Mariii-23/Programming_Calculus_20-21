@@ -1091,15 +1091,9 @@ g_eval_exp num = either (const num) (either id (either (uncurry f) (uncurry g)))
 % returnamos o valor do out
 % Un op Valor -> op Valor
 
-% TODO Trocar para out tudo 
 \begin{code}
 clean X = i1 X
 clean (N a) = i2 . i1 $ a
-
-clean (Bin Product (N 0) _) = i2 . i1 $ 0
-clean (Bin Product _ (N 0)) = i2 . i1 $ 0
--- TODO: Acabar esta otimizacao
--- clean (Bin Sum a (N 0)) = 
 clean (Bin op (N a) (N b)) = i2 . i1 $ ((f op) a b)
   where
     f Sum = (+)
@@ -1192,8 +1186,14 @@ ad_gen a = either (const (a,1)) (either g (either (uncurry bin_op) (uncurry un_o
 \subsection*{Problema 2}
 Definir
 \begin{code}
-loop (f,(s,h)) = (div (f*s) h, (s+4 , h+1 ))
-inic = (1,(2,2))
+-- loop = undefined
+-- inic = undefined
+-- prj = undefined
+-- loop (f,k) = (k-f, 2*k + f)
+-- loop (f,k) = (k-f, k+2 )
+-- inic = (1,2)
+loop (f,k) = (k-f, 2*k+f )
+inic = (1,2)
 prj = p1
 \end{code}
 por forma a que
@@ -1227,37 +1227,18 @@ avg = p1.avg_aux
 \end{code}
 
 \begin{code}
-avg_aux = undefined
--- avg_aux  = auxiliar (0,1)
---   where
---     auxiliar (a,b) [] = (a,b)
---     -- auxiliar (a,b) [m] = ( ((a*b)+m)/ (b+1) , b+1 )
---     auxiliar (a,b) (h:t) = auxiliar (div (a*b+h) l , l) t
---       where
---         l = if (b<0) then 1 else (b+1)
--- avg_aux [a] = (a,1) 
--- avg_aux (a:b) = (((l+a)*r)/r,r+1)
-  -- where
-  --   (l,r) = avg_aux b
+-- avg_aux = undefined
+-- avg_aux [] = (0,1)
+avg_aux [a] = (a,1) 
+-- avg_aux _ = (1,1) 
 \end{code}
 Solução para árvores de tipo \LTree:
 \begin{code}
 avgLTree = p1.cataLTree gene where
-  gene = undefined
-  -- gene = either (split id (succ . zero)) final
-  -- final = split (uncurry div) (p2) . ((uncurry (+)) >< (uncurry (+))) .  split (split ((uncurry (*)).p1) ((uncurry (*)).p2)) (split (p2.p1) (p2.p2))
-   
-  --gene = either (split id (const 1)) ((either (const (0,1)) id) . final)
-  --final = maybe (Left ()) (Right . split (uncurry (/)) (p2) . ((uncurry (+)) >< (uncurry (+))) .  split (split ((uncurry (*)).p1) ((uncurry (*)).p2)) (split (p2.p1) (p2.p2))) 
---   gene = either (split id (const 1)) final
---   aux = split (split (p1.p1) (p1.p2)) (split (p2.p1) (p2.p2))
---   -- final m = (a / b , b)
---   final m = (a / b , b)
---     where 
---       (a,b) = ((uncurry (+)) >< (uncurry (+))) $ aux m
-  
--- gene (Left _) = (0,1)
--- gene (Right ((a,b),(c,d))) = (+ a  c,+ a d)
+  gene = either (const (0,1)) (((uncurry (+)) >< (uncurry (+))).aux)
+  aux = split (split (p1.p1) (p1.p2)) (split (p2.p1) (p2.p2))
+  -- gene (Left _) = (0,1)
+  -- gene (Right ((a,b),(c,d))) = (+ a  c,+ a d)
 \end{code}
 
 \subsection*{Problema 5}

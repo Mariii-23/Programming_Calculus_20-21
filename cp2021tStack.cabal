@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: b928ea144e7f74e4592657a5a08437d7f673bbae0f1e11421bcf7a2c415803a1
+-- hash: aa5884efcd43ae4c371ec73f9b1d10958cf37c7582b1bfcabe1f4cfe498afd8f
 
 name:           cp2021tStack
 version:        0.1.0.0
@@ -32,6 +32,7 @@ library
       List
       LTree
       Nat
+      SList
   other-modules:
       Paths_cp2021tStack
   hs-source-dirs:
