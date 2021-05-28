@@ -701,8 +701,9 @@ Verifique as suas funções testando a propriedade seguinte:
 \begin{propriedade}
 A média de uma lista não vazia e de uma \LTree\ com os mesmos elementos coincide,
 a menos de um erro de 0.1 milésimas:
+%%-- prop_avg :: Ord a => [a] -> Property
 \begin{code}
-prop_avg :: Ord a => [a] -> Property
+prop_avg ::  [Double] -> Property
 prop_avg = nonempty .==>. diff .<=. const 0.000001 where
    diff l = avg l - (avgLTree . genLTree) l
    genLTree = anaLTree lsplit
@@ -1093,24 +1094,44 @@ g_eval_exp num = either (const num) (either id (either (uncurry f) (uncurry g)))
 
 % TODO Trocar para out tudo 
 \begin{code}
-clean X = i1 X
-clean (N a) = i2 . i1 $ a
+clean X =  i1 ()
+clean (N a) = outExpAr (N a)
+clean (Bin Product (N 0) _) = outExpAr (N 0)
+clean (Bin Product _ (N 0)) = outExpAr (N 0)
 
-clean (Bin Product (N 0) _) = i2 . i1 $ 0
-clean (Bin Product _ (N 0)) = i2 . i1 $ 0
--- TODO: Acabar esta otimizacao
--- clean (Bin Sum a (N 0)) = 
-clean (Bin op (N a) (N b)) = i2 . i1 $ ((f op) a b)
+clean (Bin Product (N 1) l) = outExpAr l
+clean (Bin Product l (N 1)) = outExpAr l
+
+clean (Bin Sum a (N 0)) = outExpAr a
+clean (Bin Sum (N 0) a) = outExpAr a
+
+clean (Bin op (N a) (N b)) = outExpAr (N ((f op) a b))
   where
     f Sum = (+)
     f Product = (*)
-clean (Bin op a b)= i2 . i2 . i1 $ (op ,(a,b))
-clean (Un op (N a)) =i2 . i1 $ ((g op) a)
+clean (Un op (N a)) =outExpAr (N ((g op) a))
   where
     g E = expd
     g Negate = negate
-clean (Un op a) =i2 . i2 . i2 $ (op,a)
+clean l = outExpAr l
 \end{code}
+%%-- clean X = i1 X
+%%-- clean (N a) = i2 . i1 $ a
+%%
+%%-- clean (Bin Product (N 0) _) = i2 . i1 $ 0
+%%-- clean (Bin Product _ (N 0)) = i2 . i1 $ 0
+%%-- -- TODO: Acabar esta otimizacao
+%%-- -- clean (Bin Sum a (N 0)) = 
+%%-- clean (Bin op (N a) (N b)) = i2 . i1 $ ((f op) a b)
+%%--   where
+%%--     f Sum = (+)
+%%--     f Product = (*)
+%%-- clean (Bin op a b)= i2 . i2 . i1 $ (op ,(a,b))
+%%-- clean (Un op (N a)) =i2 . i1 $ ((g op) a)
+%%--   where
+%%--     g E = expd
+%%--     g Negate = negate
+%%-- clean (Un op a) =i2 . i2 . i2 $ (op,a)
 
 % Comentario gopt
 % tipo de entrada é o de saida do out
@@ -1155,7 +1176,6 @@ sd_gen = either (const (X,(N 1))) (either construi_n  (either construi_bin  cons
     construi_bin (Product,(a,b)) = (Bin Product (p1 a) (p1 b), Bin Sum (Bin Product (p1 a) (p2 b)) ( Bin Product ( p2 a ) ( p1 b )))
     construi_un (E,a) = ( Un E (p1 a) , Bin Product (Un E (p1 a)) (p2 a))
     construi_un (Negate,a) = (Un Negate (p1 a) , Un Negate (p2 a))
-    
 \end{code}
 
 % Comentario ad_gen
@@ -1227,37 +1247,20 @@ avg = p1.avg_aux
 \end{code}
 
 \begin{code}
-avg_aux = undefined
--- avg_aux  = auxiliar (0,1)
---   where
---     auxiliar (a,b) [] = (a,b)
---     -- auxiliar (a,b) [m] = ( ((a*b)+m)/ (b+1) , b+1 )
---     auxiliar (a,b) (h:t) = auxiliar (div (a*b+h) l , l) t
---       where
---         l = if (b<0) then 1 else (b+1)
--- avg_aux [a] = (a,1) 
--- avg_aux (a:b) = (((l+a)*r)/r,r+1)
-  -- where
-  --   (l,r) = avg_aux b
+avg_aux = auxiliar . split (const (0,0)) (id)
+   where
+   auxiliar ((a,b),[]) = ( a / b , b)
+   auxiliar ((a,b), (h:t) ) = auxiliar ((  a + h , succ b),t)
+     
 \end{code}
 Solução para árvores de tipo \LTree:
+  
+%% gene (Left _) = (0,1)
+%% gene (Right ((a,b),(c,d))) = (+ a  c,+ a d)
 \begin{code}
 avgLTree = p1.cataLTree gene where
-  gene = undefined
-  -- gene = either (split id (succ . zero)) final
-  -- final = split (uncurry div) (p2) . ((uncurry (+)) >< (uncurry (+))) .  split (split ((uncurry (*)).p1) ((uncurry (*)).p2)) (split (p2.p1) (p2.p2))
-   
-  --gene = either (split id (const 1)) ((either (const (0,1)) id) . final)
-  --final = maybe (Left ()) (Right . split (uncurry (/)) (p2) . ((uncurry (+)) >< (uncurry (+))) .  split (split ((uncurry (*)).p1) ((uncurry (*)).p2)) (split (p2.p1) (p2.p2))) 
---   gene = either (split id (const 1)) final
---   aux = split (split (p1.p1) (p1.p2)) (split (p2.p1) (p2.p2))
---   -- final m = (a / b , b)
---   final m = (a / b , b)
---     where 
---       (a,b) = ((uncurry (+)) >< (uncurry (+))) $ aux m
-  
--- gene (Left _) = (0,1)
--- gene (Right ((a,b),(c,d))) = (+ a  c,+ a d)
+  gene = either (split id (const 1)) final
+  final = split (uncurry (/)) (p2) . ((uncurry (+)) >< (uncurry (+))) .  split (split ((uncurry (*)).p1) ((uncurry (*)).p2)) (split (p2.p1) (p2.p2))
 \end{code}
 
 \subsection*{Problema 5}

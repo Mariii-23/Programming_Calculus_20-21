@@ -1038,11 +1038,14 @@ Verifique as suas funções testando a propriedade seguinte:
 \begin{propriedade}
 A média de uma lista não vazia e de uma \LTree\ com os mesmos elementos coincide,
 a menos de um erro de 0.1 milésimas:
+%%-- prop_avg :: Ord a => [a] -> Property
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{4}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{14}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
-\>[B]{}\Varid{prop\char95 avg}\mathbin{::}\Conid{Ord}\;\Varid{a}\Rightarrow [\mskip1.5mu \Varid{a}\mskip1.5mu]\to \Conid{Property}{}\<[E]%
+\>[B]{}\Varid{prop\char95 avg}\mathbin{::}{}\<[14]%
+\>[14]{}[\mskip1.5mu \Conid{Double}\mskip1.5mu]\to \Conid{Property}{}\<[E]%
 \\
 \>[B]{}\Varid{prop\char95 avg}\mathrel{=}\Varid{nonempty}\Rightarrow\Varid{diff}\leq\underline{\mathrm{0.000001}}\;\mathbf{where}{}\<[E]%
 \\
@@ -1652,16 +1655,31 @@ Definir:
 % returnamos o valor do out
 % Un op Valor -> op Valor
 
+% TODO Trocar para out tudo 
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{3}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{5}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{12}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
-\>[B]{}\Varid{clean}\;\Conid{X}\mathrel{=}i_1\;\Conid{X}{}\<[E]%
+\>[B]{}\Varid{clean}\;\Conid{X}\mathrel{=}{}\<[12]%
+\>[12]{}i_1\;(){}\<[E]%
 \\
-\>[B]{}\Varid{clean}\;(\Conid{N}\;\Varid{a})\mathrel{=}i_2\comp i_1\mathbin{\$}\Varid{a}{}\<[E]%
+\>[B]{}\Varid{clean}\;(\Conid{N}\;\Varid{a})\mathrel{=}\Varid{outExpAr}\;(\Conid{N}\;\Varid{a}){}\<[E]%
 \\
-\>[B]{}\Varid{clean}\;(\Conid{Bin}\;\Varid{op}\;(\Conid{N}\;\Varid{a})\;(\Conid{N}\;\Varid{b}))\mathrel{=}i_2\comp i_1\mathbin{\$}((\Varid{f}\;\Varid{op})\;\Varid{a}\;\Varid{b}){}\<[E]%
+\>[B]{}\Varid{clean}\;(\Conid{Bin}\;\Conid{Product}\;(\Conid{N}\;\mathrm{0})\;\anonymous )\mathrel{=}\Varid{outExpAr}\;(\Conid{N}\;\mathrm{0}){}\<[E]%
+\\
+\>[B]{}\Varid{clean}\;(\Conid{Bin}\;\Conid{Product}\;\anonymous \;(\Conid{N}\;\mathrm{0}))\mathrel{=}\Varid{outExpAr}\;(\Conid{N}\;\mathrm{0}){}\<[E]%
+\\[\blanklineskip]%
+\>[B]{}\Varid{clean}\;(\Conid{Bin}\;\Conid{Product}\;(\Conid{N}\;\mathrm{1})\;\Varid{l})\mathrel{=}\Varid{outExpAr}\;\Varid{l}{}\<[E]%
+\\
+\>[B]{}\Varid{clean}\;(\Conid{Bin}\;\Conid{Product}\;\Varid{l}\;(\Conid{N}\;\mathrm{1}))\mathrel{=}\Varid{outExpAr}\;\Varid{l}{}\<[E]%
+\\[\blanklineskip]%
+\>[B]{}\Varid{clean}\;(\Conid{Bin}\;\Conid{Sum}\;\Varid{a}\;(\Conid{N}\;\mathrm{0}))\mathrel{=}\Varid{outExpAr}\;\Varid{a}{}\<[E]%
+\\
+\>[B]{}\Varid{clean}\;(\Conid{Bin}\;\Conid{Sum}\;(\Conid{N}\;\mathrm{0})\;\Varid{a})\mathrel{=}\Varid{outExpAr}\;\Varid{a}{}\<[E]%
+\\[\blanklineskip]%
+\>[B]{}\Varid{clean}\;(\Conid{Bin}\;\Varid{op}\;(\Conid{N}\;\Varid{a})\;(\Conid{N}\;\Varid{b}))\mathrel{=}\Varid{outExpAr}\;(\Conid{N}\;((\Varid{f}\;\Varid{op})\;\Varid{a}\;\Varid{b})){}\<[E]%
 \\
 \>[B]{}\hsindent{3}{}\<[3]%
 \>[3]{}\mathbf{where}{}\<[E]%
@@ -1672,9 +1690,7 @@ Definir:
 \>[3]{}\hsindent{2}{}\<[5]%
 \>[5]{}\Varid{f}\;\Conid{Product}\mathrel{=}(\mathbin{*}){}\<[E]%
 \\
-\>[B]{}\Varid{clean}\;(\Conid{Bin}\;\Varid{op}\;\Varid{a}\;\Varid{b})\mathrel{=}i_2\comp i_2\comp i_1\mathbin{\$}(\Varid{op},(\Varid{a},\Varid{b})){}\<[E]%
-\\
-\>[B]{}\Varid{clean}\;(\Conid{Un}\;\Varid{op}\;(\Conid{N}\;\Varid{a}))\mathrel{=}i_2\comp i_1\mathbin{\$}((\Varid{g}\;\Varid{op})\;\Varid{a}){}\<[E]%
+\>[B]{}\Varid{clean}\;(\Conid{Un}\;\Varid{op}\;(\Conid{N}\;\Varid{a}))\mathrel{=}\Varid{outExpAr}\;(\Conid{N}\;((\Varid{g}\;\Varid{op})\;\Varid{a})){}\<[E]%
 \\
 \>[B]{}\hsindent{3}{}\<[3]%
 \>[3]{}\mathbf{where}{}\<[E]%
@@ -1685,9 +1701,26 @@ Definir:
 \>[3]{}\hsindent{2}{}\<[5]%
 \>[5]{}\Varid{g}\;\Conid{Negate}\mathrel{=}\Varid{negate}{}\<[E]%
 \\
-\>[B]{}\Varid{clean}\;(\Conid{Un}\;\Varid{op}\;\Varid{a})\mathrel{=}i_2\comp i_2\comp i_2\mathbin{\$}(\Varid{op},\Varid{a}){}\<[E]%
+\>[B]{}\Varid{clean}\;\Varid{l}\mathrel{=}\Varid{outExpAr}\;\Varid{l}{}\<[E]%
 \ColumnHook
 \end{hscode}\resethooks
+%%-- clean X = i1 X
+%%-- clean (N a) = i2 . i1 $ a
+%%
+%%-- clean (Bin Product (N 0) _) = i2 . i1 $ 0
+%%-- clean (Bin Product _ (N 0)) = i2 . i1 $ 0
+%%-- -- TODO: Acabar esta otimizacao
+%%-- -- clean (Bin Sum a (N 0)) = 
+%%-- clean (Bin op (N a) (N b)) = i2 . i1 $ ((f op) a b)
+%%--   where
+%%--     f Sum = (+)
+%%--     f Product = (*)
+%%-- clean (Bin op a b)= i2 . i2 . i1 $ (op ,(a,b))
+%%-- clean (Un op (N a)) =i2 . i1 $ ((g op) a)
+%%--   where
+%%--     g E = expd
+%%--     g Negate = negate
+%%-- clean (Un op a) =i2 . i2 . i2 $ (op,a)
 
 % Comentario gopt
 % tipo de entrada é o de saida do out
@@ -1823,11 +1856,11 @@ Definir
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
-\>[B]{}\Varid{loop}\mathrel{=}\bot {}\<[E]%
+\>[B]{}\Varid{loop}\;(\Varid{f},(\Varid{s},\Varid{h}))\mathrel{=}(\Varid{f}\mathbin{*}\Varid{s}\div \Varid{h},(\Varid{s}\mathbin{+}\mathrm{4},\Varid{h}\mathbin{+}\mathrm{1})){}\<[E]%
 \\
-\>[B]{}\Varid{inic}\mathrel{=}\bot {}\<[E]%
+\>[B]{}\Varid{inic}\mathrel{=}(\mathrm{1},(\mathrm{2},\mathrm{2})){}\<[E]%
 \\
-\>[B]{}\Varid{prj}\mathrel{=}\bot {}\<[E]%
+\>[B]{}\Varid{prj}\mathrel{=}\p1{}\<[E]%
 \ColumnHook
 \end{hscode}\resethooks
 por forma a que
@@ -1880,19 +1913,39 @@ Solução para listas não vazias:
 
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{4}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{44}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
-\>[B]{}\Varid{avg\char95 aux}\mathrel{=}\bot {}\<[E]%
+\>[B]{}\Varid{avg\char95 aux}\mathrel{=}\Varid{auxiliar}\comp \conj{\underline{(\mathrm{0},\mathrm{0})}}{\Varid{id}}{}\<[E]%
+\\
+\>[B]{}\hsindent{4}{}\<[4]%
+\>[4]{}\mathbf{where}{}\<[E]%
+\\
+\>[B]{}\hsindent{4}{}\<[4]%
+\>[4]{}\Varid{auxiliar}\;((\Varid{a},\Varid{b}),[\mskip1.5mu \mskip1.5mu])\mathrel{=}(\Varid{a}\mathbin{/}\Varid{b},\Varid{b}){}\<[E]%
+\\
+\>[B]{}\hsindent{4}{}\<[4]%
+\>[4]{}\Varid{auxiliar}\;((\Varid{a},\Varid{b}),(\Varid{h}\mathbin{:}\Varid{t}))\mathrel{=}\Varid{auxiliar}\;(({}\<[44]%
+\>[44]{}\Varid{a}\mathbin{+}\Varid{h},\succ \;\Varid{b}),\Varid{t}){}\<[E]%
 \ColumnHook
 \end{hscode}\resethooks
 Solução para árvores de tipo \LTree:
+  
+%% gene (Left _) = (0,1)
+%% gene (Right ((a,b),(c,d))) = (+ a  c,+ a d)
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{4}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{3}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{74}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
 \>[B]{}\Varid{avgLTree}\mathrel{=}\p1\comp \llparenthesis\, \Varid{gene}\,\rrparenthesis\;\mathbf{where}{}\<[E]%
 \\
-\>[B]{}\hsindent{4}{}\<[4]%
-\>[4]{}\Varid{gene}\mathrel{=}\bot {}\<[E]%
+\>[B]{}\hsindent{3}{}\<[3]%
+\>[3]{}\Varid{gene}\mathrel{=}\alt{\conj{\Varid{id}}{\underline{\mathrm{1}}}}{\Varid{final}}{}\<[E]%
+\\
+\>[B]{}\hsindent{3}{}\<[3]%
+\>[3]{}\Varid{final}\mathrel{=}\conj{\uncurry{(\mathbin{/})}}{\p2}\comp (\uncurry{(\mathbin{+})}\times\uncurry{(\mathbin{+})})\comp {}\<[74]%
+\>[74]{}\conj{\conj{\uncurry{(\mathbin{*})}\comp \p1}{\uncurry{(\mathbin{*})}\comp \p2}}{\conj{\p2\comp \p1}{\p2\comp \p2}}{}\<[E]%
 \ColumnHook
 \end{hscode}\resethooks
 
