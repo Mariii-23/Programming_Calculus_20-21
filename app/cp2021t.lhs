@@ -1018,6 +1018,27 @@ ad v = p2 . cataExpAr (ad_gen v)
 \end{code}
 Definir:
 
+As funções |outExpAr| e |recExpAr| são deduzidas através do tipo de dados do problema e com auxílio de alguns diagramas. 
+Sendo o tipo de dados |ExpAr a| e partindo do |inExpAr| fornecido, sabendo que, este "constrói" algo do tipo, chegou-se à implementação e ao diagrama do |outExpr|, tendo em mente que este "destrói" o tipo.
+
+\begin{eqnarray*}
+\xymatrix@@C=2cm{
+     |ExpAr a|
+&
+     | b + ( a + (BinOp * (ExpAr a * ExpAr a) + (UnOp * ExpAr a)))|
+           \ar[l]^-{|inExpAr|}
+}
+\end{eqnarray*}% Comentario g_eval
+
+\begin{eqnarray*}
+\xymatrix@@C=2cm{
+     |ExpAr a|
+           \ar[r]^-{|outExpAr|}
+&
+     | b + ( a + (BinOp * (ExpAr a * ExpAr a) + (UnOp * ExpAr a)))|
+}
+\end{eqnarray*}% Comentario g_eval
+
 % Comentario outEXpAr
 % outExpAr :: ExpAr a -> Either
 %     b (Either a (Either (BinOp, (ExpAr a, ExpAr a)) (UnOp, ExpAr a)))
@@ -1034,6 +1055,8 @@ outExpAr (Bin op a b) = i2 . i2 . i1 $ (op, (a, b))
 outExpAr (Un op a) = i2 . i2 . i2 $ (op, a)
 \end{code}
 
+%TODO: Explicar rec
+
 % Comentario recEXpAr
 % x -> x
 % n a -> n a
@@ -1043,7 +1066,24 @@ outExpAr (Un op a) = i2 . i2 . i2 $ (op, a)
 recExpAr x = baseExpAr id id id x x id x
 \end{code}
 
-% Comentario g_eval
+%TODO: Mais certo é estar mal
+\begin{eqnarray*}
+\xymatrix@@C=3cm{
+   |ExpAr a|
+          \ar[d]_-{|eval_exp num|}
+           \ar[r]^-{|outExpAr|}
+&
+   | b + ( a + (BinOp * (ExpAr a * ExpAr a) + (UnOp * ExpAr a)))|
+          \ar[d]^{|recBlockchain (g_eval_exp num))|}
+\\
+    |a|
+&
+   | b + ( a + (BinOp * (a * a) + (UnOp * a)))|
+          \ar[l]^-{|g_eval_exp num|}
+}
+\end{eqnarray*}
+
+
 % a () -> a
 % a 10 -> 10
 % a (BinOP,(valor1,valor2)) -> valor1 op valor2
@@ -1081,6 +1121,7 @@ g_eval_exp num = either (const num) (either id (either (uncurry f) (uncurry g)))
     
 \end{code}
 
+
 % Comentario clean
 % o seu tipo de saida tem q ser do tipo de entrada do out
 
@@ -1092,10 +1133,7 @@ g_eval_exp num = either (const num) (either id (either (uncurry f) (uncurry g)))
 % returnamos o valor do out
 % Un op Valor -> op Valor
 
-% TODO Trocar para out tudo 
 \begin{code}
-clean X =  i1 ()
-clean (N a) = outExpAr (N a)
 clean (Bin Product (N 0) _) = outExpAr (N 0)
 clean (Bin Product _ (N 0)) = outExpAr (N 0)
 
@@ -1246,6 +1284,7 @@ Solução para listas não vazias:
 avg = p1.avg_aux
 \end{code}
 
+%TODO: verificar
 \begin{code}
 avg_aux = auxiliar . split (const (0,0)) (id)
    where
@@ -1260,7 +1299,7 @@ Solução para árvores de tipo \LTree:
 \begin{code}
 avgLTree = p1.cataLTree gene where
   gene = either (split id (const 1)) final
-  final = split (uncurry (/)) (p2) . ((uncurry (+)) >< (uncurry (+))) .  split (split ((uncurry (*)).p1) ((uncurry (*)).p2)) (split (p2.p1) (p2.p2))
+  final = split (uncurry (/)) p2 . ((uncurry (+)) >< (uncurry (+))) .  split (split ((uncurry (*)).p1) ((uncurry (*)).p2)) (split (p2.p1) (p2.p2))
 \end{code}
 
 \subsection*{Problema 5}

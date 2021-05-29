@@ -1558,6 +1558,27 @@ São dadas:
 \end{hscode}\resethooks
 Definir:
 
+As funções \ensuremath{\Varid{outExpAr}} e \ensuremath{\Varid{recExpAr}} são deduzidas através do tipo de dados do problema e com auxílio de alguns diagramas. 
+Sendo o tipo de dados \ensuremath{\Conid{ExpAr}\;\Varid{a}} e partindo do \ensuremath{\Varid{inExpAr}} fornecido, sabendo que, este "constrói" algo do tipo, chegou-se à implementação e ao diagrama do \ensuremath{\Varid{outExpr}}, tendo em mente que este "destrói" o tipo.
+
+\begin{eqnarray*}
+\xymatrix@C=2cm{
+     \ensuremath{\Conid{ExpAr}\;\Varid{a}}
+&
+     \ensuremath{\Varid{b}\mathbin{+}(\Varid{a}\mathbin{+}(\Conid{BinOp}\mathbin{*}(\Conid{ExpAr}\;\Varid{a}\mathbin{*}\Conid{ExpAr}\;\Varid{a})\mathbin{+}(\Conid{UnOp}\mathbin{*}\Conid{ExpAr}\;\Varid{a})))}
+           \ar[l]^-{\ensuremath{\Varid{inExpAr}}}
+}
+\end{eqnarray*}% Comentario g_eval
+
+\begin{eqnarray*}
+\xymatrix@C=2cm{
+     \ensuremath{\Conid{ExpAr}\;\Varid{a}}
+           \ar[r]^-{\ensuremath{\Varid{outExpAr}}}
+&
+     \ensuremath{\Varid{b}\mathbin{+}(\Varid{a}\mathbin{+}(\Conid{BinOp}\mathbin{*}(\Conid{ExpAr}\;\Varid{a}\mathbin{*}\Conid{ExpAr}\;\Varid{a})\mathbin{+}(\Conid{UnOp}\mathbin{*}\Conid{ExpAr}\;\Varid{a})))}
+}
+\end{eqnarray*}% Comentario g_eval
+
 % Comentario outEXpAr
 % outExpAr :: ExpAr a -> Either
 %     b (Either a (Either (BinOp, (ExpAr a, ExpAr a)) (UnOp, ExpAr a)))
@@ -1580,6 +1601,8 @@ Definir:
 \ColumnHook
 \end{hscode}\resethooks
 
+%TODO: Explicar rec
+
 % Comentario recEXpAr
 % x -> x
 % n a -> n a
@@ -1592,7 +1615,24 @@ Definir:
 \ColumnHook
 \end{hscode}\resethooks
 
-% Comentario g_eval
+%TODO: Mais certo é estar mal
+\begin{eqnarray*}
+\xymatrix@C=3cm{
+   \ensuremath{\Conid{ExpAr}\;\Varid{a}}
+          \ar[d]_-{\ensuremath{\Varid{eval\char95 exp}\;\Varid{num}}}
+           \ar[r]^-{\ensuremath{\Varid{outExpAr}}}
+&
+   \ensuremath{\Varid{b}\mathbin{+}(\Varid{a}\mathbin{+}(\Conid{BinOp}\mathbin{*}(\Conid{ExpAr}\;\Varid{a}\mathbin{*}\Conid{ExpAr}\;\Varid{a})\mathbin{+}(\Conid{UnOp}\mathbin{*}\Conid{ExpAr}\;\Varid{a})))}
+          \ar[d]^{\ensuremath{\Varid{recBlockchain}\;(\Varid{g\char95 eval\char95 exp}\;\Varid{num}))}}
+\\
+    \ensuremath{\Varid{a}}
+&
+   \ensuremath{\Varid{b}\mathbin{+}(\Varid{a}\mathbin{+}(\Conid{BinOp}\mathbin{*}(\Varid{a}\mathbin{*}\Varid{a})\mathbin{+}(\Conid{UnOp}\mathbin{*}\Varid{a})))}
+          \ar[l]^-{\ensuremath{\Varid{g\char95 eval\char95 exp}\;\Varid{num}}}
+}
+\end{eqnarray*}
+
+
 % a () -> a
 % a 10 -> 10
 % a (BinOP,(valor1,valor2)) -> valor1 op valor2
@@ -1643,6 +1683,7 @@ Definir:
 \>[5]{}\Varid{g}\;\Conid{Negate}\mathrel{=}\Varid{negate}{}\<[E]%
 \ColumnHook
 \end{hscode}\resethooks
+
 
 % Comentario clean
 % o seu tipo de saida tem q ser do tipo de entrada do out
