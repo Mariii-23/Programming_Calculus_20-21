@@ -1055,6 +1055,8 @@ outExpAr (Bin op a b) = i2 . i2 . i1 $ (op, (a, b))
 outExpAr (Un op a) = i2 . i2 . i2 $ (op, a)
 \end{code}
 
+%TODO: Explicar rec
+
 % Comentario recEXpAr
 % x -> x
 % n a -> n a
@@ -1065,17 +1067,14 @@ recExpAr x = baseExpAr id id id x x id x
 \end{code}
 
 %TODO: Mais certo é estar mal
-
-%% esta funcao recebe 2 argumentos
-%% no grafico ficara (num, ExpAr a) ou so o Exp como temos ?
 \begin{eqnarray*}
-\xymatrix@@C=2cm{
+\xymatrix@@C=3cm{
    |ExpAr a|
           \ar[d]_-{|eval_exp num|}
            \ar[r]^-{|outExpAr|}
 &
    | b + ( a + (BinOp * (ExpAr a * ExpAr a) + (UnOp * ExpAr a)))|
-          \ar[d]^{|id + ( id + ((id* (g_eval_exp num)^2)+ (id*g_eval_exp num))|}
+          \ar[d]^{|recBlockchain (g_eval_exp num))|}
 \\
     |a|
 &
@@ -1134,8 +1133,6 @@ g_eval_exp num = either (const num) (either id (either (uncurry f) (uncurry g)))
 % returnamos o valor do out
 % Un op Valor -> op Valor
 
-%% TODO: diagrama de hilomorfismo
-
 \begin{code}
 clean (Bin Product (N 0) _) = outExpAr (N 0)
 clean (Bin Product _ (N 0)) = outExpAr (N 0)
@@ -1161,6 +1158,18 @@ clean l = outExpAr l
 %%
 %%-- clean (Bin Product (N 0) _) = i2 . i1 $ 0
 %%-- clean (Bin Product _ (N 0)) = i2 . i1 $ 0
+%%-- -- TODO: Acabar esta otimizacao
+%%-- -- clean (Bin Sum a (N 0)) = 
+%%-- clean (Bin op (N a) (N b)) = i2 . i1 $ ((f op) a b)
+%%--   where
+%%--     f Sum = (+)
+%%--     f Product = (*)
+%%-- clean (Bin op a b)= i2 . i2 . i1 $ (op ,(a,b))
+%%-- clean (Un op (N a)) =i2 . i1 $ ((g op) a)
+%%--   where
+%%--     g E = expd
+%%--     g Negate = negate
+%%-- clean (Un op a) =i2 . i2 . i2 $ (op,a)
 
 % Comentario gopt
 % tipo de entrada é o de saida do out
@@ -1274,43 +1283,20 @@ Solução para listas não vazias:
 \begin{code}
 avg = p1.avg_aux
 \end{code}
+
+%TODO: mudar para recursividade mutua
 \begin{code}
-
-avg_aux = cataList algo
+-- avg_aux = auxiliar . split (const (0,0)) (id)
+--   where
+--    auxiliar ((a,b),[]) = ( a , b)
+--    auxiliar ((a,b), (h:t) ) = auxiliar ((  (a *b + h ) / succ b , succ b),t)
+avg_aux = cataList gene
   where
-    algo (Left _) = (0,0)
-    algo (Right (a, (b,c))) = ((a + b*c )/succ c, succ c)
+    gene = either (split (const 0) (const 0)) final
+    final ((a,b), (h,t) ) = ((a * b + h ) / succ b , succ b)
 \end{code}
-%% apagar 1
-%%-- avg_aux = auxiliar . split (const (0,0)) (id)
-%%--   where
-%%--    auxiliar ((a,b),[]) = ( a , b)
-%%--    auxiliar ((a,b), (h:t) ) = auxiliar ((  (a *b + h ) / succ b , succ b),t)
-
-%% -- Leaf 10 -> (10,1)
-%% -- Fork (10) (20) -> ( 10+20 / 2 , 2)
-%% -- Ltree empty -> Left () -> (0,0)
-%% -- Ltree
-%% -- ((10, 20), (30)) -> (10, [20,30]) -> (10, ((20+30)/2 , 2) ) -> ( 10+20+30 / 2+1 , 2+1 )
-
-
 Solução para árvores de tipo \LTree:
   
-\begin{eqnarray*}
-\xymatrix@@C=2cm{
-   |LTree A|
-          \ar[d]_-{|avgLTree|}
-           \ar[r]^-{|outLtree|}
-&
-   | A + ((LTree A)* (LTree A))|
-          \ar[d]^{|id + (avgLTree * avgLTree)|}
-\\
-    |A|
-&
-   | A + ((A*A) * (A*A))|
-          \ar[l]^-{| p1.gene|}
-}
-\end{eqnarray*}
 %% gene (Left _) = (0,1)
 %% gene (Right ((a,b),(c,d))) = (+ a  c,+ a d)
 \begin{code}
@@ -1318,27 +1304,6 @@ avgLTree = p1.cataLTree gene where
   gene = either (split id (const 1)) final
   final = split (uncurry (/)) p2 . ((uncurry (+)) >< (uncurry (+))) .  split (split ((uncurry (*)).p1) ((uncurry (*)).p2)) (split (p2.p1) (p2.p2))
 \end{code}
-
-\begin{verbatim}
-
-Veremos o q o final faz
-Primeiro ele aplica:
-split (split ((uncurry (*)).p1) ((uncurry (*)).p2)) (split (p2.p1) (p2.p2))
-
-final ((a,b),(c,d)) ->  ( ( a*b , c*d ) , ( b,d ) )
-Depois aplica:
-((uncurry (+)) >< (uncurry (+)))
-( ( a*b , c*d ) , ( b,d ) ) -> ( a*b+c*d ,b+d )
-Para finalizar aplica-se :
-split (uncurry (/)) p2
-( a+b ,b+d ) -> ( (a*b+c*d) / (b+d) , b+d )
-Concluindo que: 
-final ((a,b),(c,d))  = ( (a+b) / (b+d) , b+d )
-
-\end{verbatim}
-%%(( a*b , c*d ) ,(b,d) )
-%%( a*b + c*d , b+d  )
-%%uncurry (/) ( a*b + c*d , b+d  )
 
 \subsection*{Problema 5}
 Inserir em baixo o código \Fsharp\ desenvolvido, entre \verb!\begin{verbatim}! e \verb!\end{verbatim}!:

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=pdflatex 2021.5.8)  29 MAY 2021 17:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020/Arch Linux) (preloaded format=pdflatex 2021.5.8)  3 JUN 2021 11:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -783,56 +783,174 @@ Overfull \hbox (8.57883pt too wide) in paragraph at lines 1431--1480
  []
 
 [12] <xymatrix 2x1 54> <xymatrix 2x1 54> <xymatrix 2x2 191>
-Overfull \hbox (32.8146pt too wide) in alignment at lines 1619--1633
+Overfull \hbox (72.08156pt too wide) in alignment at lines 1620--1634
  [][][] []
  []
 
 [13]
-Overfull \hbox (137.53072pt too wide) in paragraph at lines 1812--1846
+Overfull \hbox (137.53072pt too wide) in paragraph at lines 1796--1830
  [][] 
  []
 
 
-Overfull \hbox (137.53072pt too wide) in paragraph at lines 1812--1846
+Overfull \hbox (137.53072pt too wide) in paragraph at lines 1796--1830
  [][][][] 
  []
 
 
-Overfull \hbox (137.53072pt too wide) in paragraph at lines 1812--1846
+Overfull \hbox (137.53072pt too wide) in paragraph at lines 1796--1830
  [][][][][][] 
  []
 
 
-Overfull \hbox (137.53072pt too wide) in paragraph at lines 1812--1846
+Overfull \hbox (137.53072pt too wide) in paragraph at lines 1796--1830
  [][][][] 
  []
 
 
-Overfull \hbox (137.53072pt too wide) in paragraph at lines 1812--1846
+Overfull \hbox (137.53072pt too wide) in paragraph at lines 1796--1830
  [][][][] 
  []
 
 
-Overfull \hbox (137.53072pt too wide) in paragraph at lines 1812--1846
+Overfull \hbox (137.53072pt too wide) in paragraph at lines 1796--1830
  [][][][] 
  []
 
 
-Overfull \hbox (137.53072pt too wide) in paragraph at lines 1812--1846
+Overfull \hbox (137.53072pt too wide) in paragraph at lines 1796--1830
  [][][][] 
  []
 
 
-Overfull \hbox (137.53072pt too wide) in paragraph at lines 1812--1846
+Overfull \hbox (137.53072pt too wide) in paragraph at lines 1796--1830
  [][][][] 
  []
 
 
-Overfull \hbox (137.53072pt too wide) in paragraph at lines 1812--1846
+Overfull \hbox (137.53072pt too wide) in paragraph at lines 1796--1830
  [][][][] 
  []
 
 [14]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1970 \end{hscode}
+                   \resethooks
+? 
+! Extra }, or forgotten $.
+\mbox  #1->\leavevmode \hbox {#1}
+                                 
+l.1970 \end{hscode}
+                   \resethooks
+? 
+! Missing } inserted.
+<inserted text> 
+                }
+l.1970 \end{hscode}
+                   \resethooks
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1970 \end{hscode}
+                   \resethooks
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1970 \end{hscode}
+                   \resethooks
+? 
+! Extra }, or forgotten $.
+\mbox  #1->\leavevmode \hbox {#1}
+                                 
+l.1970 \end{hscode}
+                   \resethooks
+? 
+! Missing } inserted.
+<inserted text> 
+                }
+l.1970 \end{hscode}
+                   \resethooks
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1970 \end{hscode}
+                   \resethooks
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1970 \end{hscode}
+                   \resethooks
+? 
+! Extra }, or forgotten $.
+\mbox  #1->\leavevmode \hbox {#1}
+                                 
+l.1970 \end{hscode}
+                   \resethooks
+? 
+! Missing } inserted.
+<inserted text> 
+                }
+l.1970 \end{hscode}
+                   \resethooks
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.1970 \end{hscode}
+                   \resethooks
+? 
+
+Overfull \hbox (173.13824pt too wide) in paragraph at lines 1939--1970
+ [][] 
+ []
+
+
+Overfull \hbox (173.13824pt too wide) in paragraph at lines 1939--1970
+ [][][][] 
+ []
+
+
+Overfull \hbox (173.13824pt too wide) in paragraph at lines 1939--1970
+ [][][][] 
+ []
+
+
+Overfull \hbox (173.13824pt too wide) in paragraph at lines 1939--1970
+ [][][][][][] 
+ []
+
+
+Overfull \hbox (173.13824pt too wide) in paragraph at lines 1939--1970
+ [][] 
+ []
+
+
+Overfull \hbox (173.13824pt too wide) in paragraph at lines 1939--1970
+ [][] 
+ []
+
+
+Overfull \hbox (173.13824pt too wide) in paragraph at lines 1939--1970
+ [][] 
+ []
+
+
+Overfull \hbox (173.13824pt too wide) in paragraph at lines 1939--1970
+ [][][][] 
+ []
+
+
+Overfull \hbox (173.13824pt too wide) in paragraph at lines 1939--1970
+ [][][][] 
+ []
+
+<xymatrix 2x2 191>
 No file cp2021t.ind.
 No file cp2021t.bbl.
 [15] (./cp2021t.aux)
@@ -874,7 +992,7 @@ urw/palatino/uplr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.
 pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb></usr/share/tex
 mf-dist/fonts/type1/public/xypic/xyatip10.pfb></usr/share/texmf-dist/fonts/type
 1/public/xypic/xybtip10.pfb>
-Output written on cp2021t.pdf (15 pages, 339560 bytes).
+Output written on cp2021t.pdf (15 pages, 344273 bytes).
 PDF statistics:
  361 PDF objects out of 1000 (max. 8388607)
  311 compressed objects within 4 object streams
