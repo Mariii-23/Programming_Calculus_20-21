@@ -1253,12 +1253,129 @@ seja a função pretendida.
 \textbf{NB}: usar divisão inteira.
 Apresentar de seguida a justificação da solução encontrada.
 
+Sabendo que:
+\begin{spec}
+  c n = frac ((2n)!) ((n+1)! * n!)
+\end{spec}
+Vamos calcular c (n+1) :
+\begin{spec}
+  c (n+1) = frac ((2n+2)!) ((n+2)! * (n+1)!)
+          = frac ((2n+2)*(2n+1)*(2n)!) ((n+2)*(n+1)! * (n+1)*n!)
+          = frac ((2n+2)*(2n+1)*(c n)) ((n+2) * (n+1))
+          = frac (2*(2n+1)*(c n)) (n+2)
+\end{spec}
+Considerando:
+\begin{spec}
+s n = 2*(2n+1)
+    = 4*n + 2
+h n = n + 2
+\end{spec}
+Podendo, com isto concluir:
+\begin{eqnarray*}
+\start
+  |lcbr(
+    c 0 = 1
+  )(
+    c (n+1) = c n * frac (s n) (h n)
+  )|
+\more
+  |lcbr(
+    s 0 = 2
+  )(
+    s (n+1) = s n + 4       
+  )|
+\more
+|lcbr(
+        h 0 = 2
+  )(
+        h (n+1) = h n + 1
+  )|
+\end{eqnarray*}
+%%\begin{spec}
+%%  	 c 0 = 1
+%%  	 c (n+1) = c n * frac (s n) (h n)
+%%  	 s 0 = 2
+%%  	 s (n+1) = s n + 4       
+%%  	 h 0 = 2
+%%    	 h (n+1) = h n + 1 
+%%\end{spec}
+Analisando:
+\begin{eqnarray*}
+\start
+  |lcbr(
+    c 0 = 1
+  )(
+    c (n+1) = c n * frac (s n) (h n)
+  )|
+\more
+  |lcbr(
+    s 0 = 2
+  )(
+    s (n+1) = s n + 4       
+  )|
+\more
+|lcbr(
+        h 0 = 2
+  )(
+        h (n+1) = h n + 1
+  )|
+%
+\just\equiv{ Igualdade extensional (71) (6 vezes) }
+%
+  |lcbr(
+    c . const 0 = const 1
+  )(
+    c .succ = uncurry (*) . split c (uncurry (/) .split s h)
+  )|
+\more
+  |lcbr(
+    s. const 0 = const 2
+  )(
+    s .succ = (+4).s
+  )|
+\more
+  |lcbr(
+        h . const 0= const 2
+  )(
+        h.succ = succ.h
+  )|
+%
+\just\equiv{ Eq- + (27) (3 vezes) }
+%
+| either (c.const 0)  (c.succ) = either (const 1) (uncurry (*) . split c (uncurry (/) .split s h)) |
+\more
+| either (s.const 0)  (s.succ) =  either (const 2) ((+4).s) |
+\more
+| either ( h.const 0 ) ( h.succ ) = either (const 2) (succ.h)|
+%
+\just\equiv{  in = [const 0, succ] ,Fusão X (3 vezes) }
+%
+|c.in = either (const 1) (uncurry (*) . split c (uncurry (/) .split s h) )|
+\more
+|s . in = either (const 2) ((+4) . s) |
+\more
+| h . in = either (const 2) (succ . h )|
+%
+\just\equiv{ Absorção + }
+%
+|c . in = either (const 1) (uncurry (*) .split (p1) (uncurry (/) .split (p1.p2) (p2.p2)) ) . id + (split c (split s h))|
+\more
+|s . in = either (const 2) ((+4) . (p1.p2)) . id + (split c (split s h)) |
+\more
+|h . in = either (const 2) (succ . (p2.p2)) . id + (split c (split s h))|
+\end{eqnarray*}
 \subsection*{Problema 3}
 
 \begin{code}
 calcLine :: NPoint -> (NPoint -> OverTime NPoint)
 calcLine = cataList h where
-   h = undefined
+  h = undefined
+  -- h = either (const 0.0) linear1d
+   --h = either (const nil) (split (linear1d.p1) p2 )
+   -- f a b t = (1-t) * a+ t*b
+   -- -- f (a,b) t = a + t*(b-a)
+   -- f (a,b) t = (a + t*(b-a), (a,a))
+   -- h = either (const ()) f
 
 deCasteljau :: [NPoint] -> OverTime NPoint
 deCasteljau = hyloAlgForm alg coalg where
