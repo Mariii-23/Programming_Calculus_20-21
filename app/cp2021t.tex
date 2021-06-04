@@ -1623,12 +1623,12 @@ Sendo o tipo de dados \ensuremath{\Conid{ExpAr}\;\Varid{a}} e partindo do \ensur
           \ar[d]_-{\ensuremath{\Varid{eval\char95 exp}\;\Varid{num}}}
            \ar[r]^-{\ensuremath{\Varid{outExpAr}}}
 &
-   \ensuremath{\Varid{b}\mathbin{+}(\Varid{a}\mathbin{+}(\Conid{BinOp}\mathbin{*}(\Conid{ExpAr}\;\Varid{a}\mathbin{*}\Conid{ExpAr}\;\Varid{a})\mathbin{+}(\Conid{UnOp}\mathbin{*}\Conid{ExpAr}\;\Varid{a})))}
-          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}\mathbin{+}((\Varid{id}\mathbin{*}(\Varid{g\char95 eval\char95 exp}\;\Varid{num})\mathbin{\uparrow}\mathrm{2})\mathbin{+}(\Varid{id}\mathbin{*}\Varid{g\char95 eval\char95 exp}\;\Varid{num}))}}
+   \ensuremath{\Varid{b}\mathbin{+}(\Varid{a}\mathbin{+}(\Conid{BinOp}}\times\ensuremath{(\Conid{ExpAr}\;\Varid{a}}\times\ensuremath{\Conid{ExpAr}\;\Varid{a})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{\Conid{ExpAr}\;\Varid{a})))}
+          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}\mathbin{+}((\Varid{id}}\times\ensuremath{(\Varid{g\char95 eval\char95 exp}\;\Varid{num})\mathbin{\uparrow}\mathrm{2})\mathbin{+}(\Varid{id}}\times\ensuremath{\Varid{g\char95 eval\char95 exp}\;\Varid{num}))}}
 \\
     \ensuremath{\Varid{a}}
 &
-   \ensuremath{\Varid{b}\mathbin{+}(\Varid{a}\mathbin{+}(\Conid{BinOp}\mathbin{*}(\Varid{a}\mathbin{*}\Varid{a})\mathbin{+}(\Conid{UnOp}\mathbin{*}\Varid{a})))}
+   \ensuremath{\Varid{b}\mathbin{+}(\Varid{a}\mathbin{+}(\Conid{BinOp}}\times\ensuremath{(\Varid{a}}\times\ensuremath{\Varid{a})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{\Varid{a})))}
           \ar[l]^-{\ensuremath{\Varid{g\char95 eval\char95 exp}\;\Varid{num}}}
 }
 \end{eqnarray*}
@@ -2000,33 +2000,24 @@ Analisando:
 
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{3}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{4}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{6}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
 \>[B]{}\Varid{calcLine}\mathbin{::}\Conid{NPoint}\to (\Conid{NPoint}\to \Conid{OverTime}\;\Conid{NPoint}){}\<[E]%
 \\
 \>[B]{}\Varid{calcLine}\mathrel{=}\Varid{cataList}\;\Varid{h}\;\mathbf{where}{}\<[E]%
 \\
-\>[B]{}\hsindent{3}{}\<[3]%
-\>[3]{}\Varid{h}\mathrel{=}\bot {}\<[E]%
+\>[B]{}\hsindent{4}{}\<[4]%
+\>[4]{}\Varid{h}\mathrel{=}\alt{\underline{\cdot }\comp \underline{\Varid{nil}}}{\Varid{g}}{}\<[E]%
 \\
-\>[B]{}\hsindent{3}{}\<[3]%
-\>[3]{}\mbox{\onelinecomment  h = either (const 0.0) linear1d}{}\<[E]%
+\>[B]{}\hsindent{4}{}\<[4]%
+\>[4]{}\Varid{g}\;(\Varid{d},\Varid{f})\;\Varid{l}\mathrel{=}\mathbf{case}\;\Varid{l}\;\mathbf{of}{}\<[E]%
 \\
-\>[3]{}\hsindent{1}{}\<[4]%
-\>[4]{}\mbox{\onelinecomment h = either (const nil) (split (linear1d.p1) p2 )}{}\<[E]%
+\>[4]{}\hsindent{2}{}\<[6]%
+\>[6]{}[\mskip1.5mu \mskip1.5mu]\to \Varid{nil}{}\<[E]%
 \\
-\>[3]{}\hsindent{1}{}\<[4]%
-\>[4]{}\mbox{\onelinecomment  f a b t = (1-t) * a+ t*b}{}\<[E]%
-\\
-\>[3]{}\hsindent{1}{}\<[4]%
-\>[4]{}\mbox{\onelinecomment  -- f (a,b) t = a + t*(b-a)}{}\<[E]%
-\\
-\>[3]{}\hsindent{1}{}\<[4]%
-\>[4]{}\mbox{\onelinecomment  f (a,b) t = (a + t*(b-a), (a,a))}{}\<[E]%
-\\
-\>[3]{}\hsindent{1}{}\<[4]%
-\>[4]{}\mbox{\onelinecomment  h = either (const ()) f}{}\<[E]%
+\>[4]{}\hsindent{2}{}\<[6]%
+\>[6]{}(\Varid{x}\mathbin{:}\Varid{xs})\to \lambda \Varid{z}\to \Varid{concat}\mathbin{\$}(\Varid{sequenceA}\;[\mskip1.5mu \Varid{singl}\comp \Varid{linear1d}\;\Varid{d}\;\Varid{x},\Varid{f}\;\Varid{xs}\mskip1.5mu])\;\Varid{z}{}\<[E]%
 \\[\blanklineskip]%
 \>[B]{}\Varid{deCasteljau}\mathbin{::}[\mskip1.5mu \Conid{NPoint}\mskip1.5mu]\to \Conid{OverTime}\;\Conid{NPoint}{}\<[E]%
 \\
@@ -2038,7 +2029,7 @@ Analisando:
 \>[B]{}\hsindent{4}{}\<[4]%
 \>[4]{}\Varid{alg}\mathrel{=}\bot {}\<[E]%
 \\[\blanklineskip]%
-\>[B]{}\Varid{hyloAlgForm}\mathrel{=}\bot {}\<[E]%
+\>[B]{}\Varid{hyloAlgForm}\;\Varid{h}\;\Varid{g}\mathrel{=}\Varid{cataList}\;\Varid{h}\comp \Varid{anaList}\;\Varid{g}{}\<[E]%
 \ColumnHook
 \end{hscode}\resethooks
 
@@ -2089,12 +2080,12 @@ Solução para árvores de tipo \LTree:
           \ar[d]_-{\ensuremath{\Varid{avgLTree}}}
            \ar[r]^-{\ensuremath{\Varid{outLtree}}}
 &
-   \ensuremath{\Conid{A}\mathbin{+}((\mathsf{LTree}\;\Conid{A})\mathbin{*}(\mathsf{LTree}\;\Conid{A}))}
-          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{avgLTree}\mathbin{*}\Varid{avgLTree})}}
+   \ensuremath{\Conid{A}\mathbin{+}((\mathsf{LTree}\;\Conid{A})} \times \ensuremath{(\mathsf{LTree}\;\Conid{A}))}
+          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{gene}}\times \ensuremath{\Varid{gene})}}
 \\
     \ensuremath{\Conid{A}}
 &
-   \ensuremath{\Conid{A}\mathbin{+}((\Conid{A}\mathbin{*}\Conid{A})\mathbin{*}(\Conid{A}\mathbin{*}\Conid{A}))}
+   \ensuremath{\Conid{A}\mathbin{+}((\Conid{A}}\times\ensuremath{\Conid{A})}\times\ensuremath{(\Conid{A}}\times \ensuremath{\Conid{A}))}
           \ar[l]^-{\ensuremath{\p1\comp \Varid{gene}}}
 }
 \end{eqnarray*}

@@ -1074,12 +1074,12 @@ recExpAr x = baseExpAr id id id x x id x
           \ar[d]_-{|eval_exp num|}
            \ar[r]^-{|outExpAr|}
 &
-   | b + ( a + (BinOp * (ExpAr a * ExpAr a) + (UnOp * ExpAr a)))|
-          \ar[d]^{|id + ( id + ((id* (g_eval_exp num)^2)+ (id*g_eval_exp num))|}
+   | b + ( a + (BinOp |\times| (ExpAr a |\times| ExpAr a) + (UnOp |\times| ExpAr a)))|
+          \ar[d]^{|id + ( id + ((id|\times| (g_eval_exp num)^2)+ (id|\times|g_eval_exp num))|}
 \\
     |a|
 &
-   | b + ( a + (BinOp * (a * a) + (UnOp * a)))|
+   | b + ( a + (BinOp |\times| (a |\times| a) + (UnOp |\times| a)))|
           \ar[l]^-{|g_eval_exp num|}
 }
 \end{eqnarray*}
@@ -1369,20 +1369,17 @@ Analisando:
 \begin{code}
 calcLine :: NPoint -> (NPoint -> OverTime NPoint)
 calcLine = cataList h where
-  h = undefined
-  -- h = either (const 0.0) linear1d
-   --h = either (const nil) (split (linear1d.p1) p2 )
-   -- f a b t = (1-t) * a+ t*b
-   -- -- f (a,b) t = a + t*(b-a)
-   -- f (a,b) t = (a + t*(b-a), (a,a))
-   -- h = either (const ()) f
+   h = either (const . const nil) g
+   g (d,f) l = case l of
+     []->nil
+     (x:xs)-> \z->concat $ (sequenceA [singl.linear1d d x, f xs]) z
 
 deCasteljau :: [NPoint] -> OverTime NPoint
 deCasteljau = hyloAlgForm alg coalg where
    coalg = undefined
    alg = undefined
 
-hyloAlgForm = undefined
+hyloAlgForm h g = cataList h . anaList g 
 \end{code}
 
 \subsection*{Problema 4}
@@ -1419,12 +1416,12 @@ Solução para árvores de tipo \LTree:
           \ar[d]_-{|avgLTree|}
            \ar[r]^-{|outLtree|}
 &
-   | A + ((LTree A)* (LTree A))|
-          \ar[d]^{|id + (avgLTree * avgLTree)|}
+   | A + ((LTree A)| \times | (LTree A))|
+          \ar[d]^{|id + (gene |\times |gene)|}
 \\
     |A|
 &
-   | A + ((A*A) * (A*A))|
+   | A + ((A|\times|A) |\times| (A|\times |A))|
           \ar[l]^-{| p1.gene|}
 }
 \end{eqnarray*}
