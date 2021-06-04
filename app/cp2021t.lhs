@@ -1016,29 +1016,100 @@ sd = p2 . cataExpAr sd_gen
 ad :: Floating a => a -> ExpAr a -> a
 ad v = p2 . cataExpAr (ad_gen v)
 \end{code}
-Definir:
 
+\subsubsection*{1. |outExpAr| e |recExpAr|}
 As funções |outExpAr| e |recExpAr| são deduzidas através do tipo de dados do problema e com auxílio de alguns diagramas. 
-Sendo o tipo de dados |ExpAr a| e partindo do |inExpAr| fornecido, sabendo que, este "constrói" algo do tipo, chegou-se à implementação e ao diagrama do |outExpr|, tendo em mente que este "destrói" o tipo.
+  
+Sabendo que :
 
 \begin{eqnarray*}
 \xymatrix@@C=2cm{
-     |ExpAr a|
+     |ExpAr A|
 &
-     | b + ( a + (BinOp * (ExpAr a * ExpAr a) + (UnOp * ExpAr a)))|
+     | 1 + ( A + (BinOp | \times| (ExpAr A |\times| ExpAr A) + (UnOp |\times| ExpAr A)))|
            \ar[l]^-{|inExpAr|}
 }
 \end{eqnarray*}% Comentario g_eval
-
 \begin{eqnarray*}
-\xymatrix@@C=2cm{
-     |ExpAr a|
-           \ar[r]^-{|outExpAr|}
-&
-     | b + ( a + (BinOp * (ExpAr a * ExpAr a) + (UnOp * ExpAr a)))|
-}
-\end{eqnarray*}% Comentario g_eval
+\start
+|inExpAr = either (const X) (either N (either bin (uncurry Un)))|
+\more
+|inExpAr . outExpAr = id|
+\more
+|outExpAr .inExpAr  = id|
+\end{eqnarray*}
 
+Pelas definições acima:
+\begin{eqnarray*}
+\start
+|outExpAr. inExpAr = id|
+%
+\just\equiv{ Definição de inExpAr }
+%
+|outExpAr. either (const X) (either N (either bin (uncurry Un))) = id|
+%
+\just\equiv{ Fusão + (20) }
+%
+|either (outExpAr.const X) (outExpAr.either N (either bin (uncurry Un))) = id|
+%
+\just\equiv{ Universal + (17) e Natural-id (1) }
+%
+  |lcbr(
+   outExpAr.const X = i1
+  )(
+  outExpAr.either N (either bin (uncurry Un)) = i2
+  )|
+%
+\just\equiv{ Fusão + (20) , Universal + (17) e Natural-id (1) }
+%
+  |lcbr(
+   outExpAr.const X = i1
+  )(
+  lcbr(
+        outExpAr.N=i2.i1
+  )(
+        outExpAr.either bin (uncurry Un) = i2.i2
+  )
+  )|
+%
+\just\equiv{ Fusão + (20) , Universal + (17) e Natural-id (1) }
+%
+  |lcbr(
+   outExpAr.const X = i1
+  )(
+  lcbr(
+        outExpAr.N=i2.i1
+  )(
+  lcbr(
+        outExpAr.bin = i2.i2.i1
+  )(
+        outExpAr.uncurry Un = i2.i2.i2
+  )
+  )
+  )|
+%
+\just\equiv{ Igualdade Extensional (71) e Def-Comp (72) }
+%
+|   outExpAr (const X x) = i1 x|
+\more
+|   outExpAr (N x) = i2.i1 x|
+\more
+|   outExpAr (bin (op,(a,b))) = i2.i2.i1 (op,(a,b))|
+\more
+|   outExpAr (uncurry Un (op,a)) = i2.i2.i2 (op,a)|
+%
+\just\equiv{ Definição de Bin e Un }
+%
+|   outExpAr X = i1 ()|
+\more
+|   outExpAr (N x) = i2.i1 x|
+\more
+|   outExpAr (Bin op a b) = i2.i2.i1 (op,(a,b))|
+\more
+|   outExpAr (Un op a) = i2.i2.i2 (op,a)|
+\end{eqnarray*}
+
+Concluiu-se que:
 % Comentario outEXpAr
 % outExpAr :: ExpAr a -> Either
 %     b (Either a (Either (BinOp, (ExpAr a, ExpAr a)) (UnOp, ExpAr a)))
@@ -1055,6 +1126,15 @@ outExpAr (Bin op a b) = i2 . i2 . i1 $ (op, (a, b))
 outExpAr (Un op a) = i2 . i2 . i2 $ (op, a)
 \end{code}
 
+\begin{eqnarray*}
+\xymatrix@@C=2cm{
+     |ExpAr A|
+           \ar[r]^-{|outExpAr|}
+&
+     | 1 + ( A + (BinOp |\times| (ExpAr A |\times| ExpAr A) + (UnOp |\times| ExpAr A)))|
+}
+\end{eqnarray*}% Comentario g_eval
+
 % Comentario recEXpAr
 % x -> x
 % n a -> n a
@@ -1064,25 +1144,6 @@ outExpAr (Un op a) = i2 . i2 . i2 $ (op, a)
 recExpAr x = baseExpAr id id id x x id x
 \end{code}
 
-%TODO: Mais certo é estar mal
-
-%% esta funcao recebe 2 argumentos
-%% no grafico ficara (num, ExpAr a) ou so o Exp como temos ?
-\begin{eqnarray*}
-\xymatrix@@C=2cm{
-   |ExpAr a|
-          \ar[d]_-{|eval_exp num|}
-           \ar[r]^-{|outExpAr|}
-&
-   | b + ( a + (BinOp |\times| (ExpAr a |\times| ExpAr a) + (UnOp |\times| ExpAr a)))|
-          \ar[d]^{|id + ( id + ((id|\times| (g_eval_exp num)^2)+ (id|\times|g_eval_exp num))|}
-\\
-    |a|
-&
-   | b + ( a + (BinOp |\times| (a |\times| a) + (UnOp |\times| a)))|
-          \ar[l]^-{|g_eval_exp num|}
-}
-\end{eqnarray*}
 
 
 % a () -> a
@@ -1112,6 +1173,8 @@ recExpAr x = baseExpAr id id id x x id x
 %
 % versao simplificada
 
+\subsubsection*{2. |g_eval_exp|}
+De seguida, apresenta-se a definição da função:
 \begin{code}
 g_eval_exp num = either (const num) (either id (either (uncurry f) (uncurry g)))
   where
@@ -1121,8 +1184,24 @@ g_eval_exp num = either (const num) (either id (either (uncurry f) (uncurry g)))
     g Negate = negate
     
 \end{code}
+E o seu diagrama:
+\begin{eqnarray*}
+\xymatrix@@C=1cm{
+   |ExpAr A|
+          \ar[d]_-{|eval_exp num|}
+           \ar[r]^-{|outExpAr|}
+&
+   | 1 + ( A + (BinOp |\times| (ExpAr A |\times| ExpAr A) + (UnOp |\times| ExpAr A)))|
+          \ar[d]^{|id + ( id + ((id|\times| (g_eval_exp num)|^2|)+ (id|\times|g_eval_exp num))|}
+\\
+    |A|
+&
+   | 1 + ( A + (BinOp |\times| (A |\times| A) + (UnOp |\times| A)))|
+          \ar[l]^-{|g_eval_exp num|}
+}
+\end{eqnarray*}
 
-
+\subsubsection*{3. |clean| e |gopt|}
 % Comentario clean
 % o seu tipo de saida tem q ser do tipo de entrada do out
 
@@ -1135,7 +1214,7 @@ g_eval_exp num = either (const num) (either id (either (uncurry f) (uncurry g)))
 % Un op Valor -> op Valor
 
 %% TODO: diagrama de hilomorfismo
-
+Optimizando a |ExpAr A| dada, através da utilização das regras da absorção e do elemento neutro, obtém-se:
 \begin{code}
 clean (Bin Product (N 0) _) = outExpAr (N 0)
 clean (Bin Product _ (N 0)) = outExpAr (N 0)
@@ -1168,16 +1247,45 @@ clean l = outExpAr l
 % ou altera o valor do X pelo recebido
 % ou faz calculos
 
-\begin{code}
-gopt num = either (const num) (either id (either (uncurry f) (uncurry g)))
-  where
-    f Sum = uncurry (+)
-    f Product = uncurry (*)
-    g E = expd 
-    g Negate = negate
 
+%% -- gopt num = either (const num) (either id (either (uncurry f) (uncurry g)))
+%% --   where
+%% --     f Sum = uncurry (+)
+%% --     f Product = uncurry (*)
+%% --     g E = expd 
+%% --     g Negate = negate
+Feita essa otimização, fez-se a substituição do |X| pelo valor dado e calculou-se o respetivo valor da expressão, reutilizando a função |g_eval_exp|:
+\begin{code}
+gopt :: Floating c =>  c -> Either b (Either c (Either (BinOp, (c, c)) (UnOp, c))) -> c
+gopt = g_eval_exp 
 \end{code}
 
+De seguida, apresenta-se o diagrama do hilomorfismo:
+\begin{eqnarray*}
+\xymatrix@@C=1cm{
+   |ExpAr A|
+          \ar[d]_-{[(| clean|)]}
+           \ar[r]^-{|outExpAr|}
+&
+   | 1 + ( A + (BinOp |\times| (ExpAr A |\times| ExpAr A) + (UnOp |\times| ExpAr A)))|
+          \ar[d]^{|id + ( id + ((id|\times| (clean)|^2|)+ (id|\times|clean))|}
+\\
+    |ExpAr A|
+          \ar[d]_-{|cata (gopt num)|}
+           \ar[r]^-{|inExpAr|}
+&
+   | 1 + ( A + (BinOp |\times| (ExpAr A |\times| ExpAr A) + (UnOp |\times| ExpAr A)))|
+          \ar[l]^-{|outExpAr|}
+          \ar[d]^{|id + ( id + ((id|\times| (gopt num)|^2|)+ (id|\times|gopt num))|}
+\\
+    |A|
+&
+   | 1 + ( A + (BinOp |\times| (A |\times| A) + (UnOp |\times| A)))|
+          \ar[l]^-{|gopt num|}
+}
+\end{eqnarray*}
+
+\subsubsection*{4. |sd_gen|}
 % Comentario sd_gen
 % funcao, derivada
 % a :: ( a, a')
@@ -1196,17 +1304,40 @@ gopt num = either (const num) (either id (either (uncurry f) (uncurry g)))
 
 \begin{code}
 sd_gen :: Floating a =>
-    Either () (Either a (Either (BinOp, ((ExpAr a, ExpAr a), (ExpAr a, ExpAr a))) (UnOp, (ExpAr a, ExpAr a)))) -> (ExpAr a, ExpAr a)
+    Either () (Either a (Either (BinOp, ((ExpAr a, ExpAr a), (ExpAr a, ExpAr a))) (UnOp, (ExpAr a, ExpAr a))))
+       -> (ExpAr a, ExpAr a)
 
 sd_gen = either (const (X,(N 1))) (either construi_n  (either construi_bin  construi_un))
   where
     construi_n a = ( N a, N 0 )
     construi_bin (Sum,(a,b)) = (Bin Sum (p1 a) (p1 b), Bin Sum (p2 a) (p2 b))
-    construi_bin (Product,(a,b)) = (Bin Product (p1 a) (p1 b), Bin Sum (Bin Product (p1 a) (p2 b)) ( Bin Product ( p2 a ) ( p1 b )))
+    construi_bin (Product,(a,b)) = (Bin Product (p1 a) (p1 b), segundo_bin)
+      where
+        segundo_bin = Bin Sum (Bin Product (p1 a) (p2 b)) ( Bin Product ( p2 a ) ( p1 b ))
     construi_un (E,a) = ( Un E (p1 a) , Bin Product (Un E (p1 a)) (p2 a))
     construi_un (Negate,a) = (Un Negate (p1 a) , Un Negate (p2 a))
 \end{code}
 
+É de notar que a função |sd_gen| retorna o par (|ExpAr A|,|ExpAr A|) , no qual, o segundo elemento irá ser a |ExpAr A| derivada da |ExpAr A| contida no primeiro elemento do par.
+
+O diagrama correspondente à função é:
+\begin{eqnarray*}
+\xymatrix@@C=2cm{
+   |ExpAr A|
+          \ar[d]_-{|sd|}
+           \ar[r]^-{|outExpAr|}
+&
+     | () + ( A + (BinOp | \times| (ExpAr A |\times| ExpAr A) + (UnOp |\times| ExpAr A)))|
+          \ar[d]^{|id + (id + (id|\times| (sd_gen |\times| sd_gen) + ( id |\times| sd_gen )))|}
+\\
+    |ExpAr A|
+&
+   | (() + ( A + (BinOp | \times| (ExpAr A |\times| ExpAr A) + (UnOp |\times| ExpAr A))))|^2| |
+          \ar[l]^-{| p2.sd_gen|}
+}
+\end{eqnarray*}
+
+\subsubsection*{5. |ad_gen|}
 % Comentario ad_gen
 
 % ad_gen a (Left ()) = ( a, 1)
@@ -1238,10 +1369,29 @@ ad_gen a = either (const (a,1)) (either g (either (uncurry bin_op) (uncurry un_o
 
 \end{code}
 
+Note que a função |ad_gen| retorna o par (|A|,|A|), onde, o primeiro elemento irá ser o valor da |ExpAr A| com a substituição do valor dado e o segundo, irá ser o valor da sua derivada.
+
+O diagrama correspondente à função é:
+\begin{eqnarray*}
+\xymatrix@@C=2cm{
+   |ExpAr A|
+          \ar[d]_-{|ad|}
+           \ar[r]^-{|outExpAr|}
+&
+     | () + ( A + (BinOp | \times| (ExpAr A |\times| ExpAr A) + (UnOp |\times| ExpAr A)))|
+          \ar[d]^{|id + (id + (id|\times| (ad_gen A|\times| ad_gen A) + ( id |\times| ad_gen A)))|}
+\\
+    |A|
+&
+   | (() + ( A + (BinOp | \times| ((A |\times |A) |\times| (A |\times |A)) + (UnOp |\times| (A |\times |A)))))|
+          \ar[l]^-{| p2.ad_gen|}
+}
+\end{eqnarray*}
+
 \subsection*{Problema 2}
 Definir
 \begin{code}
-loop (f,(s,h)) = (div (f*s) h, (s+4 , h+1 ))
+loop (c,(s,h)) = (div (c*s) h, (s+4 , h+1 ))
 inic = (1,(2,2))
 prj = p1
 \end{code}
@@ -1259,15 +1409,11 @@ Sabendo que:
 \end{spec}
 Vamos calcular c (n+1) :
 \begin{spec}
-  c (n+1) = frac ((2n+2)!) ((n+2)! * (n+1)!)
-          = frac ((2n+2)*(2n+1)*(2n)!) ((n+2)*(n+1)! * (n+1)*n!)
-          = frac ((2n+2)*(2n+1)*(c n)) ((n+2) * (n+1))
-          = frac (2*(2n+1)*(c n)) (n+2)
+  c (n+1) = frac ((2n+2)!) ((n+2)! * (n+1)!) = frac ((2n+2)*(2n+1)*(2n)!) ((n+2)*(n+1)! * (n+1)*n!) = frac ((2n+2)*(2n+1)*(c n)) ((n+2) * (n+1)) = (frac (2*(2n+1)) (n+2)) * (c n)
 \end{spec}
 Considerando:
 \begin{spec}
-s n = 2*(2n+1)
-    = 4*n + 2
+s n = 2*(2n+1) = 4*n + 2
 h n = n + 2
 \end{spec}
 Podendo, com isto concluir:
@@ -1342,7 +1488,7 @@ Analisando:
 %
 \just\equiv{ Eq- + (27) (3 vezes) }
 %
-| either (c.const 0)  (c.succ) = either (const 1) (uncurry (*) . split c (uncurry (/) .split s h)) |
+| either (c.const 0)  (c.succ) = either (const 1) (uncurry (/) . split (uncurry (*). (split c s)) (h)) |
 \more
 | either (s.const 0)  (s.succ) =  either (const 2) ((+4).s) |
 \more
@@ -1350,7 +1496,7 @@ Analisando:
 %
 \just\equiv{  in = [const 0, succ] ,Fusão X (3 vezes) }
 %
-|c.in = either (const 1) (uncurry (*) . split c (uncurry (/) .split s h) )|
+|c.in = either (const 1) (uncurry (/) . split (uncurry (*). (split c s)) (h) )|
 \more
 |s . in = either (const 2) ((+4) . s) |
 \more
@@ -1358,11 +1504,27 @@ Analisando:
 %
 \just\equiv{ Absorção + }
 %
-|c . in = either (const 1) (uncurry (*) .split (p1) (uncurry (/) .split (p1.p2) (p2.p2)) ) . id + (split c (split s h))|
+|c . in = either (const 1) (uncurry (/) . split (uncurry (*). (split p1 (p1.p2))) (p2.p2) ) . (id + (split c (split s h)) )|
 \more
-|s . in = either (const 2) ((+4) . (p1.p2)) . id + (split c (split s h)) |
+|s . in = either (const 2) ((+4) . (p1.p2)) . ( id + (split c (split s h))) |
 \more
-|h . in = either (const 2) (succ . (p2.p2)) . id + (split c (split s h))|
+|h . in = either (const 2) (succ . (p2.p2)) . ( id + (split c (split s h))) |
+%
+\just\equiv{ Def- x (lei 10) e Fokkinga com 3 elementos}
+%
+|split c (split s h) = cata (split (either (const 1) (uncurry (/) . split (uncurry (*). (id >< p1)) (p2.p2) )) (split (either (const 2) ((+4) . p1.p2)) (either (const 2) (succ . p2.p2))   ) |
+%
+\just\equiv{ Lei da troca (28) }
+%
+|split c (split s h) = cata (split (either (const 1) (uncurry (/) . split (uncurry (*). (id >< p1)) (p2.p2) )) ( either (split  (const 2) (const 2)) (split  ((+4) . p1.p2) (succ . p2.p2))   ) |
+%
+\just\equiv{ Lei da troca (28) }
+%
+|split c (split s h) = cata (either (split (const 1) (split  (const 2) (const 2)) ) ( split (uncurry (/) . split (uncurry (*). (id >< p1)) (p2.p2) ) (split  ((+4) . p1.p2) (succ . p2.p2))   ) |
+%
+\just\equiv{ for b i = (| const i , b |) }
+%
+| split c (split s h) = for ((1,(2,2))) (  split (uncurry (/) . split (uncurry (*). (id >< p1)) (p2.p2) ) (split  ((+4) . p1.p2) (succ . p2.p2))   ) |
 \end{eqnarray*}
 \subsection*{Problema 3}
 
@@ -1376,40 +1538,109 @@ calcLine = cataList h where
 
 deCasteljau :: [NPoint] -> OverTime NPoint
 deCasteljau = hyloAlgForm alg coalg where
-   coalg = undefined
-   alg = undefined
-
-hyloAlgForm h g = cataList h . anaList g 
+    -- coalg [] = i1 ()
+    -- coalg l = i2 $ split (init) (tail) l
+    -- coalg l = i2 $ split (\a -> deCasteljau.init) (\a->deCasteljau.tail) l
+    coalg = undefined
+    --coalg l = i2 $ split (deCasteljau.g) (deCasteljau.tail) l
+    --g (a:t) = a
+    alg = undefined
+    --coalg = split (deCasteljau.cons.(split p1 (init.p2))) (deCasteljau.p2)
+    -- coalg .. (p,q)
+    -- alg = either (const nil) (f)
+    -- f (a,b) = calcLine a b
+    --f (a,b) = \z->(calcLine (a z) (b z) z) 
+   -- coalg = split id calcLine
+   -- alg = either (const (nil,([[0.0]],id))) funcao
+   -- funcao (lista,((a,b),(c,d))) = ((fmap d a) :lista, (a,b) )
+   --alg ( (a,f1),(b, l)) = either (const ((0,id),(0,[]))) ( (a,f1) , (b, (f1 b):l) ) 
+   --alg (a, ((a,f1), (b,f2))) = either (const ([],((0,id), (0,id))) ( (f1 b):a ,  ) 
+   
+hyloAlgForm h g = cataList h .anaList g 
 \end{code}
 
 \subsection*{Problema 4}
+\subsubsection*{1. Solução para listas não vazias:}
 
-Solução para listas não vazias:
+
 \begin{code}
 avg = p1.avg_aux
-\end{code}
-\begin{code}
-
-avg_aux = cataList algo
+  
+avg_aux = cataList gene
   where
-    algo (Left _) = (0,0)
-    algo (Right (a, (b,c))) = ((a + b*c )/succ c, succ c)
+    gene = either (split (const 0) (const 0)) (split ( uncurry (/). split (uncurry (+). split (p1) (uncurry (*).p2)) (succ.p2.p2) ) (succ.p2.p2))
 \end{code}
-%% apagar 1
-%%-- avg_aux = auxiliar . split (const (0,0)) (id)
-%%--   where
-%%--    auxiliar ((a,b),[]) = ( a , b)
-%%--    auxiliar ((a,b), (h:t) ) = auxiliar ((  (a *b + h ) / succ b , succ b),t)
-
 %% -- Leaf 10 -> (10,1)
 %% -- Fork (10) (20) -> ( 10+20 / 2 , 2)
 %% -- Ltree empty -> Left () -> (0,0)
 %% -- Ltree
 %% -- ((10, 20), (30)) -> (10, [20,30]) -> (10, ((20+30)/2 , 2) ) -> ( 10+20+30 / 2+1 , 2+1 )
 
+%% --gene (Left _) = (0,0)
+%% --gene (Right (a, (b,c))) = ((a + b*c )/succ c, succ c)
 
-Solução para árvores de tipo \LTree:
+Descrita pelo diagrama seguinte:
+\begin{eqnarray*}
+\xymatrix@@C=2cm{
+   |A|^*
+          \ar[d]_-{|avg|}
+           \ar[r]^-{|outList|}
+&
+   | 1 + ( A|\times | A |^*)
+          \ar[d]^{|id + (id |\times |avg_aux)|}
+\\
+    |A|
+&
+   | 1 + (A| \times |(A|\times|A))|
+          \ar[l]^-{| p1.avg_aux|}
+}
+\end{eqnarray*}
+
+\subsubsection*{2. Solução para árvores de tipo \LTree:}
   
+%% gene (Left _) = (0,1)
+%% gene (Right ((a,b),(c,d))) = (+ a  c,+ a d)
+\begin{code}
+avgLTree = p1.cataLTree gene where
+  gene = either (split id (const 1)) final
+  final = split (uncurry (/)) p2 . ((uncurry (+)) >< (uncurry (+))) .  split ((uncurry (*)) >< (uncurry (*))) (p2 >< p2)
+\end{code}
+  
+Na definição do gene acima, apresenta-se a versão pointfree da função "final", correspondendo à versão pointwise seguinte:
+\begin{eqnarray*}
+\start
+|final = split (uncurry (/)) p2 . ((uncurry (+)) >< (uncurry (+))) .  split ((uncurry (*)) >< (uncurry (*))) (p2 >< p2)|
+%
+\just\equiv{ Igualdade Extensional (71) e Def-comp(72) }
+%
+|final ((a,b),(c,d)) = split (uncurry (/)) p2 . ((uncurry (+)) >< (uncurry (+))) . (split ((uncurry (*)) >< (uncurry (*))) (p2 >< p2) ((a,b),(c,d)))|
+%
+\just\equiv{ Def-split (76) e Natural-|p2| (13) (2 vezes) }
+%
+|final ((a,b),(c,d)) = split (uncurry (/)) p2 ( ((uncurry (+)) >< (uncurry (+)))  (((uncurry (*)) >< (uncurry (*))) ((a,b),(c,d)), (p2 >< p2) ((a,b),(c,d))))|
+%
+\just\equiv{ Def-X (77) }
+%
+|final ((a,b),(c,d)) = split (uncurry (/)) p2 ( ((uncurry (+)) >< (uncurry (+)))  ((uncurry (*) (a,b),uncurry (*) (c,d)), (p2 (a,b), p2 (c,d))))|
+%
+\just\equiv{ Uncurry (84) , Definição de * (multiplicação) e Natural-|p2| (13) }
+%
+|final ((a,b),(c,d)) = split (uncurry (/)) p2 ( ((uncurry (+)) >< (uncurry (+)))  ((a*b,c*d), (b,d)))|
+%
+\just\equiv{ Def-split (76) , Uncurry (84) e Definição da soma }
+%
+|final ((a,b),(c,d)) = split (uncurry (/)) p2 (a*b+c*d, b+d)|
+%
+\just\equiv{ Def-split (76) , Uncurry (84) , Definição da divisão e Natural-p2 (13) }
+%
+|final ((a,b),(c,d)) = ((a*b+c*d) / (b+d) , b+d)|
+\end{eqnarray*}
+Chegando assim à versão pointwise:
+\begin{eqnarray*}
+\start
+|final ((a,b),(c,d)) = ((a*b + c*d) / (b+d) , b+d)|
+\end{eqnarray*}
+O diagrama correspondente é:
 \begin{eqnarray*}
 \xymatrix@@C=2cm{
    |LTree A|
@@ -1425,34 +1656,6 @@ Solução para árvores de tipo \LTree:
           \ar[l]^-{| p1.gene|}
 }
 \end{eqnarray*}
-%% gene (Left _) = (0,1)
-%% gene (Right ((a,b),(c,d))) = (+ a  c,+ a d)
-\begin{code}
-avgLTree = p1.cataLTree gene where
-  gene = either (split id (const 1)) final
-  final = split (uncurry (/)) p2 . ((uncurry (+)) >< (uncurry (+))) .  split (split ((uncurry (*)).p1) ((uncurry (*)).p2)) (split (p2.p1) (p2.p2))
-\end{code}
-
-\begin{verbatim}
-
-Veremos o q o final faz
-Primeiro ele aplica:
-split (split ((uncurry (*)).p1) ((uncurry (*)).p2)) (split (p2.p1) (p2.p2))
-
-final ((a,b),(c,d)) ->  ( ( a*b , c*d ) , ( b,d ) )
-Depois aplica:
-((uncurry (+)) >< (uncurry (+)))
-( ( a*b , c*d ) , ( b,d ) ) -> ( a*b+c*d ,b+d )
-Para finalizar aplica-se :
-split (uncurry (/)) p2
-( a+b ,b+d ) -> ( (a*b+c*d) / (b+d) , b+d )
-Concluindo que: 
-final ((a,b),(c,d))  = ( (a+b) / (b+d) , b+d )
-
-\end{verbatim}
-%%(( a*b , c*d ) ,(b,d) )
-%%( a*b + c*d , b+d  )
-%%uncurry (/) ( a*b + c*d , b+d  )
 
 \subsection*{Problema 5}
 Inserir em baixo o código \Fsharp\ desenvolvido, entre \verb!\begin{verbatim}! e \verb!\end{verbatim}!:

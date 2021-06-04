@@ -1556,29 +1556,76 @@ São dadas:
 \>[B]{}\Varid{ad}\;\Varid{v}\mathrel{=}\p2\comp \Varid{cataExpAr}\;(\Varid{ad\char95 gen}\;\Varid{v}){}\<[E]%
 \ColumnHook
 \end{hscode}\resethooks
-Definir:
 
+\subsubsection*{1. \ensuremath{\Varid{outExpAr}} e \ensuremath{\Varid{recExpAr}}}
 As funções \ensuremath{\Varid{outExpAr}} e \ensuremath{\Varid{recExpAr}} são deduzidas através do tipo de dados do problema e com auxílio de alguns diagramas. 
-Sendo o tipo de dados \ensuremath{\Conid{ExpAr}\;\Varid{a}} e partindo do \ensuremath{\Varid{inExpAr}} fornecido, sabendo que, este "constrói" algo do tipo, chegou-se à implementação e ao diagrama do \ensuremath{\Varid{outExpr}}, tendo em mente que este "destrói" o tipo.
+  
+Sabendo que :
 
 \begin{eqnarray*}
 \xymatrix@C=2cm{
-     \ensuremath{\Conid{ExpAr}\;\Varid{a}}
+     \ensuremath{\Conid{ExpAr}\;\Conid{A}}
 &
-     \ensuremath{\Varid{b}\mathbin{+}(\Varid{a}\mathbin{+}(\Conid{BinOp}\mathbin{*}(\Conid{ExpAr}\;\Varid{a}\mathbin{*}\Conid{ExpAr}\;\Varid{a})\mathbin{+}(\Conid{UnOp}\mathbin{*}\Conid{ExpAr}\;\Varid{a})))}
+     \ensuremath{\mathrm{1}\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}} \times\ensuremath{(\Conid{ExpAr}\;\Conid{A}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})))}
            \ar[l]^-{\ensuremath{\Varid{inExpAr}}}
 }
 \end{eqnarray*}% Comentario g_eval
-
 \begin{eqnarray*}
-\xymatrix@C=2cm{
-     \ensuremath{\Conid{ExpAr}\;\Varid{a}}
-           \ar[r]^-{\ensuremath{\Varid{outExpAr}}}
-&
-     \ensuremath{\Varid{b}\mathbin{+}(\Varid{a}\mathbin{+}(\Conid{BinOp}\mathbin{*}(\Conid{ExpAr}\;\Varid{a}\mathbin{*}\Conid{ExpAr}\;\Varid{a})\mathbin{+}(\Conid{UnOp}\mathbin{*}\Conid{ExpAr}\;\Varid{a})))}
-}
-\end{eqnarray*}% Comentario g_eval
+\start
+\ensuremath{\Varid{inExpAr}\mathrel{=}\alt{\underline{\Conid{X}}}{\alt{\Conid{N}}{\alt{\Varid{bin}}{\uncurry{\Conid{Un}}}}}}
+\more
+\ensuremath{\Varid{inExpAr}\comp \Varid{outExpAr}\mathrel{=}\Varid{id}}
+\more
+\ensuremath{\Varid{outExpAr}\comp \Varid{inExpAr}\mathrel{=}\Varid{id}}
+\end{eqnarray*}
 
+Pelas definições acima:
+\begin{eqnarray*}
+\start
+\ensuremath{\Varid{outExpAr}\comp \Varid{inExpAr}\mathrel{=}\Varid{id}}
+%
+\just\equiv{ Definição de inExpAr }
+%
+\ensuremath{\Varid{outExpAr}\comp \alt{\underline{\Conid{X}}}{\alt{\Conid{N}}{\alt{\Varid{bin}}{\uncurry{\Conid{Un}}}}}\mathrel{=}\Varid{id}}
+%
+\just\equiv{ Fusão + (20) }
+%
+\ensuremath{\alt{\Varid{outExpAr}\comp \underline{\Conid{X}}}{\Varid{outExpAr}\comp \alt{\Conid{N}}{\alt{\Varid{bin}}{\uncurry{\Conid{Un}}}}}\mathrel{=}\Varid{id}}
+%
+\just\equiv{ Universal + (17) e Natural-id (1) }
+%
+  \ensuremath{\begin{lcbr}\Varid{outExpAr}\comp \underline{\Conid{X}}\mathrel{=}i_1\\\Varid{outExpAr}\comp \alt{\Conid{N}}{\alt{\Varid{bin}}{\uncurry{\Conid{Un}}}}\mathrel{=}i_2\end{lcbr}}
+%
+\just\equiv{ Fusão + (20) , Universal + (17) e Natural-id (1) }
+%
+  \ensuremath{\begin{lcbr}\Varid{outExpAr}\comp \underline{\Conid{X}}\mathrel{=}i_1\\\begin{lcbr}\Varid{outExpAr}\comp \Conid{N}\mathrel{=}i_2\comp i_1\\\Varid{outExpAr}\comp \alt{\Varid{bin}}{\uncurry{\Conid{Un}}}\mathrel{=}i_2\comp i_2\end{lcbr}\end{lcbr}}
+%
+\just\equiv{ Fusão + (20) , Universal + (17) e Natural-id (1) }
+%
+  \ensuremath{\begin{lcbr}\Varid{outExpAr}\comp \underline{\Conid{X}}\mathrel{=}i_1\\\begin{lcbr}\Varid{outExpAr}\comp \Conid{N}\mathrel{=}i_2\comp i_1\\\begin{lcbr}\Varid{outExpAr}\comp \Varid{bin}\mathrel{=}i_2\comp i_2\comp i_1\\\Varid{outExpAr}\comp \uncurry{\Conid{Un}}\mathrel{=}i_2\comp i_2\comp i_2\end{lcbr}\end{lcbr}\end{lcbr}}
+%
+\just\equiv{ Igualdade Extensional (71) e Def-Comp (72) }
+%
+\ensuremath{\Varid{outExpAr}\;\underline{\Conid{X}}\;\Varid{x}\mathrel{=}i_1\;\Varid{x}}
+\more
+\ensuremath{\Varid{outExpAr}\;(\Conid{N}\;\Varid{x})\mathrel{=}i_2\comp i_1\;\Varid{x}}
+\more
+\ensuremath{\Varid{outExpAr}\;(\Varid{bin}\;(\Varid{op},(\Varid{a},\Varid{b})))\mathrel{=}i_2\comp i_2\comp i_1\;(\Varid{op},(\Varid{a},\Varid{b}))}
+\more
+\ensuremath{\Varid{outExpAr}\;\uncurry{\Conid{Un}}\;(\Varid{op},\Varid{a})\mathrel{=}i_2\comp i_2\comp i_2\;(\Varid{op},\Varid{a})}
+%
+\just\equiv{ Definição de Bin e Un }
+%
+\ensuremath{\Varid{outExpAr}\;\Conid{X}\mathrel{=}i_1\;()}
+\more
+\ensuremath{\Varid{outExpAr}\;(\Conid{N}\;\Varid{x})\mathrel{=}i_2\comp i_1\;\Varid{x}}
+\more
+\ensuremath{\Varid{outExpAr}\;(\Conid{Bin}\;\Varid{op}\;\Varid{a}\;\Varid{b})\mathrel{=}i_2\comp i_2\comp i_1\;(\Varid{op},(\Varid{a},\Varid{b}))}
+\more
+\ensuremath{\Varid{outExpAr}\;(\Conid{Un}\;\Varid{op}\;\Varid{a})\mathrel{=}i_2\comp i_2\comp i_2\;(\Varid{op},\Varid{a})}
+\end{eqnarray*}
+
+Concluiu-se que:
 % Comentario outEXpAr
 % outExpAr :: ExpAr a -> Either
 %     b (Either a (Either (BinOp, (ExpAr a, ExpAr a)) (UnOp, ExpAr a)))
@@ -1601,6 +1648,15 @@ Sendo o tipo de dados \ensuremath{\Conid{ExpAr}\;\Varid{a}} e partindo do \ensur
 \ColumnHook
 \end{hscode}\resethooks
 
+\begin{eqnarray*}
+\xymatrix@C=2cm{
+     \ensuremath{\Conid{ExpAr}\;\Conid{A}}
+           \ar[r]^-{\ensuremath{\Varid{outExpAr}}}
+&
+     \ensuremath{\mathrm{1}\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}}\times\ensuremath{(\Conid{ExpAr}\;\Conid{A}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})))}
+}
+\end{eqnarray*}% Comentario g_eval
+
 % Comentario recEXpAr
 % x -> x
 % n a -> n a
@@ -1613,25 +1669,6 @@ Sendo o tipo de dados \ensuremath{\Conid{ExpAr}\;\Varid{a}} e partindo do \ensur
 \ColumnHook
 \end{hscode}\resethooks
 
-%TODO: Mais certo é estar mal
-
-%% esta funcao recebe 2 argumentos
-%% no grafico ficara (num, ExpAr a) ou so o Exp como temos ?
-\begin{eqnarray*}
-\xymatrix@C=2cm{
-   \ensuremath{\Conid{ExpAr}\;\Varid{a}}
-          \ar[d]_-{\ensuremath{\Varid{eval\char95 exp}\;\Varid{num}}}
-           \ar[r]^-{\ensuremath{\Varid{outExpAr}}}
-&
-   \ensuremath{\Varid{b}\mathbin{+}(\Varid{a}\mathbin{+}(\Conid{BinOp}}\times\ensuremath{(\Conid{ExpAr}\;\Varid{a}}\times\ensuremath{\Conid{ExpAr}\;\Varid{a})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{\Conid{ExpAr}\;\Varid{a})))}
-          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}\mathbin{+}((\Varid{id}}\times\ensuremath{(\Varid{g\char95 eval\char95 exp}\;\Varid{num})\mathbin{\uparrow}\mathrm{2})\mathbin{+}(\Varid{id}}\times\ensuremath{\Varid{g\char95 eval\char95 exp}\;\Varid{num}))}}
-\\
-    \ensuremath{\Varid{a}}
-&
-   \ensuremath{\Varid{b}\mathbin{+}(\Varid{a}\mathbin{+}(\Conid{BinOp}}\times\ensuremath{(\Varid{a}}\times\ensuremath{\Varid{a})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{\Varid{a})))}
-          \ar[l]^-{\ensuremath{\Varid{g\char95 eval\char95 exp}\;\Varid{num}}}
-}
-\end{eqnarray*}
 
 
 % a () -> a
@@ -1661,6 +1698,8 @@ Sendo o tipo de dados \ensuremath{\Conid{ExpAr}\;\Varid{a}} e partindo do \ensur
 %
 % versao simplificada
 
+\subsubsection*{2. \ensuremath{\Varid{g\char95 eval\char95 exp}}}
+De seguida, apresenta-se a definição da função:
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{3}{@{}>{\hspre}l<{\hspost}@{}}%
@@ -1684,8 +1723,24 @@ Sendo o tipo de dados \ensuremath{\Conid{ExpAr}\;\Varid{a}} e partindo do \ensur
 \>[5]{}\Varid{g}\;\Conid{Negate}\mathrel{=}\Varid{negate}{}\<[E]%
 \ColumnHook
 \end{hscode}\resethooks
+E o seu diagrama:
+\begin{eqnarray*}
+\xymatrix@C=1cm{
+   \ensuremath{\Conid{ExpAr}\;\Conid{A}}
+          \ar[d]_-{\ensuremath{\Varid{eval\char95 exp}\;\Varid{num}}}
+           \ar[r]^-{\ensuremath{\Varid{outExpAr}}}
+&
+   \ensuremath{\mathrm{1}\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}}\times\ensuremath{(\Conid{ExpAr}\;\Conid{A}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})))}
+          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}\mathbin{+}((\Varid{id}}\times\ensuremath{(\Varid{g\char95 eval\char95 exp}\;\Varid{num})}^2\ensuremath{)\mathbin{+}(\Varid{id}}\times\ensuremath{\Varid{g\char95 eval\char95 exp}\;\Varid{num}))}}
+\\
+    \ensuremath{\Conid{A}}
+&
+   \ensuremath{\mathrm{1}\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}}\times\ensuremath{(\Conid{A}}\times\ensuremath{\Conid{A})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{\Conid{A})))}
+          \ar[l]^-{\ensuremath{\Varid{g\char95 eval\char95 exp}\;\Varid{num}}}
+}
+\end{eqnarray*}
 
-
+\subsubsection*{3. \ensuremath{\Varid{clean}} e \ensuremath{\Varid{gopt}}}
 % Comentario clean
 % o seu tipo de saida tem q ser do tipo de entrada do out
 
@@ -1698,7 +1753,7 @@ Sendo o tipo de dados \ensuremath{\Conid{ExpAr}\;\Varid{a}} e partindo do \ensur
 % Un op Valor -> op Valor
 
 %% TODO: diagrama de hilomorfismo
-
+Optimizando a \ensuremath{\Conid{ExpAr}\;\Conid{A}} dada, através da utilização das regras da absorção e do elemento neutro, obtém-se:
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{3}{@{}>{\hspre}l<{\hspost}@{}}%
@@ -1753,30 +1808,51 @@ Sendo o tipo de dados \ensuremath{\Conid{ExpAr}\;\Varid{a}} e partindo do \ensur
 % ou altera o valor do X pelo recebido
 % ou faz calculos
 
+
+%% -- gopt num = either (const num) (either id (either (uncurry f) (uncurry g)))
+%% --   where
+%% --     f Sum = uncurry (+)
+%% --     f Product = uncurry (*)
+%% --     g E = expd 
+%% --     g Negate = negate
+Feita essa otimização, fez-se a substituição do \ensuremath{\Conid{X}} pelo valor dado e calculou-se o respetivo valor da expressão, reutilizando a função \ensuremath{\Varid{g\char95 eval\char95 exp}}:
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{3}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{5}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{24}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
-\>[B]{}\Varid{gopt}\;\Varid{num}\mathrel{=}\alt{\underline{\Varid{num}}}{\alt{\Varid{id}}{\alt{\uncurry{\Varid{f}}}{\uncurry{\Varid{g}}}}}{}\<[E]%
+\>[B]{}\Varid{gopt}\mathbin{::}\Conid{Floating}\;\Varid{c}\Rightarrow {}\<[24]%
+\>[24]{}\Varid{c}\to \Varid{b}+(\Varid{c}+((\Conid{BinOp},(\Varid{c},\Varid{c}))+(\Conid{UnOp},\Varid{c})))\to \Varid{c}{}\<[E]%
 \\
-\>[B]{}\hsindent{3}{}\<[3]%
-\>[3]{}\mathbf{where}{}\<[E]%
-\\
-\>[3]{}\hsindent{2}{}\<[5]%
-\>[5]{}\Varid{f}\;\Conid{Sum}\mathrel{=}\uncurry{(\mathbin{+})}{}\<[E]%
-\\
-\>[3]{}\hsindent{2}{}\<[5]%
-\>[5]{}\Varid{f}\;\Conid{Product}\mathrel{=}\uncurry{(\mathbin{*})}{}\<[E]%
-\\
-\>[3]{}\hsindent{2}{}\<[5]%
-\>[5]{}\Varid{g}\;\Conid{E}\mathrel{=}\Varid{expd}{}\<[E]%
-\\
-\>[3]{}\hsindent{2}{}\<[5]%
-\>[5]{}\Varid{g}\;\Conid{Negate}\mathrel{=}\Varid{negate}{}\<[E]%
+\>[B]{}\Varid{gopt}\mathrel{=}\Varid{g\char95 eval\char95 exp}{}\<[E]%
 \ColumnHook
 \end{hscode}\resethooks
 
+De seguida, apresenta-se o diagrama do hilomorfismo:
+\begin{eqnarray*}
+\xymatrix@C=1cm{
+   \ensuremath{\Conid{ExpAr}\;\Conid{A}}
+          \ar[d]_-{[(\ensuremath{\Varid{clean}})]}
+           \ar[r]^-{\ensuremath{\Varid{outExpAr}}}
+&
+   \ensuremath{\mathrm{1}\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}}\times\ensuremath{(\Conid{ExpAr}\;\Conid{A}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})))}
+          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}\mathbin{+}((\Varid{id}}\times\ensuremath{(\Varid{clean})}^2\ensuremath{)\mathbin{+}(\Varid{id}}\times\ensuremath{\Varid{clean}))}}
+\\
+    \ensuremath{\Conid{ExpAr}\;\Conid{A}}
+          \ar[d]_-{\ensuremath{\cata{\Varid{gopt}\;\Varid{num}}}}
+           \ar[r]^-{\ensuremath{\Varid{inExpAr}}}
+&
+   \ensuremath{\mathrm{1}\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}}\times\ensuremath{(\Conid{ExpAr}\;\Conid{A}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})))}
+          \ar[l]^-{\ensuremath{\Varid{outExpAr}}}
+          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}\mathbin{+}((\Varid{id}}\times\ensuremath{(\Varid{gopt}\;\Varid{num})}^2\ensuremath{)\mathbin{+}(\Varid{id}}\times\ensuremath{\Varid{gopt}\;\Varid{num}))}}
+\\
+    \ensuremath{\Conid{A}}
+&
+   \ensuremath{\mathrm{1}\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}}\times\ensuremath{(\Conid{A}}\times\ensuremath{\Conid{A})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{\Conid{A})))}
+          \ar[l]^-{\ensuremath{\Varid{gopt}\;\Varid{num}}}
+}
+\end{eqnarray*}
+
+\subsubsection*{4. \ensuremath{\Varid{sd\char95 gen}}}
 % Comentario sd_gen
 % funcao, derivada
 % a :: ( a, a')
@@ -1797,13 +1873,19 @@ Sendo o tipo de dados \ensuremath{\Conid{ExpAr}\;\Varid{a}} e partindo do \ensur
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{3}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{5}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{7}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{8}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{9}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{55}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{77}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
 \>[B]{}\Varid{sd\char95 gen}\mathbin{::}\Conid{Floating}\;\Varid{a}\Rightarrow {}\<[E]%
 \\
 \>[B]{}\hsindent{5}{}\<[5]%
-\>[5]{}()+(\Varid{a}+((\Conid{BinOp},((\Conid{ExpAr}\;\Varid{a},\Conid{ExpAr}\;\Varid{a}),(\Conid{ExpAr}\;\Varid{a},\Conid{ExpAr}\;\Varid{a})))+(\Conid{UnOp},(\Conid{ExpAr}\;\Varid{a},\Conid{ExpAr}\;\Varid{a}))))\to (\Conid{ExpAr}\;\Varid{a},\Conid{ExpAr}\;\Varid{a}){}\<[E]%
+\>[5]{}()+(\Varid{a}+((\Conid{BinOp},((\Conid{ExpAr}\;\Varid{a},\Conid{ExpAr}\;\Varid{a}),(\Conid{ExpAr}\;\Varid{a},\Conid{ExpAr}\;\Varid{a})))+(\Conid{UnOp},(\Conid{ExpAr}\;\Varid{a},\Conid{ExpAr}\;\Varid{a})))){}\<[E]%
+\\
+\>[5]{}\hsindent{3}{}\<[8]%
+\>[8]{}\to (\Conid{ExpAr}\;\Varid{a},\Conid{ExpAr}\;\Varid{a}){}\<[E]%
 \\[\blanklineskip]%
 \>[B]{}\Varid{sd\char95 gen}\mathrel{=}\alt{\underline{(\Conid{X},(\Conid{N}\;\mathrm{1}))}}{\alt{\Varid{construi\char95 n}}{{}\<[55]%
 \>[55]{}\alt{\Varid{construi\char95 bin}}{{}\<[77]%
@@ -1819,7 +1901,13 @@ Sendo o tipo de dados \ensuremath{\Conid{ExpAr}\;\Varid{a}} e partindo do \ensur
 \>[5]{}\Varid{construi\char95 bin}\;(\Conid{Sum},(\Varid{a},\Varid{b}))\mathrel{=}(\Conid{Bin}\;\Conid{Sum}\;(\p1\;\Varid{a})\;(\p1\;\Varid{b}),\Conid{Bin}\;\Conid{Sum}\;(\p2\;\Varid{a})\;(\p2\;\Varid{b})){}\<[E]%
 \\
 \>[3]{}\hsindent{2}{}\<[5]%
-\>[5]{}\Varid{construi\char95 bin}\;(\Conid{Product},(\Varid{a},\Varid{b}))\mathrel{=}(\Conid{Bin}\;\Conid{Product}\;(\p1\;\Varid{a})\;(\p1\;\Varid{b}),\Conid{Bin}\;\Conid{Sum}\;(\Conid{Bin}\;\Conid{Product}\;(\p1\;\Varid{a})\;(\p2\;\Varid{b}))\;(\Conid{Bin}\;\Conid{Product}\;(\p2\;\Varid{a})\;(\p1\;\Varid{b}))){}\<[E]%
+\>[5]{}\Varid{construi\char95 bin}\;(\Conid{Product},(\Varid{a},\Varid{b}))\mathrel{=}(\Conid{Bin}\;\Conid{Product}\;(\p1\;\Varid{a})\;(\p1\;\Varid{b}),\Varid{segundo\char95 bin}){}\<[E]%
+\\
+\>[5]{}\hsindent{2}{}\<[7]%
+\>[7]{}\mathbf{where}{}\<[E]%
+\\
+\>[7]{}\hsindent{2}{}\<[9]%
+\>[9]{}\Varid{segundo\char95 bin}\mathrel{=}\Conid{Bin}\;\Conid{Sum}\;(\Conid{Bin}\;\Conid{Product}\;(\p1\;\Varid{a})\;(\p2\;\Varid{b}))\;(\Conid{Bin}\;\Conid{Product}\;(\p2\;\Varid{a})\;(\p1\;\Varid{b})){}\<[E]%
 \\
 \>[3]{}\hsindent{2}{}\<[5]%
 \>[5]{}\Varid{construi\char95 un}\;(\Conid{E},\Varid{a})\mathrel{=}(\Conid{Un}\;\Conid{E}\;(\p1\;\Varid{a}),\Conid{Bin}\;\Conid{Product}\;(\Conid{Un}\;\Conid{E}\;(\p1\;\Varid{a}))\;(\p2\;\Varid{a})){}\<[E]%
@@ -1829,6 +1917,26 @@ Sendo o tipo de dados \ensuremath{\Conid{ExpAr}\;\Varid{a}} e partindo do \ensur
 \ColumnHook
 \end{hscode}\resethooks
 
+É de notar que a função \ensuremath{\Varid{sd\char95 gen}} retorna o par (\ensuremath{\Conid{ExpAr}\;\Conid{A}},\ensuremath{\Conid{ExpAr}\;\Conid{A}}) , no qual, o segundo elemento irá ser a \ensuremath{\Conid{ExpAr}\;\Conid{A}} derivada da \ensuremath{\Conid{ExpAr}\;\Conid{A}} contida no primeiro elemento do par.
+
+O diagrama correspondente à função é:
+\begin{eqnarray*}
+\xymatrix@C=2cm{
+   \ensuremath{\Conid{ExpAr}\;\Conid{A}}
+          \ar[d]_-{\ensuremath{\Varid{sd}}}
+           \ar[r]^-{\ensuremath{\Varid{outExpAr}}}
+&
+     \ensuremath{()\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}} \times\ensuremath{(\Conid{ExpAr}\;\Conid{A}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})))}
+          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}\mathbin{+}(\Varid{id}}\times\ensuremath{(\Varid{sd\char95 gen}}\times\ensuremath{\Varid{sd\char95 gen})\mathbin{+}(\Varid{id}}\times\ensuremath{\Varid{sd\char95 gen})))}}
+\\
+    \ensuremath{\Conid{ExpAr}\;\Conid{A}}
+&
+   \ensuremath{(()\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}} \times\ensuremath{(\Conid{ExpAr}\;\Conid{A}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A}))))}^2\ensuremath{}
+          \ar[l]^-{\ensuremath{\p2\comp \Varid{sd\char95 gen}}}
+}
+\end{eqnarray*}
+
+\subsubsection*{5. \ensuremath{\Varid{ad\char95 gen}}}
 % Comentario ad_gen
 
 % ad_gen a (Left ()) = ( a, 1)
@@ -1876,12 +1984,31 @@ Sendo o tipo de dados \ensuremath{\Conid{ExpAr}\;\Varid{a}} e partindo do \ensur
 \ColumnHook
 \end{hscode}\resethooks
 
+Note que a função \ensuremath{\Varid{ad\char95 gen}} retorna o par (\ensuremath{\Conid{A}},\ensuremath{\Conid{A}}), onde, o primeiro elemento irá ser o valor da \ensuremath{\Conid{ExpAr}\;\Conid{A}} com a substituição do valor dado e o segundo, irá ser o valor da sua derivada.
+
+O diagrama correspondente à função é:
+\begin{eqnarray*}
+\xymatrix@C=2cm{
+   \ensuremath{\Conid{ExpAr}\;\Conid{A}}
+          \ar[d]_-{\ensuremath{\Varid{ad}}}
+           \ar[r]^-{\ensuremath{\Varid{outExpAr}}}
+&
+     \ensuremath{()\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}} \times\ensuremath{(\Conid{ExpAr}\;\Conid{A}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})))}
+          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}\mathbin{+}(\Varid{id}}\times\ensuremath{(\Varid{ad\char95 gen}\;\Conid{A}}\times\ensuremath{\Varid{ad\char95 gen}\;\Conid{A})\mathbin{+}(\Varid{id}}\times\ensuremath{\Varid{ad\char95 gen}\;\Conid{A})))}}
+\\
+    \ensuremath{\Conid{A}}
+&
+   \ensuremath{(()\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}} \times\ensuremath{((\Conid{A}}\times \ensuremath{\Conid{A})}\times\ensuremath{(\Conid{A}}\times \ensuremath{\Conid{A}))\mathbin{+}(\Conid{UnOp}}\times\ensuremath{(\Conid{A}}\times \ensuremath{\Conid{A})))))}
+          \ar[l]^-{\ensuremath{\p2\comp \Varid{ad\char95 gen}}}
+}
+\end{eqnarray*}
+
 \subsection*{Problema 2}
 Definir
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
-\>[B]{}\Varid{loop}\;(\Varid{f},(\Varid{s},\Varid{h}))\mathrel{=}(\Varid{f}\mathbin{*}\Varid{s}\div \Varid{h},(\Varid{s}\mathbin{+}\mathrm{4},\Varid{h}\mathbin{+}\mathrm{1})){}\<[E]%
+\>[B]{}\Varid{loop}\;(\Varid{c},(\Varid{s},\Varid{h}))\mathrel{=}(\Varid{c}\mathbin{*}\Varid{s}\div \Varid{h},(\Varid{s}\mathbin{+}\mathrm{4},\Varid{h}\mathbin{+}\mathrm{1})){}\<[E]%
 \\
 \>[B]{}\Varid{inic}\mathrel{=}(\mathrm{1},(\mathrm{2},\mathrm{2})){}\<[E]%
 \\
@@ -1911,29 +2038,15 @@ Vamos calcular c (n+1) :
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{3}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{11}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
-\>[3]{}\Varid{c}\;(\Varid{n}\mathbin{+}\mathrm{1})\mathrel{=}\frac{(\mathrm{2}\;\Varid{n}\mathbin{+}\mathrm{2})\mathbin{!}}{(\Varid{n}\mathbin{+}\mathrm{2})\mathbin{!}\mathbin{*}(\Varid{n}\mathbin{+}\mathrm{1})\mathbin{!}}{}\<[E]%
-\\
-\>[3]{}\hsindent{8}{}\<[11]%
-\>[11]{}\mathrel{=}\frac{(\mathrm{2}\;\Varid{n}\mathbin{+}\mathrm{2})\mathbin{*}(\mathrm{2}\;\Varid{n}\mathbin{+}\mathrm{1})\mathbin{*}(\mathrm{2}\;\Varid{n})\mathbin{!}}{(\Varid{n}\mathbin{+}\mathrm{2})\mathbin{*}(\Varid{n}\mathbin{+}\mathrm{1})\mathbin{!}\mathbin{*}(\Varid{n}\mathbin{+}\mathrm{1})\mathbin{*}\Varid{n}\mathbin{!}}{}\<[E]%
-\\
-\>[3]{}\hsindent{8}{}\<[11]%
-\>[11]{}\mathrel{=}\frac{(\mathrm{2}\;\Varid{n}\mathbin{+}\mathrm{2})\mathbin{*}(\mathrm{2}\;\Varid{n}\mathbin{+}\mathrm{1})\mathbin{*}(\Varid{c}\;\Varid{n})}{(\Varid{n}\mathbin{+}\mathrm{2})\mathbin{*}(\Varid{n}\mathbin{+}\mathrm{1})}{}\<[E]%
-\\
-\>[3]{}\hsindent{8}{}\<[11]%
-\>[11]{}\mathrel{=}\frac{\mathrm{2}\mathbin{*}(\mathrm{2}\;\Varid{n}\mathbin{+}\mathrm{1})\mathbin{*}(\Varid{c}\;\Varid{n})}{\Varid{n}\mathbin{+}\mathrm{2}}{}\<[E]%
+\>[3]{}\Varid{c}\;(\Varid{n}\mathbin{+}\mathrm{1})\mathrel{=}\frac{(\mathrm{2}\;\Varid{n}\mathbin{+}\mathrm{2})\mathbin{!}}{(\Varid{n}\mathbin{+}\mathrm{2})\mathbin{!}\mathbin{*}(\Varid{n}\mathbin{+}\mathrm{1})\mathbin{!}}\mathrel{=}\frac{(\mathrm{2}\;\Varid{n}\mathbin{+}\mathrm{2})\mathbin{*}(\mathrm{2}\;\Varid{n}\mathbin{+}\mathrm{1})\mathbin{*}(\mathrm{2}\;\Varid{n})\mathbin{!}}{(\Varid{n}\mathbin{+}\mathrm{2})\mathbin{*}(\Varid{n}\mathbin{+}\mathrm{1})\mathbin{!}\mathbin{*}(\Varid{n}\mathbin{+}\mathrm{1})\mathbin{*}\Varid{n}\mathbin{!}}\mathrel{=}\frac{(\mathrm{2}\;\Varid{n}\mathbin{+}\mathrm{2})\mathbin{*}(\mathrm{2}\;\Varid{n}\mathbin{+}\mathrm{1})\mathbin{*}(\Varid{c}\;\Varid{n})}{(\Varid{n}\mathbin{+}\mathrm{2})\mathbin{*}(\Varid{n}\mathbin{+}\mathrm{1})}\mathrel{=}\frac{\mathrm{2}\mathbin{*}(\mathrm{2}\;\Varid{n}\mathbin{+}\mathrm{1})}{\Varid{n}\mathbin{+}\mathrm{2}}\mathbin{*}(\Varid{c}\;\Varid{n}){}\<[E]%
 \ColumnHook
 \end{hscode}\resethooks
 Considerando:
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{5}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
-\>[B]{}\Varid{s}\;\Varid{n}\mathrel{=}\mathrm{2}\mathbin{*}(\mathrm{2}\;\Varid{n}\mathbin{+}\mathrm{1}){}\<[E]%
-\\
-\>[B]{}\hsindent{5}{}\<[5]%
-\>[5]{}\mathrel{=}\mathrm{4}\mathbin{*}\Varid{n}\mathbin{+}\mathrm{2}{}\<[E]%
+\>[B]{}\Varid{s}\;\Varid{n}\mathrel{=}\mathrm{2}\mathbin{*}(\mathrm{2}\;\Varid{n}\mathbin{+}\mathrm{1})\mathrel{=}\mathrm{4}\mathbin{*}\Varid{n}\mathbin{+}\mathrm{2}{}\<[E]%
 \\
 \>[B]{}\Varid{h}\;\Varid{n}\mathrel{=}\Varid{n}\mathbin{+}\mathrm{2}{}\<[E]%
 \ColumnHook
@@ -1974,7 +2087,7 @@ Analisando:
 %
 \just\equiv{ Eq- + (27) (3 vezes) }
 %
-\ensuremath{\alt{\Varid{c}\comp \underline{\mathrm{0}}}{\Varid{c}\comp \succ }\mathrel{=}\alt{\underline{\mathrm{1}}}{\uncurry{(\mathbin{*})}\comp \conj{\Varid{c}}{\uncurry{(\mathbin{/})}\comp \conj{\Varid{s}}{\Varid{h}}}}}
+\ensuremath{\alt{\Varid{c}\comp \underline{\mathrm{0}}}{\Varid{c}\comp \succ }\mathrel{=}\alt{\underline{\mathrm{1}}}{\uncurry{(\mathbin{/})}\comp \conj{\uncurry{(\mathbin{*})}\comp \conj{\Varid{c}}{\Varid{s}}}{\Varid{h}}}}
 \more
 \ensuremath{\alt{\Varid{s}\comp \underline{\mathrm{0}}}{\Varid{s}\comp \succ }\mathrel{=}\alt{\underline{\mathrm{2}}}{(\mathbin{+}\mathrm{4})\comp \Varid{s}}}
 \more
@@ -1982,7 +2095,7 @@ Analisando:
 %
 \just\equiv{  in = [const 0, succ] ,Fusão X (3 vezes) }
 %
-\ensuremath{\Varid{c}\comp \mathbf{in}\mathrel{=}\alt{\underline{\mathrm{1}}}{\uncurry{(\mathbin{*})}\comp \conj{\Varid{c}}{\uncurry{(\mathbin{/})}\comp \conj{\Varid{s}}{\Varid{h}}}}}
+\ensuremath{\Varid{c}\comp \mathbf{in}\mathrel{=}\alt{\underline{\mathrm{1}}}{\uncurry{(\mathbin{/})}\comp \conj{\uncurry{(\mathbin{*})}\comp \conj{\Varid{c}}{\Varid{s}}}{\Varid{h}}}}
 \more
 \ensuremath{\Varid{s}\comp \mathbf{in}\mathrel{=}\alt{\underline{\mathrm{2}}}{(\mathbin{+}\mathrm{4})\comp \Varid{s}}}
 \more
@@ -1990,17 +2103,34 @@ Analisando:
 %
 \just\equiv{ Absorção + }
 %
-\ensuremath{\Varid{c}\comp \mathbf{in}\mathrel{=}\alt{\underline{\mathrm{1}}}{\uncurry{(\mathbin{*})}\comp \conj{\p1}{\uncurry{(\mathbin{/})}\comp \conj{\p1\comp \p2}{\p2\comp \p2}}}\comp \Varid{id}\mathbin{+}\conj{\Varid{c}}{\conj{\Varid{s}}{\Varid{h}}}}
+\ensuremath{\Varid{c}\comp \mathbf{in}\mathrel{=}\alt{\underline{\mathrm{1}}}{\uncurry{(\mathbin{/})}\comp \conj{\uncurry{(\mathbin{*})}\comp \conj{\p1}{\p1\comp \p2}}{\p2\comp \p2}}\comp (\Varid{id}\mathbin{+}\conj{\Varid{c}}{\conj{\Varid{s}}{\Varid{h}}})}
 \more
-\ensuremath{\Varid{s}\comp \mathbf{in}\mathrel{=}\alt{\underline{\mathrm{2}}}{(\mathbin{+}\mathrm{4})\comp (\p1\comp \p2)}\comp \Varid{id}\mathbin{+}\conj{\Varid{c}}{\conj{\Varid{s}}{\Varid{h}}}}
+\ensuremath{\Varid{s}\comp \mathbf{in}\mathrel{=}\alt{\underline{\mathrm{2}}}{(\mathbin{+}\mathrm{4})\comp (\p1\comp \p2)}\comp (\Varid{id}\mathbin{+}\conj{\Varid{c}}{\conj{\Varid{s}}{\Varid{h}}})}
 \more
-\ensuremath{\Varid{h}\comp \mathbf{in}\mathrel{=}\alt{\underline{\mathrm{2}}}{\succ \comp (\p2\comp \p2)}\comp \Varid{id}\mathbin{+}\conj{\Varid{c}}{\conj{\Varid{s}}{\Varid{h}}}}
+\ensuremath{\Varid{h}\comp \mathbf{in}\mathrel{=}\alt{\underline{\mathrm{2}}}{\succ \comp (\p2\comp \p2)}\comp (\Varid{id}\mathbin{+}\conj{\Varid{c}}{\conj{\Varid{s}}{\Varid{h}}})}
+%
+\just\equiv{ Def- x (lei 10) e Fokkinga com 3 elementos}
+%
+\ensuremath{\conj{\Varid{c}}{\conj{\Varid{s}}{\Varid{h}}}\mathrel{=}\cata{\conj{\alt{\underline{\mathrm{1}}}{\uncurry{(\mathbin{/})}\comp \conj{\uncurry{(\mathbin{*})}\comp (\Varid{id}\times\p1)}{\p2\comp \p2}}}{\conj{\alt{\underline{\mathrm{2}}}{(\mathbin{+}\mathrm{4})\comp \p1\comp \p2}}{\alt{\underline{\mathrm{2}}}{\succ \comp \p2\comp \p2}}}}}
+%
+\just\equiv{ Lei da troca (28) }
+%
+\ensuremath{\conj{\Varid{c}}{\conj{\Varid{s}}{\Varid{h}}}\mathrel{=}\cata{\conj{\alt{\underline{\mathrm{1}}}{\uncurry{(\mathbin{/})}\comp \conj{\uncurry{(\mathbin{*})}\comp (\Varid{id}\times\p1)}{\p2\comp \p2}}}{\alt{\conj{\underline{\mathrm{2}}}{\underline{\mathrm{2}}}}{\conj{(\mathbin{+}\mathrm{4})\comp \p1\comp \p2}{\succ \comp \p2\comp \p2}}}}}
+%
+\just\equiv{ Lei da troca (28) }
+%
+\ensuremath{\conj{\Varid{c}}{\conj{\Varid{s}}{\Varid{h}}}\mathrel{=}\cata{\alt{\conj{\underline{\mathrm{1}}}{\conj{\underline{\mathrm{2}}}{\underline{\mathrm{2}}}}}{\conj{\uncurry{(\mathbin{/})}\comp \conj{\uncurry{(\mathbin{*})}\comp (\Varid{id}\times\p1)}{\p2\comp \p2}}{\conj{(\mathbin{+}\mathrm{4})\comp \p1\comp \p2}{\succ \comp \p2\comp \p2}}}}}
+%
+\just\equiv{ for b i = (\ensuremath{\underline{\Varid{i}},\Varid{b}}) }
+%
+\ensuremath{\conj{\Varid{c}}{\conj{\Varid{s}}{\Varid{h}}}\mathrel{=}\for{(\mathrm{1},(\mathrm{2},\mathrm{2}))}\ {\conj{\uncurry{(\mathbin{/})}\comp \conj{\uncurry{(\mathbin{*})}\comp (\Varid{id}\times\p1)}{\p2\comp \p2}}{\conj{(\mathbin{+}\mathrm{4})\comp \p1\comp \p2}{\succ \comp \p2\comp \p2}}}}
 \end{eqnarray*}
 \subsection*{Problema 3}
 
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{4}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{5}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{6}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
 \>[B]{}\Varid{calcLine}\mathbin{::}\Conid{NPoint}\to (\Conid{NPoint}\to \Conid{OverTime}\;\Conid{NPoint}){}\<[E]%
@@ -2023,57 +2153,162 @@ Analisando:
 \\
 \>[B]{}\Varid{deCasteljau}\mathrel{=}\Varid{hyloAlgForm}\;\Varid{alg}\;\Varid{coalg}\;\mathbf{where}{}\<[E]%
 \\
-\>[B]{}\hsindent{4}{}\<[4]%
-\>[4]{}\Varid{coalg}\mathrel{=}\bot {}\<[E]%
+\>[B]{}\hsindent{5}{}\<[5]%
+\>[5]{}\mbox{\onelinecomment  coalg [] = i1 ()}{}\<[E]%
+\\
+\>[B]{}\hsindent{5}{}\<[5]%
+\>[5]{}\mbox{\onelinecomment  coalg l = i2 $ split (init) (tail) l}{}\<[E]%
+\\
+\>[B]{}\hsindent{5}{}\<[5]%
+\>[5]{}\mbox{\onelinecomment  coalg l = i2 $ split (\a -> deCasteljau.init) (\a->deCasteljau.tail) l}{}\<[E]%
+\\
+\>[B]{}\hsindent{5}{}\<[5]%
+\>[5]{}\Varid{coalg}\mathrel{=}\bot {}\<[E]%
+\\
+\>[B]{}\hsindent{5}{}\<[5]%
+\>[5]{}\mbox{\onelinecomment coalg l = i2 $ split (deCasteljau.g) (deCasteljau.tail) l}{}\<[E]%
+\\
+\>[B]{}\hsindent{5}{}\<[5]%
+\>[5]{}\mbox{\onelinecomment g (a:t) = a}{}\<[E]%
+\\
+\>[B]{}\hsindent{5}{}\<[5]%
+\>[5]{}\Varid{alg}\mathrel{=}\bot {}\<[E]%
+\\
+\>[B]{}\hsindent{5}{}\<[5]%
+\>[5]{}\mbox{\onelinecomment coalg = split (deCasteljau.cons.(split p1 (init.p2))) (deCasteljau.p2)}{}\<[E]%
+\\
+\>[B]{}\hsindent{5}{}\<[5]%
+\>[5]{}\mbox{\onelinecomment  coalg .. (p,q)}{}\<[E]%
+\\
+\>[B]{}\hsindent{5}{}\<[5]%
+\>[5]{}\mbox{\onelinecomment  alg = either (const nil) (f)}{}\<[E]%
+\\
+\>[B]{}\hsindent{5}{}\<[5]%
+\>[5]{}\mbox{\onelinecomment  f (a,b) = calcLine a b}{}\<[E]%
+\\
+\>[B]{}\hsindent{5}{}\<[5]%
+\>[5]{}\mbox{\onelinecomment f (a,b) = \z->(calcLine (a z) (b z) z) }{}\<[E]%
 \\
 \>[B]{}\hsindent{4}{}\<[4]%
-\>[4]{}\Varid{alg}\mathrel{=}\bot {}\<[E]%
+\>[4]{}\mbox{\onelinecomment  coalg = split id calcLine}{}\<[E]%
+\\
+\>[B]{}\hsindent{4}{}\<[4]%
+\>[4]{}\mbox{\onelinecomment  alg = either (const (nil,([[0.0]],id))) funcao}{}\<[E]%
+\\
+\>[B]{}\hsindent{4}{}\<[4]%
+\>[4]{}\mbox{\onelinecomment  funcao (lista,((a,b),(c,d))) = ((fmap d a) :lista, (a,b) )}{}\<[E]%
+\\
+\>[B]{}\hsindent{4}{}\<[4]%
+\>[4]{}\mbox{\onelinecomment alg ( (a,f1),(b, l)) = either (const ((0,id),(0,[]))) ( (a,f1) , (b, (f1 b):l) ) }{}\<[E]%
+\\
+\>[B]{}\hsindent{4}{}\<[4]%
+\>[4]{}\mbox{\onelinecomment alg (a, ((a,f1), (b,f2))) = either (const ([],((0,id), (0,id))) ( (f1 b):a ,  ) }{}\<[E]%
 \\[\blanklineskip]%
 \>[B]{}\Varid{hyloAlgForm}\;\Varid{h}\;\Varid{g}\mathrel{=}\Varid{cataList}\;\Varid{h}\comp \Varid{anaList}\;\Varid{g}{}\<[E]%
 \ColumnHook
 \end{hscode}\resethooks
 
 \subsection*{Problema 4}
+\subsubsection*{1. Solução para listas não vazias:}
 
-Solução para listas não vazias:
-\begin{hscode}\SaveRestoreHook
-\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
-\>[B]{}\Varid{avg}\mathrel{=}\p1\comp \Varid{avg\char95 aux}{}\<[E]%
-\ColumnHook
-\end{hscode}\resethooks
+
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{3}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{5}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
-\>[B]{}\Varid{avg\char95 aux}\mathrel{=}\Varid{cataList}\;\Varid{algo}{}\<[E]%
+\>[B]{}\Varid{avg}\mathrel{=}\p1\comp \Varid{avg\char95 aux}{}\<[E]%
+\\[\blanklineskip]%
+\>[B]{}\Varid{avg\char95 aux}\mathrel{=}\Varid{cataList}\;\Varid{gene}{}\<[E]%
 \\
 \>[B]{}\hsindent{3}{}\<[3]%
 \>[3]{}\mathbf{where}{}\<[E]%
 \\
 \>[3]{}\hsindent{2}{}\<[5]%
-\>[5]{}\Varid{algo}\;(i_1\;\anonymous )\mathrel{=}(\mathrm{0},\mathrm{0}){}\<[E]%
-\\
-\>[3]{}\hsindent{2}{}\<[5]%
-\>[5]{}\Varid{algo}\;(i_2\;(\Varid{a},(\Varid{b},\Varid{c})))\mathrel{=}((\Varid{a}\mathbin{+}\Varid{b}\mathbin{*}\Varid{c})\mathbin{/}\succ \;\Varid{c},\succ \;\Varid{c}){}\<[E]%
+\>[5]{}\Varid{gene}\mathrel{=}\alt{\conj{\underline{\mathrm{0}}}{\underline{\mathrm{0}}}}{\conj{\uncurry{(\mathbin{/})}\comp \conj{\uncurry{(\mathbin{+})}\comp \conj{\p1}{\uncurry{(\mathbin{*})}\comp \p2}}{\succ \comp \p2\comp \p2}}{\succ \comp \p2\comp \p2}}{}\<[E]%
 \ColumnHook
 \end{hscode}\resethooks
-%% apagar 1
-%%-- avg_aux = auxiliar . split (const (0,0)) (id)
-%%--   where
-%%--    auxiliar ((a,b),[]) = ( a , b)
-%%--    auxiliar ((a,b), (h:t) ) = auxiliar ((  (a *b + h ) / succ b , succ b),t)
-
 %% -- Leaf 10 -> (10,1)
 %% -- Fork (10) (20) -> ( 10+20 / 2 , 2)
 %% -- Ltree empty -> Left () -> (0,0)
 %% -- Ltree
 %% -- ((10, 20), (30)) -> (10, [20,30]) -> (10, ((20+30)/2 , 2) ) -> ( 10+20+30 / 2+1 , 2+1 )
 
+%% --gene (Left _) = (0,0)
+%% --gene (Right (a, (b,c))) = ((a + b*c )/succ c, succ c)
 
-Solução para árvores de tipo \LTree:
+Descrita pelo diagrama seguinte:
+\begin{eqnarray*}
+\xymatrix@C=2cm{
+   \ensuremath{\Conid{A}}^*
+          \ar[d]_-{\ensuremath{\Varid{avg}}}
+           \ar[r]^-{\ensuremath{\Varid{outList}}}
+&
+   \ensuremath{\mathrm{1}\mathbin{+}(\Conid{A}}\times \ensuremath{\Conid{A}}^*)
+          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}}\times \ensuremath{\Varid{avg\char95 aux})}}
+\\
+    \ensuremath{\Conid{A}}
+&
+   \ensuremath{\mathrm{1}\mathbin{+}(\Conid{A}} \times \ensuremath{(\Conid{A}}\times\ensuremath{\Conid{A}))}
+          \ar[l]^-{\ensuremath{\p1\comp \Varid{avg\char95 aux}}}
+}
+\end{eqnarray*}
+
+\subsubsection*{2. Solução para árvores de tipo \LTree:}
   
+%% gene (Left _) = (0,1)
+%% gene (Right ((a,b),(c,d))) = (+ a  c,+ a d)
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{3}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{72}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{avgLTree}\mathrel{=}\p1\comp \llparenthesis\, \Varid{gene}\,\rrparenthesis\;\mathbf{where}{}\<[E]%
+\\
+\>[B]{}\hsindent{3}{}\<[3]%
+\>[3]{}\Varid{gene}\mathrel{=}\alt{\conj{\Varid{id}}{\underline{\mathrm{1}}}}{\Varid{final}}{}\<[E]%
+\\
+\>[B]{}\hsindent{3}{}\<[3]%
+\>[3]{}\Varid{final}\mathrel{=}\conj{\uncurry{(\mathbin{/})}}{\p2}\comp (\uncurry{(\mathbin{+})}\times\uncurry{(\mathbin{+})})\comp {}\<[72]%
+\>[72]{}\conj{\uncurry{(\mathbin{*})}\times\uncurry{(\mathbin{*})}}{\p2\times\p2}{}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+  
+Na definição do gene acima, apresenta-se a versão pointfree da função "final", correspondendo à versão pointwise seguinte:
+\begin{eqnarray*}
+\start
+\ensuremath{\Varid{final}\mathrel{=}\conj{\uncurry{(\mathbin{/})}}{\p2}\comp (\uncurry{(\mathbin{+})}\times\uncurry{(\mathbin{+})})\comp \conj{\uncurry{(\mathbin{*})}\times\uncurry{(\mathbin{*})}}{\p2\times\p2}}
+%
+\just\equiv{ Igualdade Extensional (71) e Def-comp(72) }
+%
+\ensuremath{\Varid{final}\;((\Varid{a},\Varid{b}),(\Varid{c},\Varid{d}))\mathrel{=}\conj{\uncurry{(\mathbin{/})}}{\p2}\comp (\uncurry{(\mathbin{+})}\times\uncurry{(\mathbin{+})})\comp \conj{\uncurry{(\mathbin{*})}\times\uncurry{(\mathbin{*})}}{\p2\times\p2}\;((\Varid{a},\Varid{b}),(\Varid{c},\Varid{d}))}
+%
+\just\equiv{ Def-split (76) e Natural-\ensuremath{\p2} (13) (2 vezes) }
+%
+\ensuremath{\Varid{final}\;((\Varid{a},\Varid{b}),(\Varid{c},\Varid{d}))\mathrel{=}\conj{\uncurry{(\mathbin{/})}}{\p2}\;((\uncurry{(\mathbin{+})}\times\uncurry{(\mathbin{+})})\;((\uncurry{(\mathbin{*})}\times\uncurry{(\mathbin{*})})\;((\Varid{a},\Varid{b}),(\Varid{c},\Varid{d})),(\p2\times\p2)\;((\Varid{a},\Varid{b}),(\Varid{c},\Varid{d}))))}
+%
+\just\equiv{ Def-X (77) }
+%
+\ensuremath{\Varid{final}\;((\Varid{a},\Varid{b}),(\Varid{c},\Varid{d}))\mathrel{=}\conj{\uncurry{(\mathbin{/})}}{\p2}\;((\uncurry{(\mathbin{+})}\times\uncurry{(\mathbin{+})})\;((\uncurry{(\mathbin{*})}\;(\Varid{a},\Varid{b}),\uncurry{(\mathbin{*})}\;(\Varid{c},\Varid{d})),(\p2\;(\Varid{a},\Varid{b}),\p2\;(\Varid{c},\Varid{d}))))}
+%
+\just\equiv{ Uncurry (84) , Definição de * (multiplicação) e Natural-\ensuremath{\p2} (13) }
+%
+\ensuremath{\Varid{final}\;((\Varid{a},\Varid{b}),(\Varid{c},\Varid{d}))\mathrel{=}\conj{\uncurry{(\mathbin{/})}}{\p2}\;((\uncurry{(\mathbin{+})}\times\uncurry{(\mathbin{+})})\;((\Varid{a}\mathbin{*}\Varid{b},\Varid{c}\mathbin{*}\Varid{d}),(\Varid{b},\Varid{d})))}
+%
+\just\equiv{ Def-split (76) , Uncurry (84) e Definição da soma }
+%
+\ensuremath{\Varid{final}\;((\Varid{a},\Varid{b}),(\Varid{c},\Varid{d}))\mathrel{=}\conj{\uncurry{(\mathbin{/})}}{\p2}\;(\Varid{a}\mathbin{*}\Varid{b}\mathbin{+}\Varid{c}\mathbin{*}\Varid{d},\Varid{b}\mathbin{+}\Varid{d})}
+%
+\just\equiv{ Def-split (76) , Uncurry (84) , Definição da divisão e Natural-p2 (13) }
+%
+\ensuremath{\Varid{final}\;((\Varid{a},\Varid{b}),(\Varid{c},\Varid{d}))\mathrel{=}((\Varid{a}\mathbin{*}\Varid{b}\mathbin{+}\Varid{c}\mathbin{*}\Varid{d})\mathbin{/}(\Varid{b}\mathbin{+}\Varid{d}),\Varid{b}\mathbin{+}\Varid{d})}
+\end{eqnarray*}
+Chegando assim à versão pointwise:
+\begin{eqnarray*}
+\start
+\ensuremath{\Varid{final}\;((\Varid{a},\Varid{b}),(\Varid{c},\Varid{d}))\mathrel{=}((\Varid{a}\mathbin{*}\Varid{b}\mathbin{+}\Varid{c}\mathbin{*}\Varid{d})\mathbin{/}(\Varid{b}\mathbin{+}\Varid{d}),\Varid{b}\mathbin{+}\Varid{d})}
+\end{eqnarray*}
+O diagrama correspondente é:
 \begin{eqnarray*}
 \xymatrix@C=2cm{
    \ensuremath{\mathsf{LTree}\;\Conid{A}}
@@ -2089,42 +2324,6 @@ Solução para árvores de tipo \LTree:
           \ar[l]^-{\ensuremath{\p1\comp \Varid{gene}}}
 }
 \end{eqnarray*}
-%% gene (Left _) = (0,1)
-%% gene (Right ((a,b),(c,d))) = (+ a  c,+ a d)
-\begin{hscode}\SaveRestoreHook
-\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{3}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{72}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
-\>[B]{}\Varid{avgLTree}\mathrel{=}\p1\comp \llparenthesis\, \Varid{gene}\,\rrparenthesis\;\mathbf{where}{}\<[E]%
-\\
-\>[B]{}\hsindent{3}{}\<[3]%
-\>[3]{}\Varid{gene}\mathrel{=}\alt{\conj{\Varid{id}}{\underline{\mathrm{1}}}}{\Varid{final}}{}\<[E]%
-\\
-\>[B]{}\hsindent{3}{}\<[3]%
-\>[3]{}\Varid{final}\mathrel{=}\conj{\uncurry{(\mathbin{/})}}{\p2}\comp (\uncurry{(\mathbin{+})}\times\uncurry{(\mathbin{+})})\comp {}\<[72]%
-\>[72]{}\conj{\conj{\uncurry{(\mathbin{*})}\comp \p1}{\uncurry{(\mathbin{*})}\comp \p2}}{\conj{\p2\comp \p1}{\p2\comp \p2}}{}\<[E]%
-\ColumnHook
-\end{hscode}\resethooks
-
-\begin{tabbing}\ttfamily
-~Veremos~o~q~o~final~faz\\
-\ttfamily ~Primeiro~ele~aplica\char58{}\\
-\ttfamily ~split~\char40{}split~\char40{}\char40{}uncurry~\char40{}\char42{}\char41{}\char41{}\char46{}p1\char41{}~\char40{}\char40{}uncurry~\char40{}\char42{}\char41{}\char41{}\char46{}p2\char41{}\char41{}~\char40{}split~\char40{}p2\char46{}p1\char41{}~\char40{}p2\char46{}p2\char41{}\char41{}\\
-\ttfamily ~\\
-\ttfamily ~final~\char40{}\char40{}a\char44{}b\char41{}\char44{}\char40{}c\char44{}d\char41{}\char41{}~\char45{}\char62{}~~\char40{}~\char40{}~a\char42{}b~\char44{}~c\char42{}d~\char41{}~\char44{}~\char40{}~b\char44{}d~\char41{}~\char41{}\\
-\ttfamily ~Depois~aplica\char58{}\\
-\ttfamily ~\char40{}\char40{}uncurry~\char40{}\char43{}\char41{}\char41{}~\char62{}\char60{}~\char40{}uncurry~\char40{}\char43{}\char41{}\char41{}\char41{}\\
-\ttfamily ~\char40{}~\char40{}~a\char42{}b~\char44{}~c\char42{}d~\char41{}~\char44{}~\char40{}~b\char44{}d~\char41{}~\char41{}~\char45{}\char62{}~\char40{}~a\char42{}b\char43{}c\char42{}d~\char44{}b\char43{}d~\char41{}\\
-\ttfamily ~Para~finalizar~aplica\char45{}se~\char58{}\\
-\ttfamily ~split~\char40{}uncurry~\char40{}\char47{}\char41{}\char41{}~p2\\
-\ttfamily ~\char40{}~a\char43{}b~\char44{}b\char43{}d~\char41{}~\char45{}\char62{}~\char40{}~\char40{}a\char42{}b\char43{}c\char42{}d\char41{}~\char47{}~\char40{}b\char43{}d\char41{}~\char44{}~b\char43{}d~\char41{}\\
-\ttfamily ~Concluindo~que\char58{}~\\
-\ttfamily ~final~\char40{}\char40{}a\char44{}b\char41{}\char44{}\char40{}c\char44{}d\char41{}\char41{}~~\char61{}~\char40{}~\char40{}a\char43{}b\char41{}~\char47{}~\char40{}b\char43{}d\char41{}~\char44{}~b\char43{}d~\char41{}
-\end{tabbing}
-%%(( a*b , c*d ) ,(b,d) )
-%%( a*b + c*d , b+d  )
-%%uncurry (/) ( a*b + c*d , b+d  )
 
 \subsection*{Problema 5}
 Inserir em baixo o código \Fsharp\ desenvolvido, entre \text{\ttfamily \char92{}begin\char123{}verbatim\char125{}} e \text{\ttfamily \char92{}end\char123{}verbatim\char125{}}:
