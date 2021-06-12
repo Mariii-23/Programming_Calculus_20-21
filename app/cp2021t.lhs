@@ -1144,8 +1144,6 @@ outExpAr (Un op a) = i2 . i2 . i2 $ (op, a)
 recExpAr x = baseExpAr id id id x x id x
 \end{code}
 
-
-
 % a () -> a
 % a 10 -> 10
 % a (BinOP,(valor1,valor2)) -> valor1 op valor2
@@ -1265,7 +1263,7 @@ De seguida, apresenta-se o diagrama do hilomorfismo:
 \xymatrix@@C=1cm{
    |ExpAr A|
           \ar[d]_-{[(| clean|)]}
-           \ar[r]^-{|outExpAr|}
+           \ar[r]^-{|clean|}
 &
    | 1 + ( A + (BinOp |\times| (ExpAr A |\times| ExpAr A) + (UnOp |\times| ExpAr A)))|
           \ar[d]^{|id + ( id + ((id|\times| (clean)|^2|)+ (id|\times|clean))|}
@@ -1494,7 +1492,7 @@ Analisando:
 \more
 | either ( h.const 0 ) ( h.succ ) = either (const 2) (succ.h)|
 %
-\just\equiv{  in = [const 0, succ] ,Fusão X (3 vezes) }
+\just\equiv{  |in = either (const 0) succ| ,Fusão x (3 vezes) }
 %
 |c.in = either (const 1) (uncurry (/) . split (uncurry (*). (split c s)) (h) )|
 \more
@@ -1528,36 +1526,74 @@ Analisando:
 \end{eqnarray*}
 \subsection*{Problema 3}
 
+\subsubsection*{1. calcLine}
+Com base na função fornecida, obteve-se:
 \begin{code}
 calcLine :: NPoint -> (NPoint -> OverTime NPoint)
-calcLine = cataList h where
-   h = either (const . const nil) g
+calcLine = cataList (either (const . const nil) g) where
    g (d,f) l = case l of
      []->nil
-     (x:xs)-> \z->concat $ (sequenceA [singl.linear1d d x, f xs]) z
-
-deCasteljau :: [NPoint] -> OverTime NPoint
-deCasteljau = hyloAlgForm alg coalg where
-    -- coalg [] = i1 ()
-    -- coalg l = i2 $ split (init) (tail) l
-    -- coalg l = i2 $ split (\a -> deCasteljau.init) (\a->deCasteljau.tail) l
-    coalg = undefined
-    --coalg l = i2 $ split (deCasteljau.g) (deCasteljau.tail) l
-    --g (a:t) = a
-    alg = undefined
-    --coalg = split (deCasteljau.cons.(split p1 (init.p2))) (deCasteljau.p2)
-    -- coalg .. (p,q)
-    -- alg = either (const nil) (f)
-    -- f (a,b) = calcLine a b
-    --f (a,b) = \z->(calcLine (a z) (b z) z) 
-   -- coalg = split id calcLine
-   -- alg = either (const (nil,([[0.0]],id))) funcao
-   -- funcao (lista,((a,b),(c,d))) = ((fmap d a) :lista, (a,b) )
-   --alg ( (a,f1),(b, l)) = either (const ((0,id),(0,[]))) ( (a,f1) , (b, (f1 b):l) ) 
-   --alg (a, ((a,f1), (b,f2))) = either (const ([],((0,id), (0,id))) ( (f1 b):a ,  ) 
-   
-hyloAlgForm h g = cataList h .anaList g 
+     (x:xs)-> \z->concat $ (sequenceA [singl.linear1d d x, f xs]) z   
 \end{code}
+
+\subsubsection*{2. deCasteljau}
+Com o auxílio do diagrama abaixo apresentado e da função dada, atingiu-se o resultado seguinte: 
+\begin{code}
+deCasteljau :: [NPoint] -> OverTime NPoint
+deCasteljau l pt = hyloAlgForm alg coalg l where
+  coalg list = case list of
+        [] -> i1 [] 
+        [a] -> i1 a
+        _ -> i2 $ split init tail list
+  alg = either id f
+  f (p,q) = calcLine p q pt
+\end{code}
+%%--   alg2 a = alg a pt
+%%-- alg a times = case a of
+%%--   Left a2 -> a2
+%%--   Right a2 -> f a2 times
+%%-- f (p,q) pt = calcLine p q pt
+
+\begin{code}
+hyloAlgForm h g = cataLTree h. anaLTree g
+\end{code}
+
+\begin{eqnarray*}
+\xymatrix@@C=2cm{
+   |[NPoint]|
+          \ar[d]_-{[(| coalg |)]}
+           \ar[r]^-{|coalg|}
+&
+   | [NPoint] + (LTree [NPoint] |\times| LTree [NPoint]) |
+          \ar[d]^{|id + (coalg |\times| coalg) |}
+\\
+    |LTree [NPoint]|
+          \ar[d]_-{|cata (alg)|}
+           \ar[r]^-{|inLTree|}
+&
+   | [NPoint] + ([NPoint]|\times|[NPoint]) |
+          \ar[l]^-{|outLTree|}
+          \ar[d]^{|id + (alg |\times| alg) |}
+\\
+    | OverTime NPoint|
+&
+   | [NPoint] + (NPoint|\times|NPoint) |
+          \ar[l]^-{|alg|}
+}
+\end{eqnarray*}
+
+\subsubsection*{3. Resultado da runBezier}
+
+\begin{figure}[!htb]
+    \label{fig:exemplo_subfigure}
+    \subfloat[\label{fig:Exemplo_1}]{
+        \includegraphics[width=0.5\textwidth]{cp2021t_media/runBezier1.png}
+    }\hfill
+    \subfloat[\label{fig:Exemplo_2}]{
+        \includegraphics[width=0.5\textwidth]{cp2021t_media/runBezier2.png}
+    }
+    \caption{Resultados da função runBezier.}
+\end{figure}
 
 \subsection*{Problema 4}
 \subsubsection*{1. Solução para listas não vazias:}

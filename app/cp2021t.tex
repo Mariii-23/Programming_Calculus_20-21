@@ -1669,8 +1669,6 @@ Concluiu-se que:
 \ColumnHook
 \end{hscode}\resethooks
 
-
-
 % a () -> a
 % a 10 -> 10
 % a (BinOP,(valor1,valor2)) -> valor1 op valor2
@@ -1832,7 +1830,7 @@ De seguida, apresenta-se o diagrama do hilomorfismo:
 \xymatrix@C=1cm{
    \ensuremath{\Conid{ExpAr}\;\Conid{A}}
           \ar[d]_-{[(\ensuremath{\Varid{clean}})]}
-           \ar[r]^-{\ensuremath{\Varid{outExpAr}}}
+           \ar[r]^-{\ensuremath{\Varid{clean}}}
 &
    \ensuremath{\mathrm{1}\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}}\times\ensuremath{(\Conid{ExpAr}\;\Conid{A}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})))}
           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}\mathbin{+}((\Varid{id}}\times\ensuremath{(\Varid{clean})}^2\ensuremath{)\mathbin{+}(\Varid{id}}\times\ensuremath{\Varid{clean}))}}
@@ -2093,7 +2091,7 @@ Analisando:
 \more
 \ensuremath{\alt{\Varid{h}\comp \underline{\mathrm{0}}}{\Varid{h}\comp \succ }\mathrel{=}\alt{\underline{\mathrm{2}}}{\succ \comp \Varid{h}}}
 %
-\just\equiv{  in = [const 0, succ] ,Fusão X (3 vezes) }
+\just\equiv{  \ensuremath{\mathbf{in}\mathrel{=}\alt{\underline{\mathrm{0}}}{\succ }} ,Fusão x (3 vezes) }
 %
 \ensuremath{\Varid{c}\comp \mathbf{in}\mathrel{=}\alt{\underline{\mathrm{1}}}{\uncurry{(\mathbin{/})}\comp \conj{\uncurry{(\mathbin{*})}\comp \conj{\Varid{c}}{\Varid{s}}}{\Varid{h}}}}
 \more
@@ -2127,18 +2125,16 @@ Analisando:
 \end{eqnarray*}
 \subsection*{Problema 3}
 
+\subsubsection*{1. calcLine}
+Com base na função fornecida, obteve-se:
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{4}{@{}>{\hspre}l<{\hspost}@{}}%
-\column{5}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{6}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{E}{@{}>{\hspre}l<{\hspost}@{}}%
 \>[B]{}\Varid{calcLine}\mathbin{::}\Conid{NPoint}\to (\Conid{NPoint}\to \Conid{OverTime}\;\Conid{NPoint}){}\<[E]%
 \\
-\>[B]{}\Varid{calcLine}\mathrel{=}\Varid{cataList}\;\Varid{h}\;\mathbf{where}{}\<[E]%
-\\
-\>[B]{}\hsindent{4}{}\<[4]%
-\>[4]{}\Varid{h}\mathrel{=}\alt{\underline{\cdot }\comp \underline{\Varid{nil}}}{\Varid{g}}{}\<[E]%
+\>[B]{}\Varid{calcLine}\mathrel{=}\Varid{cataList}\;\alt{\underline{\cdot }\comp \underline{\Varid{nil}}}{\Varid{g}}\;\mathbf{where}{}\<[E]%
 \\
 \>[B]{}\hsindent{4}{}\<[4]%
 \>[4]{}\Varid{g}\;(\Varid{d},\Varid{f})\;\Varid{l}\mathrel{=}\mathbf{case}\;\Varid{l}\;\mathbf{of}{}\<[E]%
@@ -2148,65 +2144,88 @@ Analisando:
 \\
 \>[4]{}\hsindent{2}{}\<[6]%
 \>[6]{}(\Varid{x}\mathbin{:}\Varid{xs})\to \lambda \Varid{z}\to \Varid{concat}\mathbin{\$}(\Varid{sequenceA}\;[\mskip1.5mu \Varid{singl}\comp \Varid{linear1d}\;\Varid{d}\;\Varid{x},\Varid{f}\;\Varid{xs}\mskip1.5mu])\;\Varid{z}{}\<[E]%
-\\[\blanklineskip]%
-\>[B]{}\Varid{deCasteljau}\mathbin{::}[\mskip1.5mu \Conid{NPoint}\mskip1.5mu]\to \Conid{OverTime}\;\Conid{NPoint}{}\<[E]%
-\\
-\>[B]{}\Varid{deCasteljau}\mathrel{=}\Varid{hyloAlgForm}\;\Varid{alg}\;\Varid{coalg}\;\mathbf{where}{}\<[E]%
-\\
-\>[B]{}\hsindent{5}{}\<[5]%
-\>[5]{}\mbox{\onelinecomment  coalg [] = i1 ()}{}\<[E]%
-\\
-\>[B]{}\hsindent{5}{}\<[5]%
-\>[5]{}\mbox{\onelinecomment  coalg l = i2 $ split (init) (tail) l}{}\<[E]%
-\\
-\>[B]{}\hsindent{5}{}\<[5]%
-\>[5]{}\mbox{\onelinecomment  coalg l = i2 $ split (\a -> deCasteljau.init) (\a->deCasteljau.tail) l}{}\<[E]%
-\\
-\>[B]{}\hsindent{5}{}\<[5]%
-\>[5]{}\Varid{coalg}\mathrel{=}\bot {}\<[E]%
-\\
-\>[B]{}\hsindent{5}{}\<[5]%
-\>[5]{}\mbox{\onelinecomment coalg l = i2 $ split (deCasteljau.g) (deCasteljau.tail) l}{}\<[E]%
-\\
-\>[B]{}\hsindent{5}{}\<[5]%
-\>[5]{}\mbox{\onelinecomment g (a:t) = a}{}\<[E]%
-\\
-\>[B]{}\hsindent{5}{}\<[5]%
-\>[5]{}\Varid{alg}\mathrel{=}\bot {}\<[E]%
-\\
-\>[B]{}\hsindent{5}{}\<[5]%
-\>[5]{}\mbox{\onelinecomment coalg = split (deCasteljau.cons.(split p1 (init.p2))) (deCasteljau.p2)}{}\<[E]%
-\\
-\>[B]{}\hsindent{5}{}\<[5]%
-\>[5]{}\mbox{\onelinecomment  coalg .. (p,q)}{}\<[E]%
-\\
-\>[B]{}\hsindent{5}{}\<[5]%
-\>[5]{}\mbox{\onelinecomment  alg = either (const nil) (f)}{}\<[E]%
-\\
-\>[B]{}\hsindent{5}{}\<[5]%
-\>[5]{}\mbox{\onelinecomment  f (a,b) = calcLine a b}{}\<[E]%
-\\
-\>[B]{}\hsindent{5}{}\<[5]%
-\>[5]{}\mbox{\onelinecomment f (a,b) = \z->(calcLine (a z) (b z) z) }{}\<[E]%
-\\
-\>[B]{}\hsindent{4}{}\<[4]%
-\>[4]{}\mbox{\onelinecomment  coalg = split id calcLine}{}\<[E]%
-\\
-\>[B]{}\hsindent{4}{}\<[4]%
-\>[4]{}\mbox{\onelinecomment  alg = either (const (nil,([[0.0]],id))) funcao}{}\<[E]%
-\\
-\>[B]{}\hsindent{4}{}\<[4]%
-\>[4]{}\mbox{\onelinecomment  funcao (lista,((a,b),(c,d))) = ((fmap d a) :lista, (a,b) )}{}\<[E]%
-\\
-\>[B]{}\hsindent{4}{}\<[4]%
-\>[4]{}\mbox{\onelinecomment alg ( (a,f1),(b, l)) = either (const ((0,id),(0,[]))) ( (a,f1) , (b, (f1 b):l) ) }{}\<[E]%
-\\
-\>[B]{}\hsindent{4}{}\<[4]%
-\>[4]{}\mbox{\onelinecomment alg (a, ((a,f1), (b,f2))) = either (const ([],((0,id), (0,id))) ( (f1 b):a ,  ) }{}\<[E]%
-\\[\blanklineskip]%
-\>[B]{}\Varid{hyloAlgForm}\;\Varid{h}\;\Varid{g}\mathrel{=}\Varid{cataList}\;\Varid{h}\comp \Varid{anaList}\;\Varid{g}{}\<[E]%
 \ColumnHook
 \end{hscode}\resethooks
+
+\subsubsection*{2. deCasteljau}
+Com o auxílio do diagrama abaixo apresentado e da função dada, atingiu-se o resultado seguinte: 
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{3}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{9}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{deCasteljau}\mathbin{::}[\mskip1.5mu \Conid{NPoint}\mskip1.5mu]\to \Conid{OverTime}\;\Conid{NPoint}{}\<[E]%
+\\
+\>[B]{}\Varid{deCasteljau}\;\Varid{l}\;\Varid{pt}\mathrel{=}\Varid{hyloAlgForm}\;\Varid{alg}\;\Varid{coalg}\;\Varid{l}\;\mathbf{where}{}\<[E]%
+\\
+\>[B]{}\hsindent{3}{}\<[3]%
+\>[3]{}\Varid{coalg}\;\Varid{list}\mathrel{=}\mathbf{case}\;\Varid{list}\;\mathbf{of}{}\<[E]%
+\\
+\>[3]{}\hsindent{6}{}\<[9]%
+\>[9]{}[\mskip1.5mu \mskip1.5mu]\to i_1\;[\mskip1.5mu \mskip1.5mu]{}\<[E]%
+\\
+\>[3]{}\hsindent{6}{}\<[9]%
+\>[9]{}[\mskip1.5mu \Varid{a}\mskip1.5mu]\to i_1\;\Varid{a}{}\<[E]%
+\\
+\>[3]{}\hsindent{6}{}\<[9]%
+\>[9]{}\anonymous \to i_2\mathbin{\$}\conj{\Varid{init}}{\Varid{tail}}\;\Varid{list}{}\<[E]%
+\\
+\>[B]{}\hsindent{3}{}\<[3]%
+\>[3]{}\Varid{alg}\mathrel{=}\alt{\Varid{id}}{\Varid{f}}{}\<[E]%
+\\
+\>[B]{}\hsindent{3}{}\<[3]%
+\>[3]{}\Varid{f}\;(\Varid{p},\Varid{q})\mathrel{=}\Varid{calcLine}\;\Varid{p}\;\Varid{q}\;\Varid{pt}{}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+%%--   alg2 a = alg a pt
+%%-- alg a times = case a of
+%%--   Left a2 -> a2
+%%--   Right a2 -> f a2 times
+%%-- f (p,q) pt = calcLine p q pt
+
+\begin{hscode}\SaveRestoreHook
+\column{B}{@{}>{\hspre}l<{\hspost}@{}}%
+\column{E}{@{}>{\hspre}l<{\hspost}@{}}%
+\>[B]{}\Varid{hyloAlgForm}\;\Varid{h}\;\Varid{g}\mathrel{=}\llparenthesis\, \Varid{h}\,\rrparenthesis\comp \mathopen{[\!(}\Varid{g}\mathclose{)\!]}{}\<[E]%
+\ColumnHook
+\end{hscode}\resethooks
+
+\begin{eqnarray*}
+\xymatrix@C=2cm{
+   \ensuremath{[\mskip1.5mu \Conid{NPoint}\mskip1.5mu]}
+          \ar[d]_-{[(\ensuremath{\Varid{coalg}})]}
+           \ar[r]^-{\ensuremath{\Varid{coalg}}}
+&
+   \ensuremath{[\mskip1.5mu \Conid{NPoint}\mskip1.5mu]\mathbin{+}(\mathsf{LTree}\;[\mskip1.5mu \Conid{NPoint}\mskip1.5mu]}\times\ensuremath{\mathsf{LTree}\;[\mskip1.5mu \Conid{NPoint}\mskip1.5mu])}
+          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{coalg}}\times\ensuremath{\Varid{coalg})}}
+\\
+    \ensuremath{\mathsf{LTree}\;[\mskip1.5mu \Conid{NPoint}\mskip1.5mu]}
+          \ar[d]_-{\ensuremath{\cata{\Varid{alg}}}}
+           \ar[r]^-{\ensuremath{\Varid{inLTree}}}
+&
+   \ensuremath{[\mskip1.5mu \Conid{NPoint}\mskip1.5mu]\mathbin{+}([\mskip1.5mu \Conid{NPoint}\mskip1.5mu]}\times\ensuremath{[\mskip1.5mu \Conid{NPoint}\mskip1.5mu])}
+          \ar[l]^-{\ensuremath{\Varid{outLTree}}}
+          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{alg}}\times\ensuremath{\Varid{alg})}}
+\\
+    \ensuremath{\Conid{OverTime}\;\Conid{NPoint}}
+&
+   \ensuremath{[\mskip1.5mu \Conid{NPoint}\mskip1.5mu]\mathbin{+}(\Conid{NPoint}}\times\ensuremath{\Conid{NPoint})}
+          \ar[l]^-{\ensuremath{\Varid{alg}}}
+}
+\end{eqnarray*}
+
+\subsubsection*{3. Resultado da runBezier}
+
+\begin{figure}[!htb]
+    \label{fig:exemplo_subfigure}
+    \subfloat[\label{fig:Exemplo_1}]{
+        \includegraphics[width=0.5\textwidth]{cp2021t_media/runBezier1.png}
+    }\hfill
+    \subfloat[\label{fig:Exemplo_2}]{
+        \includegraphics[width=0.5\textwidth]{cp2021t_media/runBezier2.png}
+    }
+    \caption{Resultados da função runBezier.}
+\end{figure}
 
 \subsection*{Problema 4}
 \subsubsection*{1. Solução para listas não vazias:}
