@@ -127,15 +127,15 @@
 
 \begin{center}\large
 \begin{tabular}{ll}
-\textbf{Grupo} nr. & 999 (preencher)
+\textbf{Grupo} nr. & 34
 \\\hline
-a11111 & Nome1 (preencher)
+a22222 & Afonso Trindade
 \\
-a22222 & Nome2 (preencher)
+a82358 & Inês Marinho
 \\
-a33333 & Nome3 (preencher)
+a93229 & Mariana Dinis Rodrigues
 \\
-a44444 & Nome4 (preencher, se aplicável, ou apagar)
+a33333 & Jéssica Fernandes
 \end{tabular}
 \end{center}
 
@@ -988,11 +988,12 @@ f .&&&. g = \a -> ((f a) && (g a))
 
 %----------------- Soluções dos alunos -----------------------------------------%
 
+\newpage
 \section{Soluções dos alunos}\label{sec:resolucao}
 Os alunos devem colocar neste anexo as suas soluções para os exercícios
 propostos, de acordo com o "layout" que se fornece. Não podem ser
 alterados os nomes ou tipos das funções dadas, mas pode ser adicionado
-texto, disgramas e/ou outras funções auxiliares que sejam necessárias.
+texto, diagramas e/ou outras funções auxiliares que sejam necessárias.
 
 Valoriza-se a escrita de \emph{pouco} código que corresponda a soluções
 simples e elegantes.
@@ -1018,10 +1019,9 @@ ad v = p2 . cataExpAr (ad_gen v)
 \end{code}
 
 \subsubsection*{1. |outExpAr| e |recExpAr|}
-As funções |outExpAr| e |recExpAr| são deduzidas através do tipo de dados do problema e com auxílio de alguns diagramas. 
-  
+As funções |outExpAr| e |recExpAr| são deduzidas através do tipo de dados do problema e com auxílio de alguns diagramas.
+       
 Sabendo que :
-
 \begin{eqnarray*}
 \xymatrix@@C=2cm{
      |ExpAr A|
@@ -1071,6 +1071,9 @@ Pelas definições acima:
         outExpAr.either bin (uncurry Un) = i2.i2
   )
   )|
+\more
+\more
+\more
 %
 \just\equiv{ Fusão + (20) , Universal + (17) e Natural-id (1) }
 %
@@ -1125,7 +1128,7 @@ outExpAr (N a) = i2 . i1 $ a
 outExpAr (Bin op a b) = i2 . i2 . i1 $ (op, (a, b))
 outExpAr (Un op a) = i2 . i2 . i2 $ (op, a)
 \end{code}
-
+Representado por:
 \begin{eqnarray*}
 \xymatrix@@C=2cm{
      |ExpAr A|
@@ -1134,7 +1137,7 @@ outExpAr (Un op a) = i2 . i2 . i2 $ (op, a)
      | 1 + ( A + (BinOp |\times| (ExpAr A |\times| ExpAr A) + (UnOp |\times| ExpAr A)))|
 }
 \end{eqnarray*}% Comentario g_eval
-
+E ainda:
 % Comentario recEXpAr
 % x -> x
 % n a -> n a
@@ -1199,6 +1202,7 @@ E o seu diagrama:
 }
 \end{eqnarray*}
 
+\newpage
 \subsubsection*{3. |clean| e |gopt|}
 % Comentario clean
 % o seu tipo de saida tem q ser do tipo de entrada do out
@@ -1211,7 +1215,6 @@ E o seu diagrama:
 % returnamos o valor do out
 % Un op Valor -> op Valor
 
-%% TODO: diagrama de hilomorfismo
 Optimizando a |ExpAr A| dada, através da utilização das regras da absorção e do elemento neutro, obtém-se:
 \begin{code}
 clean (Bin Product (N 0) _) = outExpAr (N 0)
@@ -1330,7 +1333,7 @@ O diagrama correspondente à função é:
 \\
     |ExpAr A|
 &
-   | (() + ( A + (BinOp | \times| (ExpAr A |\times| ExpAr A) + (UnOp |\times| ExpAr A))))|^2| |
+   | () + ( A + (BinOp | \times| (ExpAr A |\times| ExpAr A) + (UnOp |\times| (ExpAr A |\times| ExpAr A)))) |
           \ar[l]^-{| p2.sd_gen|}
 }
 \end{eqnarray*}
@@ -1381,7 +1384,7 @@ O diagrama correspondente à função é:
 \\
     |A|
 &
-   | (() + ( A + (BinOp | \times| ((A |\times |A) |\times| (A |\times |A)) + (UnOp |\times| (A |\times |A)))))|
+   | () + ( A + (BinOp | \times| ((A |\times |A) |\times| (A |\times |A)) + (UnOp |\times| (A |\times |A))))|
           \ar[l]^-{| p2.ad_gen|}
 }
 \end{eqnarray*}
@@ -1443,7 +1446,7 @@ Podendo, com isto concluir:
 %%  	 h 0 = 2
 %%    	 h (n+1) = h n + 1 
 %%\end{spec}
-Analisando:
+Fazendo a demonstração:
 \begin{eqnarray*}
 \start
   |lcbr(
@@ -1524,6 +1527,7 @@ Analisando:
 %
 | split c (split s h) = for ((1,(2,2))) (  split (uncurry (/) . split (uncurry (*). (id >< p1)) (p2.p2) ) (split  ((+4) . p1.p2) (succ . p2.p2))   ) |
 \end{eqnarray*}
+\newpage
 \subsection*{Problema 3}
 
 \subsubsection*{1. calcLine}
@@ -1557,7 +1561,7 @@ deCasteljau l pt = hyloAlgForm alg coalg l where
 \begin{code}
 hyloAlgForm h g = cataLTree h. anaLTree g
 \end{code}
-
+Diagrama em questão:
 \begin{eqnarray*}
 \xymatrix@@C=2cm{
    |[NPoint]|
@@ -1618,16 +1622,16 @@ avg_aux = cataList gene
 Descrita pelo diagrama seguinte:
 \begin{eqnarray*}
 \xymatrix@@C=2cm{
-   |A|^*
+   |Double|^*
           \ar[d]_-{|avg|}
            \ar[r]^-{|outList|}
 &
-   | 1 + ( A|\times | A |^*)
+   | 1 + ( Double|\times | Double |^*)
           \ar[d]^{|id + (id |\times |avg_aux)|}
 \\
-    |A|
+    |Double|
 &
-   | 1 + (A| \times |(A|\times|A))|
+   | 1 + (Double| \times |(Double|\times|Double))|
           \ar[l]^-{| p1.avg_aux|}
 }
 \end{eqnarray*}
@@ -1642,7 +1646,9 @@ avgLTree = p1.cataLTree gene where
   final = split (uncurry (/)) p2 . ((uncurry (+)) >< (uncurry (+))) .  split ((uncurry (*)) >< (uncurry (*))) (p2 >< p2)
 \end{code}
   
-Na definição do gene acima, apresenta-se a versão pointfree da função "final", correspondendo à versão pointwise seguinte:
+Na definição do gene acima, apresenta-se a versão pointfree da função "final".
+  
+Correspondendo à versão pointwise seguinte:
 \begin{eqnarray*}
 \start
 |final = split (uncurry (/)) p2 . ((uncurry (+)) >< (uncurry (+))) .  split ((uncurry (*)) >< (uncurry (*))) (p2 >< p2)|
@@ -1671,12 +1677,12 @@ Na definição do gene acima, apresenta-se a versão pointfree da função "fina
 %
 |final ((a,b),(c,d)) = ((a*b+c*d) / (b+d) , b+d)|
 \end{eqnarray*}
-Chegando assim à versão pointwise:
+Chegando assim:
 \begin{eqnarray*}
 \start
 |final ((a,b),(c,d)) = ((a*b + c*d) / (b+d) , b+d)|
 \end{eqnarray*}
-O diagrama correspondente é:
+O diagrama correspondente à função \textbf{avgLTree} é o seguinte:
 \begin{eqnarray*}
 \xymatrix@@C=2cm{
    |LTree A|

@@ -305,15 +305,15 @@
 
 \begin{center}\large
 \begin{tabular}{ll}
-\textbf{Grupo} nr. & 999 (preencher)
+\textbf{Grupo} nr. & 34
 \\\hline
-a11111 & Nome1 (preencher)
+a22222 & Afonso Trindade
 \\
-a22222 & Nome2 (preencher)
+a82358 & Inês Marinho
 \\
-a33333 & Nome3 (preencher)
+a93229 & Mariana Dinis Rodrigues
 \\
-a44444 & Nome4 (preencher, se aplicável, ou apagar)
+a33333 & Jéssica Fernandes
 \end{tabular}
 \end{center}
 
@@ -1519,11 +1519,12 @@ Lógicas:
 
 %----------------- Soluções dos alunos -----------------------------------------%
 
+\newpage
 \section{Soluções dos alunos}\label{sec:resolucao}
 Os alunos devem colocar neste anexo as suas soluções para os exercícios
 propostos, de acordo com o "layout" que se fornece. Não podem ser
 alterados os nomes ou tipos das funções dadas, mas pode ser adicionado
-texto, disgramas e/ou outras funções auxiliares que sejam necessárias.
+texto, diagramas e/ou outras funções auxiliares que sejam necessárias.
 
 Valoriza-se a escrita de \emph{pouco} código que corresponda a soluções
 simples e elegantes.
@@ -1558,10 +1559,9 @@ São dadas:
 \end{hscode}\resethooks
 
 \subsubsection*{1. \ensuremath{\Varid{outExpAr}} e \ensuremath{\Varid{recExpAr}}}
-As funções \ensuremath{\Varid{outExpAr}} e \ensuremath{\Varid{recExpAr}} são deduzidas através do tipo de dados do problema e com auxílio de alguns diagramas. 
-  
+As funções \ensuremath{\Varid{outExpAr}} e \ensuremath{\Varid{recExpAr}} são deduzidas através do tipo de dados do problema e com auxílio de alguns diagramas.
+       
 Sabendo que :
-
 \begin{eqnarray*}
 \xymatrix@C=2cm{
      \ensuremath{\Conid{ExpAr}\;\Conid{A}}
@@ -1599,6 +1599,9 @@ Pelas definições acima:
 \just\equiv{ Fusão + (20) , Universal + (17) e Natural-id (1) }
 %
   \ensuremath{\begin{lcbr}\Varid{outExpAr}\comp \underline{\Conid{X}}\mathrel{=}i_1\\\begin{lcbr}\Varid{outExpAr}\comp \Conid{N}\mathrel{=}i_2\comp i_1\\\Varid{outExpAr}\comp \alt{\Varid{bin}}{\uncurry{\Conid{Un}}}\mathrel{=}i_2\comp i_2\end{lcbr}\end{lcbr}}
+\more
+\more
+\more
 %
 \just\equiv{ Fusão + (20) , Universal + (17) e Natural-id (1) }
 %
@@ -1647,7 +1650,7 @@ Concluiu-se que:
 \>[B]{}\Varid{outExpAr}\;(\Conid{Un}\;\Varid{op}\;\Varid{a})\mathrel{=}i_2\comp i_2\comp i_2\mathbin{\$}(\Varid{op},\Varid{a}){}\<[E]%
 \ColumnHook
 \end{hscode}\resethooks
-
+Representado por:
 \begin{eqnarray*}
 \xymatrix@C=2cm{
      \ensuremath{\Conid{ExpAr}\;\Conid{A}}
@@ -1656,7 +1659,7 @@ Concluiu-se que:
      \ensuremath{\mathrm{1}\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}}\times\ensuremath{(\Conid{ExpAr}\;\Conid{A}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})))}
 }
 \end{eqnarray*}% Comentario g_eval
-
+E ainda:
 % Comentario recEXpAr
 % x -> x
 % n a -> n a
@@ -1738,6 +1741,7 @@ E o seu diagrama:
 }
 \end{eqnarray*}
 
+\newpage
 \subsubsection*{3. \ensuremath{\Varid{clean}} e \ensuremath{\Varid{gopt}}}
 % Comentario clean
 % o seu tipo de saida tem q ser do tipo de entrada do out
@@ -1750,7 +1754,6 @@ E o seu diagrama:
 % returnamos o valor do out
 % Un op Valor -> op Valor
 
-%% TODO: diagrama de hilomorfismo
 Optimizando a \ensuremath{\Conid{ExpAr}\;\Conid{A}} dada, através da utilização das regras da absorção e do elemento neutro, obtém-se:
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
@@ -1929,7 +1932,7 @@ O diagrama correspondente à função é:
 \\
     \ensuremath{\Conid{ExpAr}\;\Conid{A}}
 &
-   \ensuremath{(()\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}} \times\ensuremath{(\Conid{ExpAr}\;\Conid{A}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A}))))}^2\ensuremath{}
+   \ensuremath{()\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}} \times\ensuremath{(\Conid{ExpAr}\;\Conid{A}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{(\Conid{ExpAr}\;\Conid{A}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A}))))}
           \ar[l]^-{\ensuremath{\p2\comp \Varid{sd\char95 gen}}}
 }
 \end{eqnarray*}
@@ -1996,7 +1999,7 @@ O diagrama correspondente à função é:
 \\
     \ensuremath{\Conid{A}}
 &
-   \ensuremath{(()\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}} \times\ensuremath{((\Conid{A}}\times \ensuremath{\Conid{A})}\times\ensuremath{(\Conid{A}}\times \ensuremath{\Conid{A}))\mathbin{+}(\Conid{UnOp}}\times\ensuremath{(\Conid{A}}\times \ensuremath{\Conid{A})))))}
+   \ensuremath{()\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}} \times\ensuremath{((\Conid{A}}\times \ensuremath{\Conid{A})}\times\ensuremath{(\Conid{A}}\times \ensuremath{\Conid{A}))\mathbin{+}(\Conid{UnOp}}\times\ensuremath{(\Conid{A}}\times \ensuremath{\Conid{A}))))}
           \ar[l]^-{\ensuremath{\p2\comp \Varid{ad\char95 gen}}}
 }
 \end{eqnarray*}
@@ -2066,7 +2069,7 @@ Podendo, com isto concluir:
 %%  	 h 0 = 2
 %%    	 h (n+1) = h n + 1 
 %%\end{spec}
-Analisando:
+Fazendo a demonstração:
 \begin{eqnarray*}
 \start
   \ensuremath{\begin{lcbr}\Varid{c}\;\mathrm{0}\mathrel{=}\mathrm{1}\\\Varid{c}\;(\Varid{n}\mathbin{+}\mathrm{1})\mathrel{=}\Varid{c}\;\Varid{n}\mathbin{*}\frac{\Varid{s}\;\Varid{n}}{\Varid{h}\;\Varid{n}}\end{lcbr}}
@@ -2123,6 +2126,7 @@ Analisando:
 %
 \ensuremath{\conj{\Varid{c}}{\conj{\Varid{s}}{\Varid{h}}}\mathrel{=}\for{(\mathrm{1},(\mathrm{2},\mathrm{2}))}\ {\conj{\uncurry{(\mathbin{/})}\comp \conj{\uncurry{(\mathbin{*})}\comp (\Varid{id}\times\p1)}{\p2\comp \p2}}{\conj{(\mathbin{+}\mathrm{4})\comp \p1\comp \p2}{\succ \comp \p2\comp \p2}}}}
 \end{eqnarray*}
+\newpage
 \subsection*{Problema 3}
 
 \subsubsection*{1. calcLine}
@@ -2189,7 +2193,7 @@ Com o auxílio do diagrama abaixo apresentado e da função dada, atingiu-se o r
 \>[B]{}\Varid{hyloAlgForm}\;\Varid{h}\;\Varid{g}\mathrel{=}\llparenthesis\, \Varid{h}\,\rrparenthesis\comp \mathopen{[\!(}\Varid{g}\mathclose{)\!]}{}\<[E]%
 \ColumnHook
 \end{hscode}\resethooks
-
+Diagrama em questão:
 \begin{eqnarray*}
 \xymatrix@C=2cm{
    \ensuremath{[\mskip1.5mu \Conid{NPoint}\mskip1.5mu]}
@@ -2259,16 +2263,16 @@ Com o auxílio do diagrama abaixo apresentado e da função dada, atingiu-se o r
 Descrita pelo diagrama seguinte:
 \begin{eqnarray*}
 \xymatrix@C=2cm{
-   \ensuremath{\Conid{A}}^*
+   \ensuremath{\Conid{Double}}^*
           \ar[d]_-{\ensuremath{\Varid{avg}}}
            \ar[r]^-{\ensuremath{\Varid{outList}}}
 &
-   \ensuremath{\mathrm{1}\mathbin{+}(\Conid{A}}\times \ensuremath{\Conid{A}}^*)
+   \ensuremath{\mathrm{1}\mathbin{+}(\Conid{Double}}\times \ensuremath{\Conid{Double}}^*)
           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}}\times \ensuremath{\Varid{avg\char95 aux})}}
 \\
-    \ensuremath{\Conid{A}}
+    \ensuremath{\Conid{Double}}
 &
-   \ensuremath{\mathrm{1}\mathbin{+}(\Conid{A}} \times \ensuremath{(\Conid{A}}\times\ensuremath{\Conid{A}))}
+   \ensuremath{\mathrm{1}\mathbin{+}(\Conid{Double}} \times \ensuremath{(\Conid{Double}}\times\ensuremath{\Conid{Double}))}
           \ar[l]^-{\ensuremath{\p1\comp \Varid{avg\char95 aux}}}
 }
 \end{eqnarray*}
@@ -2293,7 +2297,9 @@ Descrita pelo diagrama seguinte:
 \ColumnHook
 \end{hscode}\resethooks
   
-Na definição do gene acima, apresenta-se a versão pointfree da função "final", correspondendo à versão pointwise seguinte:
+Na definição do gene acima, apresenta-se a versão pointfree da função "final".
+  
+Correspondendo à versão pointwise seguinte:
 \begin{eqnarray*}
 \start
 \ensuremath{\Varid{final}\mathrel{=}\conj{\uncurry{(\mathbin{/})}}{\p2}\comp (\uncurry{(\mathbin{+})}\times\uncurry{(\mathbin{+})})\comp \conj{\uncurry{(\mathbin{*})}\times\uncurry{(\mathbin{*})}}{\p2\times\p2}}
@@ -2322,12 +2328,12 @@ Na definição do gene acima, apresenta-se a versão pointfree da função "fina
 %
 \ensuremath{\Varid{final}\;((\Varid{a},\Varid{b}),(\Varid{c},\Varid{d}))\mathrel{=}((\Varid{a}\mathbin{*}\Varid{b}\mathbin{+}\Varid{c}\mathbin{*}\Varid{d})\mathbin{/}(\Varid{b}\mathbin{+}\Varid{d}),\Varid{b}\mathbin{+}\Varid{d})}
 \end{eqnarray*}
-Chegando assim à versão pointwise:
+Chegando assim:
 \begin{eqnarray*}
 \start
 \ensuremath{\Varid{final}\;((\Varid{a},\Varid{b}),(\Varid{c},\Varid{d}))\mathrel{=}((\Varid{a}\mathbin{*}\Varid{b}\mathbin{+}\Varid{c}\mathbin{*}\Varid{d})\mathbin{/}(\Varid{b}\mathbin{+}\Varid{d}),\Varid{b}\mathbin{+}\Varid{d})}
 \end{eqnarray*}
-O diagrama correspondente é:
+O diagrama correspondente à função \textbf{avgLTree} é o seguinte:
 \begin{eqnarray*}
 \xymatrix@C=2cm{
    \ensuremath{\mathsf{LTree}\;\Conid{A}}
