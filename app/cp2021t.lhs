@@ -1265,11 +1265,11 @@ De seguida, apresenta-se o diagrama do hilomorfismo:
 \begin{eqnarray*}
 \xymatrix@@C=1cm{
    |ExpAr A|
-          \ar[d]_-{[(| clean|)]}
+          \ar[d]_-{\ana{clean}}
            \ar[r]^-{|clean|}
 &
    | 1 + ( A + (BinOp |\times| (ExpAr A |\times| ExpAr A) + (UnOp |\times| ExpAr A)))|
-          \ar[d]^{|id + ( id + ((id|\times| (clean)|^2|)+ (id|\times|clean))|}
+          \ar[d]^{|id + ( id + ((id|\times| (|\ana{clean}^2|)+ (id|\times \ana{clean}|))|}
 \\
     |ExpAr A|
           \ar[d]_-{|cata (gopt num)|}
@@ -1277,7 +1277,7 @@ De seguida, apresenta-se o diagrama do hilomorfismo:
 &
    | 1 + ( A + (BinOp |\times| (ExpAr A |\times| ExpAr A) + (UnOp |\times| ExpAr A)))|
           \ar[l]^-{|outExpAr|}
-          \ar[d]^{|id + ( id + ((id|\times| (gopt num)|^2|)+ (id|\times|gopt num))|}
+          \ar[d]^{|id + ( id + ((id|\times| (cata (gopt num))|^2|)+ (id|\times| cata (gopt num))|}
 \\
     |A|
 &
@@ -1565,11 +1565,11 @@ Diagrama em questão:
 \begin{eqnarray*}
 \xymatrix@@C=2cm{
    |[NPoint]|
-          \ar[d]_-{[(| coalg |)]}
+          \ar[d]_-{ \ana{coalg}}
            \ar[r]^-{|coalg|}
 &
    | [NPoint] + (LTree [NPoint] |\times| LTree [NPoint]) |
-          \ar[d]^{|id + (coalg |\times| coalg) |}
+          \ar[d]^{|id + (|\ana{coalg} \times \ana{coalg}|)| }
 \\
     |LTree [NPoint]|
           \ar[d]_-{|cata (alg)|}
@@ -1577,7 +1577,7 @@ Diagrama em questão:
 &
    | [NPoint] + ([NPoint]|\times|[NPoint]) |
           \ar[l]^-{|outLTree|}
-          \ar[d]^{|id + (alg |\times| alg) |}
+          \ar[d]^{|id + (cata alg |\times| cata alg) |}
 \\
     | OverTime NPoint|
 &

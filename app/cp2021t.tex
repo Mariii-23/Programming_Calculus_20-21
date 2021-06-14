@@ -1832,11 +1832,11 @@ De seguida, apresenta-se o diagrama do hilomorfismo:
 \begin{eqnarray*}
 \xymatrix@C=1cm{
    \ensuremath{\Conid{ExpAr}\;\Conid{A}}
-          \ar[d]_-{[(\ensuremath{\Varid{clean}})]}
+          \ar[d]_-{\ana{clean}}
            \ar[r]^-{\ensuremath{\Varid{clean}}}
 &
    \ensuremath{\mathrm{1}\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}}\times\ensuremath{(\Conid{ExpAr}\;\Conid{A}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})))}
-          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}\mathbin{+}((\Varid{id}}\times\ensuremath{(\Varid{clean})}^2\ensuremath{)\mathbin{+}(\Varid{id}}\times\ensuremath{\Varid{clean}))}}
+          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}\mathbin{+}((\Varid{id}}\times\ensuremath{(}\ana{clean}^2\ensuremath{)\mathbin{+}(\Varid{id}}\times \ana{clean}\ensuremath{))}}
 \\
     \ensuremath{\Conid{ExpAr}\;\Conid{A}}
           \ar[d]_-{\ensuremath{\cata{\Varid{gopt}\;\Varid{num}}}}
@@ -1844,7 +1844,7 @@ De seguida, apresenta-se o diagrama do hilomorfismo:
 &
    \ensuremath{\mathrm{1}\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}}\times\ensuremath{(\Conid{ExpAr}\;\Conid{A}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})))}
           \ar[l]^-{\ensuremath{\Varid{outExpAr}}}
-          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}\mathbin{+}((\Varid{id}}\times\ensuremath{(\Varid{gopt}\;\Varid{num})}^2\ensuremath{)\mathbin{+}(\Varid{id}}\times\ensuremath{\Varid{gopt}\;\Varid{num}))}}
+          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}\mathbin{+}((\Varid{id}}\times\ensuremath{\cata{\Varid{gopt}\;\Varid{num}}}^2\ensuremath{)\mathbin{+}(\Varid{id}}\times\ensuremath{\cata{\Varid{gopt}\;\Varid{num}})}}
 \\
     \ensuremath{\Conid{A}}
 &
@@ -2197,11 +2197,11 @@ Diagrama em questão:
 \begin{eqnarray*}
 \xymatrix@C=2cm{
    \ensuremath{[\mskip1.5mu \Conid{NPoint}\mskip1.5mu]}
-          \ar[d]_-{[(\ensuremath{\Varid{coalg}})]}
+          \ar[d]_-{ \ana{coalg}}
            \ar[r]^-{\ensuremath{\Varid{coalg}}}
 &
    \ensuremath{[\mskip1.5mu \Conid{NPoint}\mskip1.5mu]\mathbin{+}(\mathsf{LTree}\;[\mskip1.5mu \Conid{NPoint}\mskip1.5mu]}\times\ensuremath{\mathsf{LTree}\;[\mskip1.5mu \Conid{NPoint}\mskip1.5mu])}
-          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{coalg}}\times\ensuremath{\Varid{coalg})}}
+          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(}\ana{coalg} \times \ana{coalg}\ensuremath{)} }
 \\
     \ensuremath{\mathsf{LTree}\;[\mskip1.5mu \Conid{NPoint}\mskip1.5mu]}
           \ar[d]_-{\ensuremath{\cata{\Varid{alg}}}}
@@ -2209,7 +2209,7 @@ Diagrama em questão:
 &
    \ensuremath{[\mskip1.5mu \Conid{NPoint}\mskip1.5mu]\mathbin{+}([\mskip1.5mu \Conid{NPoint}\mskip1.5mu]}\times\ensuremath{[\mskip1.5mu \Conid{NPoint}\mskip1.5mu])}
           \ar[l]^-{\ensuremath{\Varid{outLTree}}}
-          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{alg}}\times\ensuremath{\Varid{alg})}}
+          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}\cata{\Varid{alg}}}\times\ensuremath{\cata{\Varid{alg}})}}
 \\
     \ensuremath{\Conid{OverTime}\;\Conid{NPoint}}
 &

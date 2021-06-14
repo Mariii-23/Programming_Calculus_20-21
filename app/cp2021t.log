@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/Arch Linux) (preloaded format=pdflatex 2021.6.10)  13 JUN 2021 21:04
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/Arch Linux) (preloaded format=pdflatex 2021.6.10)  14 JUN 2021 22:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -915,7 +915,7 @@ Overfull \hbox (51.69261pt too wide) in alignment at lines 1728--1742
 \openout5 = `cp2021t.ptb'.
 
  <xymatrix 2x3 372>
-Overfull \hbox (4.84729pt too wide) in alignment at lines 1832--1854
+Overfull \hbox (12.00935pt too wide) in alignment at lines 1832--1854
  [][][] []
  []
 
@@ -1183,7 +1183,7 @@ uplr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/sha
 re/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb></usr/share/texmf-dist/fonts
 /type1/public/xypic/xyatip10.pfb></usr/share/texmf-dist/fonts/type1/public/xypi
 c/xybtip10.pfb>
-Output written on cp2021t.pdf (20 pages, 441908 bytes).
+Output written on cp2021t.pdf (20 pages, 442509 bytes).
 PDF statistics:
  421 PDF objects out of 1000 (max. 8388607)
  358 compressed objects within 4 object streams
