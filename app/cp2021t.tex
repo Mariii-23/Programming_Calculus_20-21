@@ -1729,10 +1729,11 @@ E o seu diagrama:
 \xymatrix@C=1cm{
    \ensuremath{\Conid{ExpAr}\;\Conid{A}}
           \ar[d]_-{\ensuremath{\Varid{eval\char95 exp}\;\Varid{num}}}
-           \ar[r]^-{\ensuremath{\Varid{outExpAr}}}
+          \ar@/^1.600pc/[r]^-{\ensuremath{\Varid{outExpAr}}} _-\cong
 &
    \ensuremath{\mathrm{1}\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}}\times\ensuremath{(\Conid{ExpAr}\;\Conid{A}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})))}
           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}\mathbin{+}((\Varid{id}}\times\ensuremath{(\Varid{g\char95 eval\char95 exp}\;\Varid{num})}^2\ensuremath{)\mathbin{+}(\Varid{id}}\times\ensuremath{\Varid{g\char95 eval\char95 exp}\;\Varid{num}))}}
+          \ar@/^1.600pc/[l]^-{\ensuremath{\Varid{inExpAr}}}
 \\
     \ensuremath{\Conid{A}}
 &
@@ -1824,7 +1825,7 @@ Feita essa otimização, fez-se a substituição do \ensuremath{\Conid{X}} pelo 
 
 De seguida, apresenta-se o diagrama do hilomorfismo:
 \begin{eqnarray*}
-\xymatrix@C=1cm{
+\xymatrix@C=2cm{
    \ensuremath{\Conid{ExpAr}\;\Conid{A}}
           \ar[d]_-{\ana{clean}}
            \ar[r]^-{\ensuremath{\Varid{clean}}}
@@ -1834,10 +1835,10 @@ De seguida, apresenta-se o diagrama do hilomorfismo:
 \\
     \ensuremath{\Conid{ExpAr}\;\Conid{A}}
           \ar[d]_-{\ensuremath{\cata{\Varid{gopt}\;\Varid{num}}}}
-           \ar[r]^-{\ensuremath{\Varid{outExpAr}}}
+          \ar@/^1.600pc/[r]^-{\ensuremath{\Varid{outExpAr}}} _-\cong
 &
-   \ensuremath{\mathrm{1}\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}}\times\ensuremath{(\Conid{ExpAr}\;\Conid{A}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})))}
-          \ar[l]^-{\ensuremath{\Varid{inExpAr}}}
+   \ensuremath{\mathrm{1}\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}}\times\ensuremath{(\Conid{ExpAr}\;\Conid{A}}^2\ensuremath{)\mathbin{+}(\Conid{UnOp}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})))}
+        \ar@/^1.600pc/[l]^-{\ensuremath{\Varid{inExpAr}}}   
           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}\mathbin{+}((\Varid{id}}\times\ensuremath{\cata{\Varid{gopt}\;\Varid{num}}}^2\ensuremath{)\mathbin{+}(\Varid{id}}\times\ensuremath{\cata{\Varid{gopt}\;\Varid{num}})}}
 \\
     \ensuremath{\Conid{A}}
@@ -1919,10 +1920,11 @@ O diagrama correspondente à função é:
 \xymatrix@C=2cm{
    \ensuremath{\Conid{ExpAr}\;\Conid{A}}
           \ar[d]_-{\ensuremath{\Varid{sd}}}
-           \ar[r]^-{\ensuremath{\Varid{outExpAr}}}
+          \ar@/^0.650pc/[r]^-{\ensuremath{\Varid{outExpAr}}} _-\cong
 &
      \ensuremath{()\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}} \times\ensuremath{(\Conid{ExpAr}\;\Conid{A}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})))}
           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}\mathbin{+}(\Varid{id}}\times\ensuremath{(\Varid{sd\char95 gen}}\times\ensuremath{\Varid{sd\char95 gen})\mathbin{+}(\Varid{id}}\times\ensuremath{\Varid{sd\char95 gen})))}}
+          \ar@/^0.650pc/[l]^-{\ensuremath{\Varid{inExpAr}}}
 \\
     \ensuremath{\Conid{ExpAr}\;\Conid{A}}
 &
@@ -1986,10 +1988,11 @@ O diagrama correspondente à função é:
 \xymatrix@C=2cm{
    \ensuremath{\Conid{ExpAr}\;\Conid{A}}
           \ar[d]_-{\ensuremath{\Varid{ad}}}
-           \ar[r]^-{\ensuremath{\Varid{outExpAr}}}
+          \ar@/^0.600pc/[r]^-{\ensuremath{\Varid{outExpAr}}} _-\cong
 &
      \ensuremath{()\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}} \times\ensuremath{(\Conid{ExpAr}\;\Conid{A}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})))}
           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}\mathbin{+}(\Varid{id}}\times\ensuremath{(\Varid{ad\char95 gen}\;\Conid{A}}\times\ensuremath{\Varid{ad\char95 gen}\;\Conid{A})\mathbin{+}(\Varid{id}}\times\ensuremath{\Varid{ad\char95 gen}\;\Conid{A})))}}
+          \ar@/^0.600pc/[l]^-{\ensuremath{\Varid{inExpAr}}}
 \\
     \ensuremath{\Conid{A}}
 &
@@ -2126,13 +2129,14 @@ Fazendo a demonstração:
 \subsubsection*{1. calcLine}
 Com base na função fornecida e no diagrama apresentado abaixo:
 \begin{eqnarray*}
-\xymatrix@C=2cm{
+\xymatrix@C=4cm{
    \ensuremath{\Conid{NPoint}}
           \ar[d]_-{\ensuremath{\cata{\Varid{calcLine}}}}
-           \ar[r]^-{\ensuremath{\Varid{outList}}}
+          \ar@/^0.600pc/[r]^-{\ensuremath{\Varid{outList}}} _-\cong
 &
      \ensuremath{()\mathbin{+}(\Q } \times\ensuremath{\Conid{NPoint})}
           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}}\times\ensuremath{\Varid{calcLine})}}
+          \ar@/^0.600pc/[l]^-{\ensuremath{\Varid{inList}}}
 \\
     \ensuremath{(\Conid{Overtime}\;\Conid{NPoint})}^{NPoint}
 &
@@ -2215,11 +2219,11 @@ Diagrama em questão:
 \\
     \ensuremath{\mathsf{LTree}\;[\mskip1.5mu \Conid{NPoint}\mskip1.5mu]}
           \ar[d]_-{\ensuremath{\cata{\Varid{alg}}}}
-          \ar[r]^-{\ensuremath{\Varid{outLTree}}}
+          \ar@/^0.400pc/[r]^-{\ensuremath{\Varid{outLTree}}} _-\cong
 &
    \ensuremath{[\mskip1.5mu \Conid{NPoint}\mskip1.5mu]\mathbin{+}(\mathsf{LTree}\;[\mskip1.5mu \Conid{NPoint}\mskip1.5mu]}\times\ensuremath{\mathsf{LTree}\;[\mskip1.5mu \Conid{NPoint}\mskip1.5mu])}
-          \ar[l]^-{\ensuremath{\Varid{inLTree}}}
           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}\cata{\Varid{alg}}}\times\ensuremath{\cata{\Varid{alg}}}}
+          \ar@/^0.400pc/[l]^-{\ensuremath{\Varid{inLTree}}}
 \\
     \ensuremath{\Conid{OverTime}\;\Conid{NPoint}}
 &
@@ -2273,13 +2277,14 @@ Diagrama em questão:
 
 Descrita pelo diagrama seguinte:
 \begin{eqnarray*}
-\xymatrix@C=2cm{
+\xymatrix@C=6cm{
    \ensuremath{\Conid{Double}}^*
           \ar[d]_-{\ensuremath{\Varid{avg}}}
-           \ar[r]^-{\ensuremath{\Varid{outList}}}
+          \ar@/^0.600pc/[r]^-{\ensuremath{\Varid{outList}}} _-\cong
 &
    \ensuremath{\mathrm{1}\mathbin{+}(\Conid{Double}}\times \ensuremath{\Conid{Double}}^*)
           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}}\times \ensuremath{\Varid{avg\char95 aux})}}
+          \ar@/^0.600pc/[l]^-{\ensuremath{\Varid{inList}}}
 \\
     \ensuremath{\Conid{Double}}
 &
@@ -2349,13 +2354,14 @@ Chegando assim:
 \end{eqnarray*}
 O diagrama correspondente à função \textbf{avgLTree} é o seguinte:
 \begin{eqnarray*}
-\xymatrix@C=2cm{
+\xymatrix@C=4cm{
    \ensuremath{\mathsf{LTree}\;\Conid{Double}}
           \ar[d]_-{\ensuremath{\Varid{avgLTree}}}
-           \ar[r]^-{\ensuremath{\Varid{outLTree}}}
+          \ar@/^0.500pc/[r]^-{\ensuremath{\Varid{outLTree}}} _-\cong
 &
    \ensuremath{\Conid{Double}\mathbin{+}((\mathsf{LTree}\;\Conid{Double})} \times \ensuremath{(\mathsf{LTree}\;\Conid{Double}))}
           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{gene}}\times \ensuremath{\Varid{gene})}}
+          \ar@/^0.500pc/[l]^-{\ensuremath{\Varid{inLTree}}}
 \\
     \ensuremath{\Conid{Double}}
 &

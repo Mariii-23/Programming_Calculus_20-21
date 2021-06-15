@@ -1190,10 +1190,11 @@ E o seu diagrama:
 \xymatrix@@C=1cm{
    |ExpAr A|
           \ar[d]_-{|eval_exp num|}
-           \ar[r]^-{|outExpAr|}
+          \ar@@/^1.600pc/[r]^-{|outExpAr|} _-\cong
 &
    | 1 + ( A + (BinOp |\times| (ExpAr A |\times| ExpAr A) + (UnOp |\times| ExpAr A)))|
           \ar[d]^{|id + ( id + ((id|\times| (g_eval_exp num)|^2|)+ (id|\times|g_eval_exp num))|}
+          \ar@@/^1.600pc/[l]^-{|inExpAr|}
 \\
     |A|
 &
@@ -1257,7 +1258,7 @@ gopt = g_eval_exp
 
 De seguida, apresenta-se o diagrama do hilomorfismo:
 \begin{eqnarray*}
-\xymatrix@@C=1cm{
+\xymatrix@@C=2cm{
    |ExpAr A|
           \ar[d]_-{\ana{clean}}
            \ar[r]^-{|clean|}
@@ -1267,10 +1268,10 @@ De seguida, apresenta-se o diagrama do hilomorfismo:
 \\
     |ExpAr A|
           \ar[d]_-{|cata (gopt num)|}
-           \ar[r]^-{|outExpAr|}
+          \ar@@/^1.600pc/[r]^-{|outExpAr|} _-\cong
 &
-   | 1 + ( A + (BinOp |\times| (ExpAr A |\times| ExpAr A) + (UnOp |\times| ExpAr A)))|
-          \ar[l]^-{|inExpAr|}
+   | 1 + ( A + (BinOp |\times| (ExpAr A |^2| ) + (UnOp |\times| ExpAr A)))|
+        \ar@@/^1.600pc/[l]^-{|inExpAr|}   
           \ar[d]^{|id + ( id + ((id|\times| (cata (gopt num))|^2|)+ (id|\times| cata (gopt num))|}
 \\
     |A|
@@ -1320,10 +1321,11 @@ O diagrama correspondente à função é:
 \xymatrix@@C=2cm{
    |ExpAr A|
           \ar[d]_-{|sd|}
-           \ar[r]^-{|outExpAr|}
+          \ar@@/^0.650pc/[r]^-{|outExpAr|} _-\cong
 &
      | () + ( A + (BinOp | \times| (ExpAr A |\times| ExpAr A) + (UnOp |\times| ExpAr A)))|
           \ar[d]^{|id + (id + (id|\times| (sd_gen |\times| sd_gen) + ( id |\times| sd_gen )))|}
+          \ar@@/^0.650pc/[l]^-{|inExpAr|}
 \\
     |ExpAr A|
 &
@@ -1371,10 +1373,11 @@ O diagrama correspondente à função é:
 \xymatrix@@C=2cm{
    |ExpAr A|
           \ar[d]_-{|ad|}
-           \ar[r]^-{|outExpAr|}
+          \ar@@/^0.600pc/[r]^-{|outExpAr|} _-\cong
 &
      | () + ( A + (BinOp | \times| (ExpAr A |\times| ExpAr A) + (UnOp |\times| ExpAr A)))|
           \ar[d]^{|id + (id + (id|\times| (ad_gen A|\times| ad_gen A) + ( id |\times| ad_gen A)))|}
+          \ar@@/^0.600pc/[l]^-{|inExpAr|}
 \\
     |A|
 &
@@ -1527,13 +1530,14 @@ Fazendo a demonstração:
 \subsubsection*{1. calcLine}
 Com base na função fornecida e no diagrama apresentado abaixo:
 \begin{eqnarray*}
-\xymatrix@@C=2cm{
+\xymatrix@@C=4cm{
    |NPoint|
           \ar[d]_-{|cata calcLine|}
-           \ar[r]^-{|outList|}
+          \ar@@/^0.600pc/[r]^-{|outList|} _-\cong
 &
      | () + ( Rational | \times| NPoint )|
           \ar[d]^{|id + (id |\times| calcLine )|}
+          \ar@@/^0.600pc/[l]^-{|inList|}
 \\
     |(Overtime NPoint)|^{NPoint}
 &
@@ -1583,11 +1587,11 @@ Diagrama em questão:
 \\
     |LTree [NPoint]|
           \ar[d]_-{|cata (alg)|}
-          \ar[r]^-{|outLTree|}
+          \ar@@/^0.400pc/[r]^-{|outLTree|} _-\cong
 &
    | [NPoint] + (LTree [NPoint]|\times|LTree [NPoint]) |
-          \ar[l]^-{|inLTree|}
           \ar[d]^{|id + (cata alg |\times| cata alg |}
+          \ar@@/^0.400pc/[l]^-{|inLTree|}
 \\
     | OverTime NPoint|
 &
@@ -1632,13 +1636,14 @@ avg_aux = cataList gene
 
 Descrita pelo diagrama seguinte:
 \begin{eqnarray*}
-\xymatrix@@C=2cm{
+\xymatrix@@C=6cm{
    |Double|^*
           \ar[d]_-{|avg|}
-           \ar[r]^-{|outList|}
+          \ar@@/^0.600pc/[r]^-{|outList|} _-\cong
 &
    | 1 + ( Double|\times | Double |^*)
           \ar[d]^{|id + (id |\times |avg_aux)|}
+          \ar@@/^0.600pc/[l]^-{|inList|}
 \\
     |Double|
 &
@@ -1698,13 +1703,14 @@ Chegando assim:
 \end{eqnarray*}
 O diagrama correspondente à função \textbf{avgLTree} é o seguinte:
 \begin{eqnarray*}
-\xymatrix@@C=2cm{
+\xymatrix@@C=4cm{
    |LTree Double |
           \ar[d]_-{|avgLTree|}
-           \ar[r]^-{|outLTree|}
+          \ar@@/^0.500pc/[r]^-{|outLTree|} _-\cong
 &
    | Double + ((LTree Double)| \times | (LTree Double))|
           \ar[d]^{|id + (gene |\times |gene)|}
+          \ar@@/^0.500pc/[l]^-{|inLTree|}
 \\
     |Double|
 &

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/Arch Linux) (preloaded format=pdflatex 2021.6.10)  15 JUN 2021 12:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/Arch Linux) (preloaded format=pdflatex 2021.6.10)  15 JUN 2021 18:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -658,12 +658,9 @@ LaTeX Font Info:    Trying to load font information for U+stmry on input line 3
 Package xypdf Info: Line width: 0.39998pt on input line 302.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-
-
-LaTeX Warning: Citation `Kn92' on page 1 undefined on input line 340.
-
 LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 3
 48.
+
 (/usr/share/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 ) [1
@@ -713,9 +710,6 @@ Package hyperref Warning: Suppressing link with empty target on input line 764.
 
 
 
-LaTeX Warning: Citation `Ol18' on page 5 undefined on input line 764.
-
-
 Package hyperref Warning: Suppressing link with empty target on input line 764.
 
 
@@ -729,9 +723,6 @@ File: ot1phv.fd 2020/03/25 scalable font definitions for OT1/phv.
 \openout5 = `cp2021t.ptb'.
 
  [5]
-
-LaTeX Warning: Citation `Ol18' on page 6 undefined on input line 810.
-
 \openout5 = `cp2021t.ptb'.
 
 \openout5 = `cp2021t.ptb'.
@@ -740,12 +731,13 @@ LaTeX Warning: Citation `Ol18' on page 6 undefined on input line 810.
 
 \openout5 = `cp2021t.ptb'.
 
-<cp2021t_media/Bezier_curves.png, id=140, 433.62pt x 180.675pt>
+<cp2021t_media/Bezier_curves.png, id=145, 433.62pt x 180.675pt>
 File: cp2021t_media/Bezier_curves.png Graphic file (type png)
 <use cp2021t_media/Bezier_curves.png>
 Package pdftex.def Info: cp2021t_media/Bezier_curves.png  used on input line 88
 0.
 (pdftex.def)             Requested size: 364.19667pt x 151.75493pt.
+
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
@@ -769,17 +761,10 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
  [7 <./cp2021t_media/Bezier_curves.png (PNG copy)>]
 \openout5 = `cp2021t.ptb'.
 
- [8]
-
-LaTeX Warning: Citation `Ol18' on page 9 undefined on input line 1079.
-
-<xymatrix 2x2 191>
+ [8] <xymatrix 2x2 191>
 
 Package hyperref Warning: Suppressing link with empty target on input line 1113
 .
-
-
-LaTeX Warning: Citation `Ol18' on page 9 undefined on input line 1114.
 
 
 Package hyperref Warning: Suppressing link with empty target on input line 1114
@@ -904,8 +889,8 @@ Overfull \hbox (8.57883pt too wide) in paragraph at lines 1431--1480
 
 \openout5 = `cp2021t.ptb'.
 
- <xymatrix 2x2 191>
-Overfull \hbox (51.69261pt too wide) in alignment at lines 1728--1742
+ <xymatrix 2x2 259>
+Overfull \hbox (51.69261pt too wide) in alignment at lines 1728--1743
  [][][] []
  []
 
@@ -914,70 +899,70 @@ Overfull \hbox (51.69261pt too wide) in alignment at lines 1728--1742
 
 \openout5 = `cp2021t.ptb'.
 
- <xymatrix 2x3 372>
-Overfull \hbox (12.00935pt too wide) in alignment at lines 1826--1848
+ <xymatrix 2x3 396>
+Overfull \hbox (40.46211pt too wide) in alignment at lines 1827--1849
  [][][] []
  []
 
 \openout5 = `cp2021t.ptb'.
 
 
-Overfull \hbox (10.52771pt too wide) in paragraph at lines 1867--1913
+Overfull \hbox (10.52771pt too wide) in paragraph at lines 1868--1914
  [][] 
  []
 
 
-Overfull \hbox (10.52771pt too wide) in paragraph at lines 1867--1913
+Overfull \hbox (10.52771pt too wide) in paragraph at lines 1868--1914
  [][][][] 
  []
 
 
-Overfull \hbox (10.52771pt too wide) in paragraph at lines 1867--1913
+Overfull \hbox (10.52771pt too wide) in paragraph at lines 1868--1914
  [][][][] 
  []
 
 
-Overfull \hbox (10.52771pt too wide) in paragraph at lines 1867--1913
+Overfull \hbox (10.52771pt too wide) in paragraph at lines 1868--1914
  [][][][][][] 
  []
 
 
-Overfull \hbox (10.52771pt too wide) in paragraph at lines 1867--1913
+Overfull \hbox (10.52771pt too wide) in paragraph at lines 1868--1914
  [][][][] 
  []
 
 
-Overfull \hbox (10.52771pt too wide) in paragraph at lines 1867--1913
+Overfull \hbox (10.52771pt too wide) in paragraph at lines 1868--1914
  [][][][] 
  []
 
 
-Overfull \hbox (10.52771pt too wide) in paragraph at lines 1867--1913
+Overfull \hbox (10.52771pt too wide) in paragraph at lines 1868--1914
  [][][][] 
  []
 
 
-Overfull \hbox (10.52771pt too wide) in paragraph at lines 1867--1913
+Overfull \hbox (10.52771pt too wide) in paragraph at lines 1868--1914
  [][][][] 
  []
 
 
-Overfull \hbox (10.52771pt too wide) in paragraph at lines 1867--1913
+Overfull \hbox (10.52771pt too wide) in paragraph at lines 1868--1914
  [][][][] 
  []
 
 
-Overfull \hbox (10.52771pt too wide) in paragraph at lines 1867--1913
+Overfull \hbox (10.52771pt too wide) in paragraph at lines 1868--1914
  [][][][] 
  []
 
 
-Overfull \hbox (10.52771pt too wide) in paragraph at lines 1867--1913
+Overfull \hbox (10.52771pt too wide) in paragraph at lines 1868--1914
  [][][][] 
  []
 
 
-Overfull \hbox (10.52771pt too wide) in paragraph at lines 1867--1913
+Overfull \hbox (10.52771pt too wide) in paragraph at lines 1868--1914
  [][][][] 
  []
 
@@ -985,25 +970,25 @@ Overfull \hbox (10.52771pt too wide) in paragraph at lines 1867--1913
 ! Dimension too large.
 <recently read> \dimen@ 
                         
-l.1931 }
+l.1933 }
         
 ? 
 ! Dimension too large.
 <recently read> \dimen@ 
                         
-l.1931 }
+l.1933 }
         
 ? 
-191>
-Overfull \hbox (49.99236pt too wide) in alignment at lines 1918--1932
+259>
+Overfull \hbox (49.99236pt too wide) in alignment at lines 1919--1934
  [][][] []
  []
 
 [15]
 \openout5 = `cp2021t.ptb'.
 
- <xymatrix 2x2 191>
-Overfull \hbox (37.7245pt too wide) in alignment at lines 1985--1999
+ <xymatrix 2x2 259>
+Overfull \hbox (37.7245pt too wide) in alignment at lines 1987--2002
  [][][] []
  []
 
@@ -1020,124 +1005,129 @@ Overfull \hbox (37.7245pt too wide) in alignment at lines 1985--1999
 ! Missing { inserted.
 <to be read again> 
                    \begingroup 
-l.2077 ... \conj{\Varid{s}}{\Varid{h}}}\end{lcbr}}
+l.2080 ... \conj{\Varid{s}}{\Varid{h}}}\end{lcbr}}
                                                   
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.2077 ... \conj{\Varid{s}}{\Varid{h}}}\end{lcbr}}
+l.2080 ... \conj{\Varid{s}}{\Varid{h}}}\end{lcbr}}
                                                   
 ? 
 ! Missing { inserted.
 <to be read again> 
                    \begingroup 
-l.2079 ...{+}\mathrm{4})\comp \Varid{s}\end{lcbr}}
+l.2082 ...{+}\mathrm{4})\comp \Varid{s}\end{lcbr}}
                                                   
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.2079 ...{+}\mathrm{4})\comp \Varid{s}\end{lcbr}}
+l.2082 ...{+}\mathrm{4})\comp \Varid{s}\end{lcbr}}
                                                   
 ? 
 ! Missing { inserted.
 <to be read again> 
                    \begingroup 
-l.2081 ...threl{=}\succ \comp \Varid{h}\end{lcbr}}
+l.2084 ...threl{=}\succ \comp \Varid{h}\end{lcbr}}
                                                   
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.2081 ...threl{=}\succ \comp \Varid{h}\end{lcbr}}
+l.2084 ...threl{=}\succ \comp \Varid{h}\end{lcbr}}
                                                   
 ? 
 ! Missing { inserted.
 <to be read again> 
                    \begingroup 
-l.2085 ...conj{\Varid{c}}{\Varid{s}}}{\Varid{h}}}}
+l.2088 ...conj{\Varid{c}}{\Varid{s}}}{\Varid{h}}}}
                                                   
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.2086 \more
+l.2089 \more
             
 ? 
 ! Missing { inserted.
 <to be read again> 
                    \begingroup 
-l.2087 ...(\mathbin{+}\mathrm{4})\comp \Varid{s}}}
+l.2090 ...(\mathbin{+}\mathrm{4})\comp \Varid{s}}}
                                                   
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.2088 \more
+l.2091 \more
             
 ? 
 ! Missing { inserted.
 <to be read again> 
                    \begingroup 
-l.2089 ...ine{\mathrm{2}}}{\succ \comp \Varid{h}}}
+l.2092 ...ine{\mathrm{2}}}{\succ \comp \Varid{h}}}
                                                   
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.2091 ...thrm{0}}}{\succ }} ,Fusão x (3 vezes) }
+l.2094 ...thrm{0}}}{\succ }} ,Fusão x (3 vezes) }
                                                   
 ? 
 ! Missing { inserted.
 <to be read again> 
                    \begingroup 
-l.2091 ...thrm{0}}}{\succ }} ,Fusão x (3 vezes) }
+l.2094 ...thrm{0}}}{\succ }} ,Fusão x (3 vezes) }
                                                   
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.2091 ...thrm{0}}}{\succ }} ,Fusão x (3 vezes) }
+l.2094 ...thrm{0}}}{\succ }} ,Fusão x (3 vezes) }
                                                   
 ? 
-[16] [17] <xymatrix 2x2 191>
+[16] [17] <xymatrix 2x2 259>
 \openout5 = `cp2021t.ptb'.
 
 \openout5 = `cp2021t.ptb'.
 
 \openout5 = `cp2021t.ptb'.
 
- <xymatrix 2x3 372> [18]
-<cp2021t_media/runBezier1.png, id=276, 1927.2pt x 1084.05pt>
+ <xymatrix 2x3 396> [18]
+<cp2021t_media/runBezier1.png, id=283, 1927.2pt x 1084.05pt>
 File: cp2021t_media/runBezier1.png Graphic file (type png)
 <use cp2021t_media/runBezier1.png>
-Package pdftex.def Info: cp2021t_media/runBezier1.png  used on input line 2238.
+Package pdftex.def Info: cp2021t_media/runBezier1.png  used on input line 2242.
 
 (pdftex.def)             Requested size: 227.62206pt x 128.02927pt.
-<cp2021t_media/runBezier2.png, id=277, 1927.2pt x 1084.05pt>
+<cp2021t_media/runBezier2.png, id=284, 1927.2pt x 1084.05pt>
 File: cp2021t_media/runBezier2.png Graphic file (type png)
 <use cp2021t_media/runBezier2.png>
-Package pdftex.def Info: cp2021t_media/runBezier2.png  used on input line 2241.
+Package pdftex.def Info: cp2021t_media/runBezier2.png  used on input line 2245.
 
 (pdftex.def)             Requested size: 227.62206pt x 128.02927pt.
 
-Overfull \hbox (10.0pt too wide) in paragraph at lines 2238--2242
+Overfull \hbox (10.0pt too wide) in paragraph at lines 2242--2246
 [][] [] 
  []
 
 \openout5 = `cp2021t.ptb'.
 
-<xymatrix 2x2 191>
+<xymatrix 2x2 259>
 \openout5 = `cp2021t.ptb'.
 
 
-Overfull \hbox (14.18288pt too wide) in alignment at lines 2314--2344
+Overfull \hbox (14.18288pt too wide) in alignment at lines 2319--2349
  [][][] []
  []
 
 [19 <./cp2021t_media/runBezier1.png> <./cp2021t_media/runBezier2.png>]
-<xymatrix 2x2 191> (./cp2021t.ind [20]
+<xymatrix 2x2 259>
+Overfull \hbox (3.98108pt too wide) in alignment at lines 2356--2371
+ [][][] []
+ []
+
+(./cp2021t.ind [20]
 ! Missing $ inserted.
 <inserted text> 
                 $
@@ -1157,22 +1147,19 @@ l.61
 
 ] (./cp2021t.aux)
 
-LaTeX Warning: There were undefined references.
-
-
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
 Package rerunfilecheck Info: File `cp2021t.out' has not changed.
 (rerunfilecheck)             Checksum: EA7FB4FC5A98FA43078E0E0DB4138C0B;1358.
  ) 
 Here is how much of TeX's memory you used:
- 16393 strings out of 478994
- 236325 string characters out of 5864751
- 637165 words of memory out of 5000000
- 33425 multiletter control sequences out of 15000+600000
- 443701 words of font info for 142 fonts, out of 8000000 for 9000
+ 16399 strings out of 478994
+ 236344 string characters out of 5864751
+ 640219 words of memory out of 5000000
+ 33432 multiletter control sequences out of 15000+600000
+ 442712 words of font info for 140 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 72i,26n,77p,3290b,590s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 72i,26n,77p,3290b,792s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/publi
 c/amsfonts/cm/cmbx9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/c
@@ -1201,10 +1188,10 @@ uplr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/sha
 re/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb></usr/share/texmf-dist/fonts
 /type1/public/xypic/xyatip10.pfb></usr/share/texmf-dist/fonts/type1/public/xypi
 c/xybtip10.pfb>
-Output written on cp2021t.pdf (22 pages, 451238 bytes).
+Output written on cp2021t.pdf (22 pages, 453831 bytes).
 PDF statistics:
- 515 PDF objects out of 1000 (max. 8388607)
- 449 compressed objects within 5 object streams
+ 520 PDF objects out of 1000 (max. 8388607)
+ 454 compressed objects within 5 object streams
  95 named destinations out of 1000 (max. 500000)
  80 words of extra memory for PDF output out of 10000 (max. 10000000)
 
