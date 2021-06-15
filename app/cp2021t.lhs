@@ -1193,7 +1193,7 @@ E o seu diagrama:
           \ar@@/^1.600pc/[r]^-{|outExpAr|} _-\cong
 &
    | 1 + ( A + (BinOp |\times| (ExpAr A |\times| ExpAr A) + (UnOp |\times| ExpAr A)))|
-          \ar[d]^{|id + ( id + ((id|\times| (g_eval_exp num)|^2|)+ (id|\times|g_eval_exp num))|}
+          \ar[d]^{|id + ( id + ((id|\times| cata(g_eval_exp num)|^2|)+ (id|\times| cata (g_eval_exp num)))|}
           \ar@@/^1.600pc/[l]^-{|inExpAr|}
 \\
     |A|
@@ -1324,12 +1324,12 @@ O diagrama correspondente à função é:
           \ar@@/^0.650pc/[r]^-{|outExpAr|} _-\cong
 &
      | () + ( A + (BinOp | \times| (ExpAr A |\times| ExpAr A) + (UnOp |\times| ExpAr A)))|
-          \ar[d]^{|id + (id + (id|\times| (sd_gen |\times| sd_gen) + ( id |\times| sd_gen )))|}
+          \ar[d]^{|id + (id + (id|\times| (cata sd_gen |\times| cata sd_gen)  + ( id |\times| cata sd_gen )))|}
           \ar@@/^0.650pc/[l]^-{|inExpAr|}
 \\
     |ExpAr A|
 &
-   | () + ( A + (BinOp | \times| (ExpAr A |\times| ExpAr A) + (UnOp |\times| (ExpAr A |\times| ExpAr A)))) |
+   | () + ( A + (BinOp | \times| (ExpAr A |\times| ExpAr A)|^2| + (UnOp |\times| (ExpAr A |\times| ExpAr A)))) |
           \ar[l]^-{| p2.sd_gen|}
 }
 \end{eqnarray*}
@@ -1376,7 +1376,7 @@ O diagrama correspondente à função é:
           \ar@@/^0.600pc/[r]^-{|outExpAr|} _-\cong
 &
      | () + ( A + (BinOp | \times| (ExpAr A |\times| ExpAr A) + (UnOp |\times| ExpAr A)))|
-          \ar[d]^{|id + (id + (id|\times| (ad_gen A|\times| ad_gen A) + ( id |\times| ad_gen A)))|}
+          \ar[d]^{|id + (id + (id|\times| ( cata (ad_gen)|\times|cata(ad_gen)) + ( id |\times| cata (ad_gen)))|}
           \ar@@/^0.600pc/[l]^-{|inExpAr|}
 \\
     |A|
@@ -1532,7 +1532,7 @@ Com base na função fornecida e no diagrama apresentado abaixo:
 \begin{eqnarray*}
 \xymatrix@@C=4cm{
    |NPoint|
-          \ar[d]_-{|cata calcLine|}
+          \ar[d]_-{|calcLine|}
           \ar@@/^0.600pc/[r]^-{|outList|} _-\cong
 &
      | () + ( Rational | \times| NPoint )|
@@ -1709,7 +1709,7 @@ O diagrama correspondente à função \textbf{avgLTree} é o seguinte:
           \ar@@/^0.500pc/[r]^-{|outLTree|} _-\cong
 &
    | Double + ((LTree Double)| \times | (LTree Double))|
-          \ar[d]^{|id + (gene |\times |gene)|}
+          \ar[d]^{|id + cata gene |\times |cata gene|}
           \ar@@/^0.500pc/[l]^-{|inLTree|}
 \\
     |Double|

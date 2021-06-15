@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/Arch Linux) (preloaded format=pdflatex 2021.6.10)  15 JUN 2021 18:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/Arch Linux) (preloaded format=pdflatex 2021.6.10)  15 JUN 2021 22:15
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -890,7 +890,7 @@ Overfull \hbox (8.57883pt too wide) in paragraph at lines 1431--1480
 \openout5 = `cp2021t.ptb'.
 
  <xymatrix 2x2 259>
-Overfull \hbox (51.69261pt too wide) in alignment at lines 1728--1743
+Overfull \hbox (61.97969pt too wide) in alignment at lines 1728--1743
  [][][] []
  []
 
@@ -980,7 +980,7 @@ l.1933 }
         
 ? 
 259>
-Overfull \hbox (49.99236pt too wide) in alignment at lines 1919--1934
+Overfull \hbox (63.7767pt too wide) in alignment at lines 1919--1934
  [][][] []
  []
 
@@ -988,7 +988,7 @@ Overfull \hbox (49.99236pt too wide) in alignment at lines 1919--1934
 \openout5 = `cp2021t.ptb'.
 
  <xymatrix 2x2 259>
-Overfull \hbox (37.7245pt too wide) in alignment at lines 1987--2002
+Overfull \hbox (31.26788pt too wide) in alignment at lines 1987--2002
  [][][] []
  []
 
@@ -1146,9 +1146,6 @@ l.61
 ]) (./cp2021t.bbl) [22
 
 ] (./cp2021t.aux)
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package rerunfilecheck Info: File `cp2021t.out' has not changed.
 (rerunfilecheck)             Checksum: EA7FB4FC5A98FA43078E0E0DB4138C0B;1358.
  ) 
@@ -1188,7 +1185,7 @@ uplr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/sha
 re/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb></usr/share/texmf-dist/fonts
 /type1/public/xypic/xyatip10.pfb></usr/share/texmf-dist/fonts/type1/public/xypi
 c/xybtip10.pfb>
-Output written on cp2021t.pdf (22 pages, 453831 bytes).
+Output written on cp2021t.pdf (22 pages, 453933 bytes).
 PDF statistics:
  520 PDF objects out of 1000 (max. 8388607)
  454 compressed objects within 5 object streams

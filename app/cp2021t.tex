@@ -1732,7 +1732,7 @@ E o seu diagrama:
           \ar@/^1.600pc/[r]^-{\ensuremath{\Varid{outExpAr}}} _-\cong
 &
    \ensuremath{\mathrm{1}\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}}\times\ensuremath{(\Conid{ExpAr}\;\Conid{A}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})))}
-          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}\mathbin{+}((\Varid{id}}\times\ensuremath{(\Varid{g\char95 eval\char95 exp}\;\Varid{num})}^2\ensuremath{)\mathbin{+}(\Varid{id}}\times\ensuremath{\Varid{g\char95 eval\char95 exp}\;\Varid{num}))}}
+          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}\mathbin{+}((\Varid{id}}\times\ensuremath{\cata{\Varid{g\char95 eval\char95 exp}\;\Varid{num}}}^2\ensuremath{)\mathbin{+}(\Varid{id}}\times\ensuremath{\cata{\Varid{g\char95 eval\char95 exp}\;\Varid{num}}))}}
           \ar@/^1.600pc/[l]^-{\ensuremath{\Varid{inExpAr}}}
 \\
     \ensuremath{\Conid{A}}
@@ -1923,12 +1923,12 @@ O diagrama correspondente à função é:
           \ar@/^0.650pc/[r]^-{\ensuremath{\Varid{outExpAr}}} _-\cong
 &
      \ensuremath{()\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}} \times\ensuremath{(\Conid{ExpAr}\;\Conid{A}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})))}
-          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}\mathbin{+}(\Varid{id}}\times\ensuremath{(\Varid{sd\char95 gen}}\times\ensuremath{\Varid{sd\char95 gen})\mathbin{+}(\Varid{id}}\times\ensuremath{\Varid{sd\char95 gen})))}}
+          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}\mathbin{+}(\Varid{id}}\times\ensuremath{\cata{\Varid{sd\char95 gen}}}\times\ensuremath{\cata{\Varid{sd\char95 gen}})\mathbin{+}(\Varid{id}}\times\ensuremath{\cata{\Varid{sd\char95 gen}})))}}
           \ar@/^0.650pc/[l]^-{\ensuremath{\Varid{inExpAr}}}
 \\
     \ensuremath{\Conid{ExpAr}\;\Conid{A}}
 &
-   \ensuremath{()\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}} \times\ensuremath{(\Conid{ExpAr}\;\Conid{A}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{(\Conid{ExpAr}\;\Conid{A}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A}))))}
+   \ensuremath{()\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}} \times\ensuremath{(\Conid{ExpAr}\;\Conid{A}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})}^2\ensuremath{\mathbin{+}(\Conid{UnOp}}\times\ensuremath{(\Conid{ExpAr}\;\Conid{A}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A}))))}
           \ar[l]^-{\ensuremath{\p2\comp \Varid{sd\char95 gen}}}
 }
 \end{eqnarray*}
@@ -1991,7 +1991,7 @@ O diagrama correspondente à função é:
           \ar@/^0.600pc/[r]^-{\ensuremath{\Varid{outExpAr}}} _-\cong
 &
      \ensuremath{()\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}} \times\ensuremath{(\Conid{ExpAr}\;\Conid{A}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})))}
-          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}\mathbin{+}(\Varid{id}}\times\ensuremath{(\Varid{ad\char95 gen}\;\Conid{A}}\times\ensuremath{\Varid{ad\char95 gen}\;\Conid{A})\mathbin{+}(\Varid{id}}\times\ensuremath{\Varid{ad\char95 gen}\;\Conid{A})))}}
+          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}\mathbin{+}(\Varid{id}}\times\ensuremath{\cata{\Varid{ad\char95 gen}}}\times\ensuremath{\cata{\Varid{ad\char95 gen}})\mathbin{+}(\Varid{id}}\times\ensuremath{\cata{\Varid{ad\char95 gen}}))}}
           \ar@/^0.600pc/[l]^-{\ensuremath{\Varid{inExpAr}}}
 \\
     \ensuremath{\Conid{A}}
@@ -2131,7 +2131,7 @@ Com base na função fornecida e no diagrama apresentado abaixo:
 \begin{eqnarray*}
 \xymatrix@C=4cm{
    \ensuremath{\Conid{NPoint}}
-          \ar[d]_-{\ensuremath{\cata{\Varid{calcLine}}}}
+          \ar[d]_-{\ensuremath{\Varid{calcLine}}}
           \ar@/^0.600pc/[r]^-{\ensuremath{\Varid{outList}}} _-\cong
 &
      \ensuremath{()\mathbin{+}(\Q } \times\ensuremath{\Conid{NPoint})}
@@ -2360,7 +2360,7 @@ O diagrama correspondente à função \textbf{avgLTree} é o seguinte:
           \ar@/^0.500pc/[r]^-{\ensuremath{\Varid{outLTree}}} _-\cong
 &
    \ensuremath{\Conid{Double}\mathbin{+}((\mathsf{LTree}\;\Conid{Double})} \times \ensuremath{(\mathsf{LTree}\;\Conid{Double}))}
-          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{gene}}\times \ensuremath{\Varid{gene})}}
+          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}\cata{\Varid{gene}}}\times \ensuremath{\cata{\Varid{gene}}}}
           \ar@/^0.500pc/[l]^-{\ensuremath{\Varid{inLTree}}}
 \\
     \ensuremath{\Conid{Double}}
