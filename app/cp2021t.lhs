@@ -1582,20 +1582,20 @@ Diagrama em questão:
           \ar[d]_-{ \ana{coalg}}
            \ar[r]^-{|coalg|}
 &
-   | [NPoint] + ([NPoint] |\times| [NPoint]) |
+   | NPoint + ([NPoint] |\times| [NPoint]) |
           \ar[d]^{|id + (|\ana{coalg} \times \ana{coalg}|)| }
 \\
-    |LTree [NPoint]|
+    |LTree NPoint|
           \ar[d]_-{|cata (alg)|}
           \ar@@/^0.400pc/[r]^-{|outLTree|} _-\cong
 &
-   | [NPoint] + (LTree [NPoint]|\times|LTree [NPoint]) |
+   | NPoint + (LTree NPoint|\times|LTree NPoint) |
           \ar[d]^{|id + (cata alg |\times| cata alg |}
           \ar@@/^0.400pc/[l]^-{|inLTree|}
 \\
     | OverTime NPoint|
 &
-   | [NPoint] + (OverTime NPoint|\times|OverTime NPoint) |
+   | NPoint + (OverTime NPoint|\times|OverTime NPoint) |
           \ar[l]^-{|alg|}
 }
 \end{eqnarray*}

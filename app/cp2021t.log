@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/Arch Linux) (preloaded format=pdflatex 2021.6.10)  15 JUN 2021 22:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/Arch Linux) (preloaded format=pdflatex 2021.6.10)  15 JUN 2021 23:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1156,7 +1156,7 @@ Here is how much of TeX's memory you used:
  33432 multiletter control sequences out of 15000+600000
  442712 words of font info for 140 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 72i,26n,77p,3290b,792s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 72i,26n,77p,3290b,802s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-dist/fon
 ts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texmf-dist/fonts/type1/publi
 c/amsfonts/cm/cmbx9.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/c
@@ -1185,7 +1185,7 @@ uplr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/sha
 re/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb></usr/share/texmf-dist/fonts
 /type1/public/xypic/xyatip10.pfb></usr/share/texmf-dist/fonts/type1/public/xypi
 c/xybtip10.pfb>
-Output written on cp2021t.pdf (22 pages, 453933 bytes).
+Output written on cp2021t.pdf (22 pages, 453941 bytes).
 PDF statistics:
  520 PDF objects out of 1000 (max. 8388607)
  454 compressed objects within 5 object streams
