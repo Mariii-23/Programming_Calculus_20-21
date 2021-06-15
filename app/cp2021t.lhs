@@ -129,13 +129,13 @@
 \begin{tabular}{ll}
 \textbf{Grupo} nr. & 34
 \\\hline
-a22222 & Afonso Trindade
+a83920 & Afonso Trindade
 \\
 a82358 & Inês Marinho
 \\
-a93229 & Mariana Dinis Rodrigues
+a93318 & Jéssica Fernandes
 \\
-a33333 & Jéssica Fernandes
+a93229 & Mariana Rodrigues
 \end{tabular}
 \end{center}
 
@@ -1205,7 +1205,6 @@ E o seu diagrama:
 \newpage
 \subsubsection*{3. |clean| e |gopt|}
 % Comentario clean
-% o seu tipo de saida tem q ser do tipo de entrada do out
 
 % funcao q limpa ou seja, se puder fazer contas faz
 % X -> nada a fazer
@@ -1243,11 +1242,6 @@ clean l = outExpAr l
 %%-- clean (Bin Product _ (N 0)) = i2 . i1 $ 0
 
 % Comentario gopt
-% tipo de entrada é o de saida do out
-% tipo de saida um valor
-% ou altera o valor do X pelo recebido
-% ou faz calculos
-
 
 %% -- gopt num = either (const num) (either id (either (uncurry f) (uncurry g)))
 %% --   where
@@ -1273,10 +1267,10 @@ De seguida, apresenta-se o diagrama do hilomorfismo:
 \\
     |ExpAr A|
           \ar[d]_-{|cata (gopt num)|}
-           \ar[r]^-{|inExpAr|}
+           \ar[r]^-{|outExpAr|}
 &
    | 1 + ( A + (BinOp |\times| (ExpAr A |\times| ExpAr A) + (UnOp |\times| ExpAr A)))|
-          \ar[l]^-{|outExpAr|}
+          \ar[l]^-{|inExpAr|}
           \ar[d]^{|id + ( id + ((id|\times| (cata (gopt num))|^2|)+ (id|\times| cata (gopt num))|}
 \\
     |A|
@@ -1531,7 +1525,23 @@ Fazendo a demonstração:
 \subsection*{Problema 3}
 
 \subsubsection*{1. calcLine}
-Com base na função fornecida, obteve-se:
+Com base na função fornecida e no diagrama apresentado abaixo:
+\begin{eqnarray*}
+\xymatrix@@C=2cm{
+   |NPoint|
+          \ar[d]_-{|cata calcLine|}
+           \ar[r]^-{|outList|}
+&
+     | () + ( Rational | \times| NPoint )|
+          \ar[d]^{|id + (id |\times| calcLine )|}
+\\
+    |(Overtime NPoint)|^{NPoint}
+&
+     | () + ( Rational | \times |(Overtime NPoint)|^{NPoint})
+           \ar[l]^-{|either (const . const nil) g|}
+}
+\end{eqnarray*}
+Obteve-se:
 \begin{code}
 calcLine :: NPoint -> (NPoint -> OverTime NPoint)
 calcLine = cataList (either (const . const nil) g) where
@@ -1568,24 +1578,25 @@ Diagrama em questão:
           \ar[d]_-{ \ana{coalg}}
            \ar[r]^-{|coalg|}
 &
-   | [NPoint] + (LTree [NPoint] |\times| LTree [NPoint]) |
+   | [NPoint] + ([NPoint] |\times| [NPoint]) |
           \ar[d]^{|id + (|\ana{coalg} \times \ana{coalg}|)| }
 \\
     |LTree [NPoint]|
           \ar[d]_-{|cata (alg)|}
-           \ar[r]^-{|inLTree|}
+          \ar[r]^-{|outLTree|}
 &
-   | [NPoint] + ([NPoint]|\times|[NPoint]) |
-          \ar[l]^-{|outLTree|}
-          \ar[d]^{|id + (cata alg |\times| cata alg) |}
+   | [NPoint] + (LTree [NPoint]|\times|LTree [NPoint]) |
+          \ar[l]^-{|inLTree|}
+          \ar[d]^{|id + (cata alg |\times| cata alg |}
 \\
     | OverTime NPoint|
 &
-   | [NPoint] + (NPoint|\times|NPoint) |
+   | [NPoint] + (OverTime NPoint|\times|OverTime NPoint) |
           \ar[l]^-{|alg|}
 }
 \end{eqnarray*}
 
+\newpage
 \subsubsection*{3. Resultado da runBezier}
 
 \begin{figure}[!htb]
@@ -1664,6 +1675,9 @@ Correspondendo à versão pointwise seguinte:
 \just\equiv{ Def-X (77) }
 %
 |final ((a,b),(c,d)) = split (uncurry (/)) p2 ( ((uncurry (+)) >< (uncurry (+)))  ((uncurry (*) (a,b),uncurry (*) (c,d)), (p2 (a,b), p2 (c,d))))|
+\more
+\more
+\more
 %
 \just\equiv{ Uncurry (84) , Definição de * (multiplicação) e Natural-|p2| (13) }
 %
@@ -1685,16 +1699,16 @@ Chegando assim:
 O diagrama correspondente à função \textbf{avgLTree} é o seguinte:
 \begin{eqnarray*}
 \xymatrix@@C=2cm{
-   |LTree A|
+   |LTree Double |
           \ar[d]_-{|avgLTree|}
-           \ar[r]^-{|outLtree|}
+           \ar[r]^-{|outLTree|}
 &
-   | A + ((LTree A)| \times | (LTree A))|
+   | Double + ((LTree Double)| \times | (LTree Double))|
           \ar[d]^{|id + (gene |\times |gene)|}
 \\
-    |A|
+    |Double|
 &
-   | A + ((A|\times|A) |\times| (A|\times |A))|
+   | Double + ((Double|\times|Double) |\times| (Double|\times |Double))|
           \ar[l]^-{| p1.gene|}
 }
 \end{eqnarray*}

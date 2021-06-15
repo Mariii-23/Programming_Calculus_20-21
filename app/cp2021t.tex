@@ -307,13 +307,13 @@
 \begin{tabular}{ll}
 \textbf{Grupo} nr. & 34
 \\\hline
-a22222 & Afonso Trindade
+a83920 & Afonso Trindade
 \\
 a82358 & Inês Marinho
 \\
-a93229 & Mariana Dinis Rodrigues
+a93318 & Jéssica Fernandes
 \\
-a33333 & Jéssica Fernandes
+a93229 & Mariana Rodrigues
 \end{tabular}
 \end{center}
 
@@ -1744,7 +1744,6 @@ E o seu diagrama:
 \newpage
 \subsubsection*{3. \ensuremath{\Varid{clean}} e \ensuremath{\Varid{gopt}}}
 % Comentario clean
-% o seu tipo de saida tem q ser do tipo de entrada do out
 
 % funcao q limpa ou seja, se puder fazer contas faz
 % X -> nada a fazer
@@ -1804,11 +1803,6 @@ Optimizando a \ensuremath{\Conid{ExpAr}\;\Conid{A}} dada, através da utilizaç�
 %%-- clean (Bin Product _ (N 0)) = i2 . i1 $ 0
 
 % Comentario gopt
-% tipo de entrada é o de saida do out
-% tipo de saida um valor
-% ou altera o valor do X pelo recebido
-% ou faz calculos
-
 
 %% -- gopt num = either (const num) (either id (either (uncurry f) (uncurry g)))
 %% --   where
@@ -1840,10 +1834,10 @@ De seguida, apresenta-se o diagrama do hilomorfismo:
 \\
     \ensuremath{\Conid{ExpAr}\;\Conid{A}}
           \ar[d]_-{\ensuremath{\cata{\Varid{gopt}\;\Varid{num}}}}
-           \ar[r]^-{\ensuremath{\Varid{inExpAr}}}
+           \ar[r]^-{\ensuremath{\Varid{outExpAr}}}
 &
    \ensuremath{\mathrm{1}\mathbin{+}(\Conid{A}\mathbin{+}(\Conid{BinOp}}\times\ensuremath{(\Conid{ExpAr}\;\Conid{A}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})\mathbin{+}(\Conid{UnOp}}\times\ensuremath{\Conid{ExpAr}\;\Conid{A})))}
-          \ar[l]^-{\ensuremath{\Varid{outExpAr}}}
+          \ar[l]^-{\ensuremath{\Varid{inExpAr}}}
           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}\mathbin{+}((\Varid{id}}\times\ensuremath{\cata{\Varid{gopt}\;\Varid{num}}}^2\ensuremath{)\mathbin{+}(\Varid{id}}\times\ensuremath{\cata{\Varid{gopt}\;\Varid{num}})}}
 \\
     \ensuremath{\Conid{A}}
@@ -2130,7 +2124,23 @@ Fazendo a demonstração:
 \subsection*{Problema 3}
 
 \subsubsection*{1. calcLine}
-Com base na função fornecida, obteve-se:
+Com base na função fornecida e no diagrama apresentado abaixo:
+\begin{eqnarray*}
+\xymatrix@C=2cm{
+   \ensuremath{\Conid{NPoint}}
+          \ar[d]_-{\ensuremath{\cata{\Varid{calcLine}}}}
+           \ar[r]^-{\ensuremath{\Varid{outList}}}
+&
+     \ensuremath{()\mathbin{+}(\Q } \times\ensuremath{\Conid{NPoint})}
+          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{id}}\times\ensuremath{\Varid{calcLine})}}
+\\
+    \ensuremath{(\Conid{Overtime}\;\Conid{NPoint})}^{NPoint}
+&
+     \ensuremath{()\mathbin{+}(\Q } \times \ensuremath{(\Conid{Overtime}\;\Conid{NPoint})}^{NPoint})
+           \ar[l]^-{\ensuremath{\alt{\underline{\cdot }\comp \underline{\Varid{nil}}}{\Varid{g}}}}
+}
+\end{eqnarray*}
+Obteve-se:
 \begin{hscode}\SaveRestoreHook
 \column{B}{@{}>{\hspre}l<{\hspost}@{}}%
 \column{4}{@{}>{\hspre}l<{\hspost}@{}}%
@@ -2200,24 +2210,25 @@ Diagrama em questão:
           \ar[d]_-{ \ana{coalg}}
            \ar[r]^-{\ensuremath{\Varid{coalg}}}
 &
-   \ensuremath{[\mskip1.5mu \Conid{NPoint}\mskip1.5mu]\mathbin{+}(\mathsf{LTree}\;[\mskip1.5mu \Conid{NPoint}\mskip1.5mu]}\times\ensuremath{\mathsf{LTree}\;[\mskip1.5mu \Conid{NPoint}\mskip1.5mu])}
+   \ensuremath{[\mskip1.5mu \Conid{NPoint}\mskip1.5mu]\mathbin{+}([\mskip1.5mu \Conid{NPoint}\mskip1.5mu]}\times\ensuremath{[\mskip1.5mu \Conid{NPoint}\mskip1.5mu])}
           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(}\ana{coalg} \times \ana{coalg}\ensuremath{)} }
 \\
     \ensuremath{\mathsf{LTree}\;[\mskip1.5mu \Conid{NPoint}\mskip1.5mu]}
           \ar[d]_-{\ensuremath{\cata{\Varid{alg}}}}
-           \ar[r]^-{\ensuremath{\Varid{inLTree}}}
+          \ar[r]^-{\ensuremath{\Varid{outLTree}}}
 &
-   \ensuremath{[\mskip1.5mu \Conid{NPoint}\mskip1.5mu]\mathbin{+}([\mskip1.5mu \Conid{NPoint}\mskip1.5mu]}\times\ensuremath{[\mskip1.5mu \Conid{NPoint}\mskip1.5mu])}
-          \ar[l]^-{\ensuremath{\Varid{outLTree}}}
-          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}\cata{\Varid{alg}}}\times\ensuremath{\cata{\Varid{alg}})}}
+   \ensuremath{[\mskip1.5mu \Conid{NPoint}\mskip1.5mu]\mathbin{+}(\mathsf{LTree}\;[\mskip1.5mu \Conid{NPoint}\mskip1.5mu]}\times\ensuremath{\mathsf{LTree}\;[\mskip1.5mu \Conid{NPoint}\mskip1.5mu])}
+          \ar[l]^-{\ensuremath{\Varid{inLTree}}}
+          \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}\cata{\Varid{alg}}}\times\ensuremath{\cata{\Varid{alg}}}}
 \\
     \ensuremath{\Conid{OverTime}\;\Conid{NPoint}}
 &
-   \ensuremath{[\mskip1.5mu \Conid{NPoint}\mskip1.5mu]\mathbin{+}(\Conid{NPoint}}\times\ensuremath{\Conid{NPoint})}
+   \ensuremath{[\mskip1.5mu \Conid{NPoint}\mskip1.5mu]\mathbin{+}(\Conid{OverTime}\;\Conid{NPoint}}\times\ensuremath{\Conid{OverTime}\;\Conid{NPoint})}
           \ar[l]^-{\ensuremath{\Varid{alg}}}
 }
 \end{eqnarray*}
 
+\newpage
 \subsubsection*{3. Resultado da runBezier}
 
 \begin{figure}[!htb]
@@ -2315,6 +2326,9 @@ Correspondendo à versão pointwise seguinte:
 \just\equiv{ Def-X (77) }
 %
 \ensuremath{\Varid{final}\;((\Varid{a},\Varid{b}),(\Varid{c},\Varid{d}))\mathrel{=}\conj{\uncurry{(\mathbin{/})}}{\p2}\;((\uncurry{(\mathbin{+})}\times\uncurry{(\mathbin{+})})\;((\uncurry{(\mathbin{*})}\;(\Varid{a},\Varid{b}),\uncurry{(\mathbin{*})}\;(\Varid{c},\Varid{d})),(\p2\;(\Varid{a},\Varid{b}),\p2\;(\Varid{c},\Varid{d}))))}
+\more
+\more
+\more
 %
 \just\equiv{ Uncurry (84) , Definição de * (multiplicação) e Natural-\ensuremath{\p2} (13) }
 %
@@ -2336,16 +2350,16 @@ Chegando assim:
 O diagrama correspondente à função \textbf{avgLTree} é o seguinte:
 \begin{eqnarray*}
 \xymatrix@C=2cm{
-   \ensuremath{\mathsf{LTree}\;\Conid{A}}
+   \ensuremath{\mathsf{LTree}\;\Conid{Double}}
           \ar[d]_-{\ensuremath{\Varid{avgLTree}}}
-           \ar[r]^-{\ensuremath{\Varid{outLtree}}}
+           \ar[r]^-{\ensuremath{\Varid{outLTree}}}
 &
-   \ensuremath{\Conid{A}\mathbin{+}((\mathsf{LTree}\;\Conid{A})} \times \ensuremath{(\mathsf{LTree}\;\Conid{A}))}
+   \ensuremath{\Conid{Double}\mathbin{+}((\mathsf{LTree}\;\Conid{Double})} \times \ensuremath{(\mathsf{LTree}\;\Conid{Double}))}
           \ar[d]^{\ensuremath{\Varid{id}\mathbin{+}(\Varid{gene}}\times \ensuremath{\Varid{gene})}}
 \\
-    \ensuremath{\Conid{A}}
+    \ensuremath{\Conid{Double}}
 &
-   \ensuremath{\Conid{A}\mathbin{+}((\Conid{A}}\times\ensuremath{\Conid{A})}\times\ensuremath{(\Conid{A}}\times \ensuremath{\Conid{A}))}
+   \ensuremath{\Conid{Double}\mathbin{+}((\Conid{Double}}\times\ensuremath{\Conid{Double})}\times\ensuremath{(\Conid{Double}}\times \ensuremath{\Conid{Double}))}
           \ar[l]^-{\ensuremath{\p1\comp \Varid{gene}}}
 }
 \end{eqnarray*}

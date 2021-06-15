@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/Arch Linux) (preloaded format=pdflatex 2021.6.10)  14 JUN 2021 22:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021/Arch Linux) (preloaded format=pdflatex 2021.6.10)  15 JUN 2021 12:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -915,69 +915,69 @@ Overfull \hbox (51.69261pt too wide) in alignment at lines 1728--1742
 \openout5 = `cp2021t.ptb'.
 
  <xymatrix 2x3 372>
-Overfull \hbox (12.00935pt too wide) in alignment at lines 1832--1854
+Overfull \hbox (12.00935pt too wide) in alignment at lines 1826--1848
  [][][] []
  []
 
 \openout5 = `cp2021t.ptb'.
 
 
-Overfull \hbox (10.52771pt too wide) in paragraph at lines 1873--1919
+Overfull \hbox (10.52771pt too wide) in paragraph at lines 1867--1913
  [][] 
  []
 
 
-Overfull \hbox (10.52771pt too wide) in paragraph at lines 1873--1919
+Overfull \hbox (10.52771pt too wide) in paragraph at lines 1867--1913
  [][][][] 
  []
 
 
-Overfull \hbox (10.52771pt too wide) in paragraph at lines 1873--1919
+Overfull \hbox (10.52771pt too wide) in paragraph at lines 1867--1913
  [][][][] 
  []
 
 
-Overfull \hbox (10.52771pt too wide) in paragraph at lines 1873--1919
+Overfull \hbox (10.52771pt too wide) in paragraph at lines 1867--1913
  [][][][][][] 
  []
 
 
-Overfull \hbox (10.52771pt too wide) in paragraph at lines 1873--1919
+Overfull \hbox (10.52771pt too wide) in paragraph at lines 1867--1913
  [][][][] 
  []
 
 
-Overfull \hbox (10.52771pt too wide) in paragraph at lines 1873--1919
+Overfull \hbox (10.52771pt too wide) in paragraph at lines 1867--1913
  [][][][] 
  []
 
 
-Overfull \hbox (10.52771pt too wide) in paragraph at lines 1873--1919
+Overfull \hbox (10.52771pt too wide) in paragraph at lines 1867--1913
  [][][][] 
  []
 
 
-Overfull \hbox (10.52771pt too wide) in paragraph at lines 1873--1919
+Overfull \hbox (10.52771pt too wide) in paragraph at lines 1867--1913
  [][][][] 
  []
 
 
-Overfull \hbox (10.52771pt too wide) in paragraph at lines 1873--1919
+Overfull \hbox (10.52771pt too wide) in paragraph at lines 1867--1913
  [][][][] 
  []
 
 
-Overfull \hbox (10.52771pt too wide) in paragraph at lines 1873--1919
+Overfull \hbox (10.52771pt too wide) in paragraph at lines 1867--1913
  [][][][] 
  []
 
 
-Overfull \hbox (10.52771pt too wide) in paragraph at lines 1873--1919
+Overfull \hbox (10.52771pt too wide) in paragraph at lines 1867--1913
  [][][][] 
  []
 
 
-Overfull \hbox (10.52771pt too wide) in paragraph at lines 1873--1919
+Overfull \hbox (10.52771pt too wide) in paragraph at lines 1867--1913
  [][][][] 
  []
 
@@ -985,17 +985,17 @@ Overfull \hbox (10.52771pt too wide) in paragraph at lines 1873--1919
 ! Dimension too large.
 <recently read> \dimen@ 
                         
-l.1937 }
+l.1931 }
         
 ? 
 ! Dimension too large.
 <recently read> \dimen@ 
                         
-l.1937 }
+l.1931 }
         
 ? 
 191>
-Overfull \hbox (49.99236pt too wide) in alignment at lines 1924--1938
+Overfull \hbox (49.99236pt too wide) in alignment at lines 1918--1932
  [][][] []
  []
 
@@ -1003,7 +1003,7 @@ Overfull \hbox (49.99236pt too wide) in alignment at lines 1924--1938
 \openout5 = `cp2021t.ptb'.
 
  <xymatrix 2x2 191>
-Overfull \hbox (37.7245pt too wide) in alignment at lines 1991--2005
+Overfull \hbox (37.7245pt too wide) in alignment at lines 1985--1999
  [][][] []
  []
 
@@ -1020,139 +1020,157 @@ Overfull \hbox (37.7245pt too wide) in alignment at lines 1991--2005
 ! Missing { inserted.
 <to be read again> 
                    \begingroup 
-l.2083 ... \conj{\Varid{s}}{\Varid{h}}}\end{lcbr}}
+l.2077 ... \conj{\Varid{s}}{\Varid{h}}}\end{lcbr}}
                                                   
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.2083 ... \conj{\Varid{s}}{\Varid{h}}}\end{lcbr}}
+l.2077 ... \conj{\Varid{s}}{\Varid{h}}}\end{lcbr}}
                                                   
 ? 
 ! Missing { inserted.
 <to be read again> 
                    \begingroup 
-l.2085 ...{+}\mathrm{4})\comp \Varid{s}\end{lcbr}}
+l.2079 ...{+}\mathrm{4})\comp \Varid{s}\end{lcbr}}
                                                   
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.2085 ...{+}\mathrm{4})\comp \Varid{s}\end{lcbr}}
+l.2079 ...{+}\mathrm{4})\comp \Varid{s}\end{lcbr}}
                                                   
 ? 
 ! Missing { inserted.
 <to be read again> 
                    \begingroup 
-l.2087 ...threl{=}\succ \comp \Varid{h}\end{lcbr}}
+l.2081 ...threl{=}\succ \comp \Varid{h}\end{lcbr}}
                                                   
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.2087 ...threl{=}\succ \comp \Varid{h}\end{lcbr}}
+l.2081 ...threl{=}\succ \comp \Varid{h}\end{lcbr}}
                                                   
 ? 
 ! Missing { inserted.
 <to be read again> 
                    \begingroup 
-l.2091 ...conj{\Varid{c}}{\Varid{s}}}{\Varid{h}}}}
+l.2085 ...conj{\Varid{c}}{\Varid{s}}}{\Varid{h}}}}
                                                   
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.2092 \more
+l.2086 \more
             
 ? 
 ! Missing { inserted.
 <to be read again> 
                    \begingroup 
-l.2093 ...(\mathbin{+}\mathrm{4})\comp \Varid{s}}}
+l.2087 ...(\mathbin{+}\mathrm{4})\comp \Varid{s}}}
                                                   
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.2094 \more
+l.2088 \more
             
 ? 
 ! Missing { inserted.
 <to be read again> 
                    \begingroup 
-l.2095 ...ine{\mathrm{2}}}{\succ \comp \Varid{h}}}
+l.2089 ...ine{\mathrm{2}}}{\succ \comp \Varid{h}}}
                                                   
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.2097 ...thrm{0}}}{\succ }} ,Fusão x (3 vezes) }
+l.2091 ...thrm{0}}}{\succ }} ,Fusão x (3 vezes) }
                                                   
 ? 
 ! Missing { inserted.
 <to be read again> 
                    \begingroup 
-l.2097 ...thrm{0}}}{\succ }} ,Fusão x (3 vezes) }
+l.2091 ...thrm{0}}}{\succ }} ,Fusão x (3 vezes) }
                                                   
 ? 
 ! Missing } inserted.
 <inserted text> 
                 }
-l.2097 ...thrm{0}}}{\succ }} ,Fusão x (3 vezes) }
+l.2091 ...thrm{0}}}{\succ }} ,Fusão x (3 vezes) }
                                                   
 ? 
-[16] [17]
+[16] [17] <xymatrix 2x2 191>
 \openout5 = `cp2021t.ptb'.
 
 \openout5 = `cp2021t.ptb'.
 
 \openout5 = `cp2021t.ptb'.
 
- <xymatrix 2x3 372>
-<cp2021t_media/runBezier1.png, id=268, 1927.2pt x 1084.05pt>
+ <xymatrix 2x3 372> [18]
+<cp2021t_media/runBezier1.png, id=276, 1927.2pt x 1084.05pt>
 File: cp2021t_media/runBezier1.png Graphic file (type png)
 <use cp2021t_media/runBezier1.png>
-Package pdftex.def Info: cp2021t_media/runBezier1.png  used on input line 2227.
+Package pdftex.def Info: cp2021t_media/runBezier1.png  used on input line 2238.
 
 (pdftex.def)             Requested size: 227.62206pt x 128.02927pt.
-<cp2021t_media/runBezier2.png, id=269, 1927.2pt x 1084.05pt>
+<cp2021t_media/runBezier2.png, id=277, 1927.2pt x 1084.05pt>
 File: cp2021t_media/runBezier2.png Graphic file (type png)
 <use cp2021t_media/runBezier2.png>
-Package pdftex.def Info: cp2021t_media/runBezier2.png  used on input line 2230.
+Package pdftex.def Info: cp2021t_media/runBezier2.png  used on input line 2241.
 
 (pdftex.def)             Requested size: 227.62206pt x 128.02927pt.
 
-Overfull \hbox (10.0pt too wide) in paragraph at lines 2227--2231
+Overfull \hbox (10.0pt too wide) in paragraph at lines 2238--2242
 [][] [] 
  []
 
 \openout5 = `cp2021t.ptb'.
 
-[18 <./cp2021t_media/runBezier1.png> <./cp2021t_media/runBezier2.png>]
 <xymatrix 2x2 191>
 \openout5 = `cp2021t.ptb'.
 
 
-Overfull \hbox (14.18288pt too wide) in alignment at lines 2303--2330
+Overfull \hbox (14.18288pt too wide) in alignment at lines 2314--2344
  [][][] []
  []
 
-<xymatrix 2x2 191> [19]
-No file cp2021t.ind.
-No file cp2021t.bbl.
-[20] (./cp2021t.aux)
+[19 <./cp2021t_media/runBezier1.png> <./cp2021t_media/runBezier2.png>]
+<xymatrix 2x2 191> (./cp2021t.ind [20]
+! Missing $ inserted.
+<inserted text> 
+                $
+l.59     \subitem
+                  \
+? 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.61 
+     
+? 
+[21
+
+
+]) (./cp2021t.bbl) [22
+
+] (./cp2021t.aux)
 
 LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
 Package rerunfilecheck Info: File `cp2021t.out' has not changed.
 (rerunfilecheck)             Checksum: EA7FB4FC5A98FA43078E0E0DB4138C0B;1358.
  ) 
 Here is how much of TeX's memory you used:
- 16377 strings out of 478994
- 236174 string characters out of 5864751
+ 16393 strings out of 478994
+ 236325 string characters out of 5864751
  637165 words of memory out of 5000000
- 33420 multiletter control sequences out of 15000+600000
- 442539 words of font info for 140 fonts, out of 8000000 for 9000
+ 33425 multiletter control sequences out of 15000+600000
+ 443701 words of font info for 142 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  72i,26n,77p,3290b,590s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-dist/fon
@@ -1183,10 +1201,10 @@ uplr8a.pfb></usr/share/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/sha
 re/texmf-dist/fonts/type1/urw/palatino/uplri8a.pfb></usr/share/texmf-dist/fonts
 /type1/public/xypic/xyatip10.pfb></usr/share/texmf-dist/fonts/type1/public/xypi
 c/xybtip10.pfb>
-Output written on cp2021t.pdf (20 pages, 442509 bytes).
+Output written on cp2021t.pdf (22 pages, 451238 bytes).
 PDF statistics:
- 421 PDF objects out of 1000 (max. 8388607)
- 358 compressed objects within 4 object streams
- 89 named destinations out of 1000 (max. 500000)
+ 515 PDF objects out of 1000 (max. 8388607)
+ 449 compressed objects within 5 object streams
+ 95 named destinations out of 1000 (max. 500000)
  80 words of extra memory for PDF output out of 10000 (max. 10000000)
 
